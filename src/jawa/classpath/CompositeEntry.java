@@ -1,4 +1,4 @@
-package classpath;
+package jawa.classpath;
 
 import java.util.ArrayList;
 import java.util.Arrays;

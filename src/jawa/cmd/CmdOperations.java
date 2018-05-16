@@ -1,6 +1,6 @@
-package cmd;
+package jawa.cmd;
 
-import classpath.Classpath;
+import jawa.classpath.Classpath;
 
 import java.util.Arrays;
 

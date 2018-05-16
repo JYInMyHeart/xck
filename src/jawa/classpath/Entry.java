@@ -1,4 +1,4 @@
-package classpath;
+package jawa.classpath;
 
 public interface Entry {
     byte[] readClass(String className);

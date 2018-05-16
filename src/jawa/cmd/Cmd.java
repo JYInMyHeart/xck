@@ -1,4 +1,4 @@
-package cmd;
+package jawa.cmd;
 
 import java.util.Arrays;
 

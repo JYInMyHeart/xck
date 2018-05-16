@@ -1,4 +1,4 @@
-package classFile;
+package jawa.classFile;
 
 import java.util.List;
 

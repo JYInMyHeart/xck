@@ -1,4 +1,4 @@
-package classFile;
+package jawa.classFile;
 
 public class MemberInfo {
     private ConstantPool cp;

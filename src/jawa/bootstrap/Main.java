@@ -1,7 +1,7 @@
-package bootstrap;
+package jawa.bootstrap;
 
-import cmd.Cmd;
-import cmd.CmdOperations;
+import jawa.cmd.Cmd;
+import jawa.cmd.CmdOperations;
 
 import java.util.Scanner;
 

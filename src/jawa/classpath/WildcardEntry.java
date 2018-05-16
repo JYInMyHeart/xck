@@ -1,4 +1,4 @@
-package classpath;
+package jawa.classpath;
 
 import java.io.File;
 import java.util.ArrayList;

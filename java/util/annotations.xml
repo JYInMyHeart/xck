@@ -1,0 +1,8 @@
+<root>
+    <item name='java.util.Optional T orElseGet(java.util.function.Supplier&lt;? extends T&gt;)'>
+        <annotation name='org.jetbrains.annotations.Contract'>
+            <val name="value" val="&quot;null -&gt; fail&quot;"/>
+            <val name="pure" val="true"/>
+        </annotation>
+    </item>
+</root>

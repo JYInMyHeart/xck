@@ -8,6 +8,10 @@ public class ClassReader {
     private byte[] data;
     private int offset = 0;
 
+    public ClassReader(byte[] data) {
+        this.data = data;
+    }
+
     public byte[] readUint8(){
         byte[] data = new byte[1];
         System.arraycopy(this.data,offset,data,0,data.length);
@@ -32,11 +36,11 @@ public class ClassReader {
         offset += data.length;
         return data;
     }
-    public List<byte[]> readUint16s(){
+    public List<String> readUint16s(){
         int n = Integer.valueOf(new String(readUint16()));
-        List<byte[]> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            list.add(readUint16());
+            list.add(new String(readUint16()));
         }
         return list;
     }

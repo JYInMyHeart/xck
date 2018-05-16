@@ -20,13 +20,4 @@ public class WildcardEntry extends CompositeEntry {
                     .map(e -> new ZipEntry(e.getAbsolutePath())).collect(Collectors.toList());
         }
     }
-    private void walkFn(File path,List<Entry> list){
-        if(!path.isDirectory()
-                && (path.getName().endsWith(".jar") || path.getName().endsWith(".JAR"))){
-            ZipEntry ze = new ZipEntry(path.getAbsolutePath());
-            list.add(ze);
-        }
-    }
-
-
 }

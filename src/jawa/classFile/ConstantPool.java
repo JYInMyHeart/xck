@@ -6,12 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static jawa.Utils.Sth.*;
 import static jawa.classFile.ConstantInfo.*;
 import static jawa.classFile.CpClass.ConstantClassInfo;
 import static jawa.classFile.CpMemberRef.*;
 import static jawa.classFile.CpNameAndTypeInfo.ConstantNameAndTypeInfo;
 import static jawa.classFile.CpNumeric.*;
 import static jawa.classFile.CpString.ConstantStringInfo;
+import static jawa.classFile.CpUtf8Info.ConstantUtf8Info;
 
 
 /**
@@ -28,10 +30,10 @@ public class ConstantPool {
     }
 
     public ConstantPool readConstantPool(ClassReader reader) {
-        byte[] cpCount = reader.readUint16();
-        List<ConstantInfo> cp = new ArrayList<>();
-        for (int i = 0; i < Integer.parseInt(ClassFile.bytesToHexString(cpCount), 10); i++) {
-            cp.add(readConstantInfo(reader, cp));
+        var cpCount = reader.readUint16();
+        var cp = new ArrayList<ConstantInfo>();
+        for (int i = 0; i < getIntIndex(cpCount); i++) {
+            cp.add(readConstantInfo(reader, this));
         }
 
         return new ConstantPool(cp);
@@ -39,7 +41,7 @@ public class ConstantPool {
     }
 
     public ConstantInfo getConstantInfo(int index) {
-        ConstantInfo cf = constantInfoList.get(index);
+        var cf = constantInfoList.get(index);
         if (cf != null) {
             return cf;
         }
@@ -47,122 +49,83 @@ public class ConstantPool {
     }
 
     public Map<String, String> getNameAndType(int index) {
-        ConstantNameAndTypeInfo ntInfo = getConstantInfo(index);
-        String name = ntInfo.getUtf8(ntInfo.nameIndex);
-        String type = ntInfo.getUtf8(ntInfo.descriptorIndex);
-        Map<String, String> map = new HashMap<>();
+        var ntInfo = (ConstantNameAndTypeInfo) getConstantInfo(index);
+        var name = getUtf8(ntInfo.getNameIndex());
+        var type = getUtf8(ntInfo.getDescriptorIndex());
+        var map = new HashMap<String, String>();
         map.put(name, type);
         return map;
     }
 
     public String getClassName(int index) {
-        ConstantInfo classInfo = getConstantInfo(index);
-        return getUtf8(classInfo.nameIndex);
+        var classInfo = (ConstantClassInfo) getConstantInfo(index);
+        return classInfo.getName();
     }
 
     public String getUtf8(int index) {
-        ConstantInfo utf8Info = getConstantInfo(index);
+        var utf8Info = getConstantInfo(index);
         return utf8Info.toString();
     }
 
-    interface ConstantInfo {
-        void readInfo(ClassReader reader);
-    }
 
     public ConstantInfo readConstantInfo(ClassReader reader, ConstantPool cp) {
-        byte[] tag = reader.readUint8();
-        ConstantInfo c = newConstantInfo(tag, cp);
+        var tag = reader.readUint8();
+        var c = newConstantInfo(tag, cp);
         c.readInfo(reader);
         return c;
     }
 
     public ConstantInfo newConstantInfo(byte[] tag, ConstantPool cp) {
-        String tagStr = ClassFile.bytesToHexString(tag);
-        switch (tagStr) {
+        var tagStr = bytesToHexString(tag);
+        switch (Integer.parseInt(tagStr)) {
             case CONSTANT_Integer:
-                return new CpNumeric.ConstantIntegerInfo {
-            }
-            break;
-            ;
+                return new CpNumeric.ConstantIntegerInfo();
             case CONSTANT_Float:
-                return new ConstantFloatInfo {
-            }
-            ;
-            break;
+                return new ConstantFloatInfo();
             case CONSTANT_Long:
-                return new ConstantLongInfo {
-            }
-            ;
-            break;
+                return new ConstantLongInfo();
             case CONSTANT_Double:
-                return new ConstantDoubleInfo {
-            }
-            ;
-            break;
+                return new ConstantDoubleInfo();
             case CONSTANT_Utf8:
-                return new CpUtf8Info.ConstantUtf8Info {
-            }
-            ;
-            break;
+                return new ConstantUtf8Info();
             case CONSTANT_String:
-                return new ConstantStringInfo {
-                cp:
-                cp
-            } ;
-            break;
+                return new ConstantStringInfo();
             case CONSTANT_Class:
-                return new ConstantClassInfo {
-                cp:
-                cp
-            } ;
-            break;
+                return new ConstantClassInfo();
             case CONSTANT_Fieldref:
-                return new ConstantFieldrefInfo {
-                ConstantMemberrefInfo {
-                    cp:
-                    cp
-                }
-            } ;
-            break;
+                return new ConstantFieldrefInfo();
             case CONSTANT_Methodref:
-                return new ConstantMethodrefInfo {
-                ConstantMemberrefInfo {
-                    cp:
-                    cp
-                }
-            } ;
-            break;
+                return new ConstantMethodrefInfo();
             case CONSTANT_InterfaceMethodref:
-                return new ConstantInterfaceMethodrefInfo {
-                ConstantMemberrefInfo {
-                    cp:
-                    cp
-                }
-            } ;
-            break;
+                return new ConstantInterfaceMethodrefInfo();
             case CONSTANT_NameAndType:
-                return new ConstantNameAndTypeInfo {
-            }
-            ;
-            break;
+                return new ConstantNameAndTypeInfo();
             case CONSTANT_MethodType:
-                return new ConstantMethodTypeInfo {
-            }
-            ;
-            break;
+                return new ConstantMethodTypeInfo();
             case CONSTANT_MethodHandle:
-                return new ConstantMethodHandleInfo {
-            }
-            ;
-            break;
+                return new ConstantMethodHandleInfo();
             case CONSTANT_InvokeDynamic:
-                return new ConstantInvokeDynamicInfo {
-            }
-            ;
-            break;
+                return new ConstantInvokeDynamicInfo();
             default:
                 throw new RuntimeException("java.lang.ClassFormatError: constant pool tag!");
-                break;
+        }
+    }
+    class ConstantMethodTypeInfo implements ConstantInfo{
+        @Override
+        public void readInfo(ClassReader reader) {
+
+        }
+    }
+    class ConstantMethodHandleInfo implements ConstantInfo{
+        @Override
+        public void readInfo(ClassReader reader) {
+
+        }
+    }
+    class ConstantInvokeDynamicInfo implements ConstantInfo{
+        @Override
+        public void readInfo(ClassReader reader) {
+
         }
     }
 }

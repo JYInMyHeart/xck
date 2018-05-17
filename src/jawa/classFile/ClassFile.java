@@ -1,6 +1,10 @@
 package jawa.classFile;
 
 import java.util.List;
+import java.util.Objects;
+
+import static jawa.Utils.Sth.bytesToHexString;
+import static jawa.Utils.Sth.getShortIndex;
 
 public class ClassFile {
     private static final String MAGIC = "cafebabe";
@@ -8,46 +12,48 @@ public class ClassFile {
     private String minorVersion;
     private String majorVersion;
     private ConstantPool constantPool;
-    private String accessFlags;
-    private String thisClass;
-    private String superClass;
+    private short accessFlags;
+    private short thisClass;
+    private short superClass;
     private List<String> interfaces;
-    private MemberInfo[] classFileds;
-    private MemberInfo[] classMethods;
-    private AttributeInfo[] attributeInfos;
+    private List<MemberInfo> classFileds;
+    private List<MemberInfo> classMethods;
+    private List<AttributeInfo> attributeInfos;
 
     public ClassFile parse(byte[] classData){
         ClassReader cr = new ClassReader(classData);
         ClassFile cf = new ClassFile();
-        cf.read(fr);
+        cf.read(cr);
         return cf;
     }
     public ClassFile read(ClassReader reader){
         readAndCheckMagic(reader);
         readAndCheckVersion(reader);
-        constantPool = readConstantPool(reader);
-        accessFlags = new String(reader.readUint16());
-        thisClass = new String(reader.readUint16());
-        superClass = new String(reader.readUint16());
+        ConstantPool c = new ConstantPool();
+        constantPool = c.readConstantPool(reader);
+        accessFlags = getShortIndex(reader.readUint16());
+        thisClass = getShortIndex(reader.readUint16());
+        superClass = getShortIndex(reader.readUint16());
         interfaces = reader.readUint16s();
-        classFileds = readMeners(reader,this,constantPool);
-        classMethods = readMeners(reader,this,constantPool);
-        attributeInfos = readAttributes(reader,this.constantPool);
+        MemberInfo memberInfo = new MemberInfo();
+        classFileds = memberInfo.readMembers(reader,constantPool);
+        classMethods = memberInfo.readMembers(reader,constantPool);
+        attributeInfos = AttributeInfo.readAttributes(reader,constantPool);
         return this;
     }
 
     private void readAndCheckVersion(ClassReader reader) {
-        byte[] minjorVersion = reader.readUint16();
-        byte[] majorVersion = reader.readUint16();
-        int minjor = Integer.parseInt(bytesToHexString(minjorVersion),10);
-        int major = Integer.parseInt(bytesToHexString(majorVersion),10);
+        var minjorVersion = reader.readUint16();
+        var majorVersion = reader.readUint16();
+        var minjor = Integer.parseInt(Objects.requireNonNull(bytesToHexString(minjorVersion)),10);
+        var major = Integer.parseInt(Objects.requireNonNull(bytesToHexString(majorVersion)),10);
         if(major <= 52 && major > 45 && minjor == 0) return;
         if(major == 45) return;
         throw new RuntimeException("java.lang.UnsupportedClassVersionError!");
     }
 
     private void readAndCheckMagic(ClassReader reader) {
-        byte[] magic = reader.readUint32();
+        var magic = reader.readUint32();
         if(!MAGIC.equals(bytesToHexString(magic))){
             throw new RuntimeException("java.lang.ClassFormatError:magic!");
         }
@@ -58,7 +64,7 @@ public class ClassFile {
     }
 
     public String getSuperClassName(){
-        return constantPool.getSuperClassName(superClass);
+        return constantPool.getClassName(superClass);
     }
 
     public String getMinorVersion() {
@@ -73,31 +79,16 @@ public class ClassFile {
         return constantPool;
     }
 
-    public String getAccessFlags() {
+    public short getAccessFlags() {
         return accessFlags;
     }
 
-    public MemberInfo[] getClassFileds() {
+    public List<MemberInfo> getClassFileds() {
         return classFileds;
     }
 
-    public MemberInfo[] getClassMethods() {
+    public List<MemberInfo> getClassMethods() {
         return classMethods;
     }
 
-    public static String bytesToHexString(byte[] src){
-        StringBuilder stringBuilder = new StringBuilder();
-        if (src == null || src.length <= 0) {
-            return null;
-        }
-        for (int i = 0; i < src.length; i++) {
-            int v = src[i] & 0xFF;
-            String hv = Integer.toHexString(v);
-            if (hv.length() < 2) {
-                stringBuilder.append(0);
-            }
-            stringBuilder.append(hv);
-        }
-        return stringBuilder.toString();
-    }
 }

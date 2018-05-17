@@ -1,35 +1,39 @@
 package jawa.classFile;
 
+import lombok.Getter;
+
+import static jawa.Utils.Sth.*;
+
 /**
  * @author xck
  */
 public class CpNumeric {
-    static class ConstantIntegerInfo{
+    @Getter
+    static class ConstantIntegerInfo implements ConstantInfo{
         private int value;
         public void readInfo(ClassReader reader){
-            byte[] bytes = reader.readUint32();
-            value = Integer.parseInt(ClassFile.bytesToHexString(bytes),10);
+            value = getIntIndex(reader.readUint32());
         }
     }
-    static class ConstantFloatInfo{
+    @Getter
+    static class ConstantFloatInfo implements ConstantInfo{
         private float value;
         public void readInfo(ClassReader reader){
-            byte[] bytes = reader.readUint32();
-            value = Float.parseFloat(ClassFile.bytesToHexString(bytes));
+            value = getFloatIndex(reader.readUint32());
         }
     }
-    static class ConstantLongInfo{
+    @Getter
+    static class ConstantLongInfo implements ConstantInfo{
         private long value;
         public void readInfo(ClassReader reader){
-            byte[] bytes = reader.readUint64();
-            value = Long.parseLong(ClassFile.bytesToHexString(bytes),10);
+            value = getLongIndex(reader.readUint64());
         }
     }
-    static class ConstantDoubleInfo{
+    @Getter
+    static class ConstantDoubleInfo implements ConstantInfo{
         private double value;
         public void readInfo(ClassReader reader){
-            byte[] bytes = reader.readUint64();
-            value = Double.parseDouble(ClassFile.bytesToHexString(bytes));
+            value = getDoubleIndex(reader.readUint64());
         }
     }
 

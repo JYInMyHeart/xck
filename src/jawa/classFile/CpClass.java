@@ -1,14 +1,17 @@
 package jawa.classFile;
 
+import static jawa.Utils.Sth.getShortIndex;
+
 /**
  * @author xck
  */
 public class CpClass {
-    static class ConstantClassInfo{
+    static class ConstantClassInfo implements ConstantInfo{
         private ConstantPool cp;
         private short nameIndex;
+        @Override
         public void readInfo(ClassReader reader){
-            nameIndex = Short.parseShort(ClassFile.bytesToHexString(reader.readUint16()));
+            nameIndex = getShortIndex(reader.readUint16());
         }
 
         public String toString() {

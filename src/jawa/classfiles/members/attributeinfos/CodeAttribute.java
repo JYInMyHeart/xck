@@ -14,7 +14,7 @@ import static jawa.Utils.Sth.getShortIndex;
 /**
  * @author xck
  */
-@Data
+
 public class CodeAttribute implements AttributeInfo {
     private ConstantPool cp;
     private int maxStack;
@@ -35,5 +35,53 @@ public class CodeAttribute implements AttributeInfo {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ConstantPool getCp() {
+        return cp;
+    }
+
+    public void setCp(ConstantPool cp) {
+        this.cp = cp;
+    }
+
+    public int getMaxStack() {
+        return maxStack;
+    }
+
+    public void setMaxStack(int maxStack) {
+        this.maxStack = maxStack;
+    }
+
+    public int getMaxLocals() {
+        return maxLocals;
+    }
+
+    public void setMaxLocals(int maxLocals) {
+        this.maxLocals = maxLocals;
+    }
+
+    public byte[] getCode() {
+        return code;
+    }
+
+    public void setCode(byte[] code) {
+        this.code = code;
+    }
+
+    public List<ExceptionTableEntry> getExceptionTable() {
+        return exceptionTable;
+    }
+
+    public void setExceptionTable(List<ExceptionTableEntry> exceptionTable) {
+        this.exceptionTable = exceptionTable;
+    }
+
+    public List<AttributeInfo> getAttributeInfos() {
+        return attributeInfos;
+    }
+
+    public void setAttributeInfos(List<AttributeInfo> attributeInfos) {
+        this.attributeInfos = attributeInfos;
     }
 }

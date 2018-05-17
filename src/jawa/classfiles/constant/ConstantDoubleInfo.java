@@ -8,9 +8,14 @@ import static jawa.Utils.Sth.getDoubleIndex;
 /**
  * @author xck
  */
-@Getter
+
 public class ConstantDoubleInfo implements ConstantInfo{
     private double value;
+
+    public double getValue() {
+        return value;
+    }
+
     public void readInfo(ClassReader reader){
         value = getDoubleIndex(reader.readUint64());
     }

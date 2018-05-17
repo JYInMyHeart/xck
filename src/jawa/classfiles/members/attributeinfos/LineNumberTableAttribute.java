@@ -26,4 +26,8 @@ public class LineNumberTableAttribute implements AttributeInfo {
         }
         this.lineNumberTable = lineNumberTable;
     }
+
+    public List<LineNumberTableEntry> getLineNumberTable() {
+        return lineNumberTable;
+    }
 }

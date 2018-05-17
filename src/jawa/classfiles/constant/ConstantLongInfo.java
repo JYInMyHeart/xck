@@ -8,9 +8,14 @@ import static jawa.Utils.Sth.getLongIndex;
 /**
  * @author xck
  */
-@Getter
+
 public class ConstantLongInfo implements ConstantInfo{
     private long value;
+
+    public long getValue() {
+        return value;
+    }
+
     public void readInfo(ClassReader reader){
         value = getLongIndex(reader.readUint64());
     }

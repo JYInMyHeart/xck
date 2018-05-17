@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * @author xck
  */
-@Getter
+
 public class ExceptionsAttribute implements AttributeInfo {
 
     private List<Short> exceptionIndexTable;
@@ -21,5 +21,7 @@ public class ExceptionsAttribute implements AttributeInfo {
         exceptionIndexTable = reader.readUint16s().stream().map(Sth::getShortIndex).collect(Collectors.toList());
     }
 
-
+    public List<Short> getExceptionIndexTable() {
+        return exceptionIndexTable;
+    }
 }

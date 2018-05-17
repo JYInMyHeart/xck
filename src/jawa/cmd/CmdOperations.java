@@ -30,7 +30,7 @@ public class CmdOperations {
     public void startJvm(Cmd cmd){
         Classpath cp = null;
         try {
-            cp = new Classpath().parse(cmd.getXJreOption(),cmd.getCpOption());
+            cp = new Classpath().parse(cmd.getxJreOption(),cmd.getCpOption());
         } catch (Exception e) {
             e.printStackTrace();
         }

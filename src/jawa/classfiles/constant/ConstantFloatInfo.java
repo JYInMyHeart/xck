@@ -8,9 +8,14 @@ import static jawa.Utils.Sth.getFloatIndex;
 /**
  * @author xck
  */
-@Getter
+
 public class ConstantFloatInfo implements ConstantInfo{
     private float value;
+
+    public float getValue() {
+        return value;
+    }
+
     public void readInfo(ClassReader reader){
         value = getFloatIndex(reader.readUint32());
     }

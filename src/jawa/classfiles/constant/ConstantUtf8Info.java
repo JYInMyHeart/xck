@@ -12,9 +12,13 @@ import static jawa.Utils.Sth.getByteIndex;
  */
 
 
-@Getter
+
 public class ConstantUtf8Info implements ConstantInfo {
     private String str;
+
+    public String getStr() {
+        return str;
+    }
 
     public void readInfo(ClassReader reader) {
         byte[] bytes = reader.readBytes(getByteIndex(reader.readUint32()));

@@ -8,10 +8,18 @@ import static jawa.Utils.Sth.getShortIndex;
 /**
  * @author xck
  */
-@Getter
+
 public class ConstantNameAndTypeInfo implements ConstantInfo {
     private short nameIndex;
     private short descriptorIndex;
+
+    public short getNameIndex() {
+        return nameIndex;
+    }
+
+    public short getDescriptorIndex() {
+        return descriptorIndex;
+    }
 
     @Override
     public void readInfo(ClassReader reader) {

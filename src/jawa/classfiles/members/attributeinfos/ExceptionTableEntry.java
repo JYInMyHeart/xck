@@ -1,0 +1,31 @@
+package jawa.classfiles.members.attributeinfos;
+
+import jawa.classfiles.ClassReader;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static jawa.Utils.Sth.getShortIndex;
+
+/**
+ * @author xck
+ */
+public class ExceptionTableEntry {
+    private short startPc;
+    private short endPc;
+    private short handlerPc;
+    private short catchType;
+    public List<ExceptionTableEntry> readExceptionTable(ClassReader reader){
+        short exceptionTableLength = getShortIndex(reader.readUint16());
+        List<ExceptionTableEntry> exceptionTable = new ArrayList<ExceptionTableEntry>();
+        for (int i = 0;i < exceptionTableLength;i++) {
+            ExceptionTableEntry e = new ExceptionTableEntry();
+            e.startPc = getShortIndex(reader.readUint16());
+            e.endPc = getShortIndex(reader.readUint16());
+            e.handlerPc = getShortIndex(reader.readUint16());
+            e.catchType = getShortIndex(reader.readUint16());
+            exceptionTable.add(e);
+        }
+        return exceptionTable;
+    }
+}

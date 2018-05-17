@@ -5,7 +5,7 @@ plugins {
 group 'xck'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 10
+sourceCompatibility = 1.9
 
 sourceSets {
     main.java.srcDirs += 'src'

@@ -1,7 +1,6 @@
-package jawa.classFile;
+package jawa.classfiles;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClassReader {
@@ -38,7 +37,7 @@ public class ClassReader {
     }
     public List<byte[]> readUint16s(){
         int n = Integer.valueOf(new String(readUint16()));
-        var list = new ArrayList<byte[]>();
+        List<byte[]> list = new ArrayList<byte[]>();
         for (int i = 0; i < n; i++) {
             list.add(readUint16());
         }

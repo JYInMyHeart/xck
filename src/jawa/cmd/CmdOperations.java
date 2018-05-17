@@ -20,7 +20,7 @@ public class CmdOperations {
                 String[] msg = args.split(" ");
                 if(msg.length != 2) throw new RuntimeException("wrong cmd");
                 else {
-                    cmd.setClasssName(msg[1]);
+                    cmd.setClassName(msg[1]);
                     cmd.setCpOption(msg[0]);
                 }
             }
@@ -28,9 +28,14 @@ public class CmdOperations {
     }
 
     public void startJvm(Cmd cmd){
-        Classpath cp = new Classpath().parse(cmd.getxJreOption(),cmd.getCpOption());
-        System.out.println("classpath: " + cmd.getClasssName());
-        byte[] classData = cp.raedClass(cmd.getClasssName().replace(".","/"));
+        Classpath cp = null;
+        try {
+            cp = new Classpath().parse(cmd.getXJreOption(),cmd.getCpOption());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("classpath: " + cmd.getClassName());
+        byte[] classData = cp.readClass(cmd.getClassName().replace(".","/"));
         System.out.println(Arrays.toString(classData));
         System.out.println(cmd);
     }

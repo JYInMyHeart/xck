@@ -8,7 +8,7 @@ public class Cmd {
     private Boolean helpFlag;
     private Boolean versionFlag;
     private String cpOption;
-    private String classsName;
+    private String className;
     private String[] args;
     private String xJreOption;
 
@@ -18,7 +18,7 @@ public class Cmd {
                 "helpFlag=" + helpFlag +
                 ", versionFlag=" + versionFlag +
                 ", cpOption='" + cpOption + '\'' +
-                ", classsName='" + classsName + '\'' +
+                ", className='" + className + '\'' +
                 ", args=" + Arrays.toString(args) +
                 '}';
     }

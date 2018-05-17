@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class CompositeEntry implements Entry {
     private String pathList;
-    List<Entry> entryList;
+    List<Entry> entryList = new ArrayList<>();
 
     public CompositeEntry(String pathList) {
         this.pathList = pathList;

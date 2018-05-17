@@ -1,4 +1,6 @@
-package jawa.classFile;
+package jawa.classfiles.constant;
+
+import jawa.classfiles.ClassReader;
 
 /**
  * @author xck

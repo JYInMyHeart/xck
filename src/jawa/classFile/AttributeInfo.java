@@ -8,6 +8,8 @@ import static jawa.classFile.AttrMarkers.DeprecatedAttribute;
 import static jawa.classFile.AttrMarkers.SyntheticAttribute;
 import static jawa.classFile.AttrConstantValue.ConstantValueAttribute;
 import static jawa.classFile.AttrCode.CodeAttribute;
+import static jawa.classFile.AttrLineNumberTable.*;
+import static jawa.classFile.AttrExceptions.*;
 
 public interface AttributeInfo {
     void readInfo(ClassReader reader);
@@ -23,7 +25,7 @@ public interface AttributeInfo {
     static AttributeInfo readAttribute(ClassReader reader,ConstantPool cp){
         var attrNameIndex = reader.readUint16();
         var attrName = cp.getUtf8(getIntIndex(attrNameIndex));
-        var attrLen = reader.readUint32();
+        var attrLen = getIntIndex(reader.readUint32());
         var attrInfo = newAttributeInfo(attrName,attrLen,cp);
         attrInfo.readInfo(reader);
         return attrInfo;
@@ -38,7 +40,7 @@ public interface AttributeInfo {
             case "LocalVariableTable": return new LocalVariableTableAttribute();
             case "SourceFile": return new SourceFileAttribute();
             case "Synthetic": return new SyntheticAttribute();
-            default: return new UnparsedAttribute(attrName, attrLen);
+            default: return new AttrUnparsed.UnparsedAttribute(attrName, attrLen);
         }
     }
 

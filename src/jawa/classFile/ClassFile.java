@@ -15,7 +15,7 @@ public class ClassFile {
     private short accessFlags;
     private short thisClass;
     private short superClass;
-    private List<String> interfaces;
+    private List<byte[]> interfaces;
     private List<MemberInfo> classFileds;
     private List<MemberInfo> classMethods;
     private List<AttributeInfo> attributeInfos;

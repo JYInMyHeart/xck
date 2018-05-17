@@ -36,11 +36,11 @@ public class ClassReader {
         offset += data.length;
         return data;
     }
-    public List<String> readUint16s(){
+    public List<byte[]> readUint16s(){
         int n = Integer.valueOf(new String(readUint16()));
-        List<String> list = new ArrayList<>();
+        var list = new ArrayList<byte[]>();
         for (int i = 0; i < n; i++) {
-            list.add(new String(readUint16()));
+            list.add(readUint16());
         }
         return list;
     }

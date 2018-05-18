@@ -1,15 +1,13 @@
 package jawa.classfiles.constant;
 
 
+import jawa.Utils.MyInt;
 import jawa.classfiles.ClassReader;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import static jawa.Utils.Sth.bytesToHexString;
 import static jawa.Utils.Sth.getIntIndex;
+import static jawa.Utils.Sth.getShortIndex;
 import static jawa.classfiles.constant.ConstantInfo.*;
 
 
@@ -17,9 +15,9 @@ import static jawa.classfiles.constant.ConstantInfo.*;
  * @author xck
  */
 public class ConstantPool {
-    private List<ConstantInfo> constantInfoList;
+    private ConstantInfo[] constantInfoList;
 
-    public ConstantPool(List<ConstantInfo> constantInfoList) {
+    public ConstantPool(ConstantInfo[] constantInfoList) {
         this.constantInfoList = constantInfoList;
     }
 
@@ -27,18 +25,19 @@ public class ConstantPool {
     }
 
     public ConstantPool readConstantPool(ClassReader reader) throws Exception {
-        int cpCount = getIntIndex(reader.readUint16());
-        List<ConstantInfo> cp = new ArrayList<ConstantInfo>();
-        for (int i = 0; i < cpCount; i++) {
-            cp.add(readConstantInfo(reader, this));
+        int cpCount = getShortIndex(reader.readUint16());
+        ConstantInfo[] cp = new ConstantInfo[cpCount];
+        MyInt index = new MyInt(1);
+        for (; index.getValue() < cpCount; index.increase()) {
+//            System.out.print("i=" + index.getValue() + ",");
+            cp[index.getValue()] = readConstantInfo(reader,new ConstantPool(cp),index);
         }
-
         return new ConstantPool(cp);
 
     }
 
     public ConstantInfo getConstantInfo(int index) throws Exception {
-        ConstantInfo cf = constantInfoList.get(index);
+        ConstantInfo cf = constantInfoList[index];
         if (cf != null) {
             return cf;
         }
@@ -65,36 +64,40 @@ public class ConstantPool {
     }
 
 
-    public ConstantInfo readConstantInfo(ClassReader reader, ConstantPool cp) throws Exception {
+    public ConstantInfo readConstantInfo(ClassReader reader, ConstantPool cp,MyInt index) throws Exception {
+//        int last = reader.getOffset();
         byte[] tag = reader.readUint8();
-        ConstantInfo c = newConstantInfo(tag, cp);
+        ConstantInfo c = newConstantInfo(tag, cp,index);
         c.readInfo(reader);
+//        System.out.println(Arrays.toString(tag) + "--->" + (reader.getOffset() - last));
         return c;
     }
 
-    public ConstantInfo newConstantInfo(byte[] tag, ConstantPool cp) throws Exception {
-        String tagStr = bytesToHexString(tag);
-        switch (Integer.parseInt(tagStr)) {
+    public ConstantInfo newConstantInfo(byte[] tag, ConstantPool cp,MyInt index) throws Exception {
+        int tagStr = getIntIndex(tag);
+        switch (tagStr) {
             case CONSTANT_Integer:
                 return new ConstantIntegerInfo();
             case CONSTANT_Float:
                 return new ConstantFloatInfo();
             case CONSTANT_Long:
+                index.increase();
                 return new ConstantLongInfo();
             case CONSTANT_Double:
+                index.increase();
                 return new ConstantDoubleInfo();
             case CONSTANT_Utf8:
                 return new ConstantUtf8Info();
             case CONSTANT_String:
                 return new ConstantStringInfo();
             case CONSTANT_Class:
-                return new ConstantClassInfo();
+                return new ConstantClassInfo(cp);
             case CONSTANT_Fieldref:
-                return new ConstantFieldrefInfo();
+                return new ConstantFieldrefInfo(cp);
             case CONSTANT_Methodref:
-                return new ConstantMethodrefInfo();
+                return new ConstantMethodrefInfo(cp);
             case CONSTANT_InterfaceMethodref:
-                return new ConstantInterfaceMethodrefInfo();
+                return new ConstantInterfaceMethodrefInfo(cp);
             case CONSTANT_NameAndType:
                 return new ConstantNameAndTypeInfo();
             case CONSTANT_MethodType:
@@ -106,5 +109,9 @@ public class ConstantPool {
             default:
                 throw new Exception("java.lang.ClassFormatError: constant pool tag!");
         }
+    }
+
+    public ConstantInfo[] getConstantInfoList() {
+        return constantInfoList;
     }
 }

@@ -19,4 +19,10 @@ public class ConstantIntegerInfo implements ConstantInfo{
     public void readInfo(ClassReader reader){
         value = getIntIndex(reader.readUint32());
     }
+
+    public String toString() {
+        return "ConstantIntegerInfo{" +
+                "value=" + value +
+                '}';
+    }
 }

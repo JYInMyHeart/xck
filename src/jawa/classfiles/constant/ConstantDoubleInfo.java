@@ -19,4 +19,10 @@ public class ConstantDoubleInfo implements ConstantInfo{
     public void readInfo(ClassReader reader){
         value = getDoubleIndex(reader.readUint64());
     }
+
+    public String toString() {
+        return "ConstantDoubleInfo{" +
+                "value=" + value +
+                '}';
+    }
 }

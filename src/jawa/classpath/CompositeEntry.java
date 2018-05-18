@@ -26,7 +26,9 @@ public class CompositeEntry implements Entry {
         List<byte[]> result = entryList.stream()
                 .map(e -> e.readClass(className))
                 .collect(Collectors.toList());
-        return result.stream().filter(e -> e != null && e.length > 0).collect(Collectors.toList()).get(0);
+        List<byte[]> res = result.stream().filter(e -> e != null && e.length > 0).collect(Collectors.toList());
+        if(res.size() > 0) return res.get(0);
+        else return null;
     }
 
     @Override

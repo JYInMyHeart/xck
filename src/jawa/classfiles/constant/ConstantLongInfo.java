@@ -19,4 +19,10 @@ public class ConstantLongInfo implements ConstantInfo{
     public void readInfo(ClassReader reader){
         value = getLongIndex(reader.readUint64());
     }
+
+    public String toString() {
+        return "ConstantLongInfo{" +
+                "value=" + value +
+                '}';
+    }
 }

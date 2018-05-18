@@ -12,6 +12,10 @@ public class ConstantClassInfo implements ConstantInfo {
     private ConstantPool cp;
     private short nameIndex;
 
+    public ConstantClassInfo(ConstantPool cp) {
+        this.cp = cp;
+    }
+
     @Override
     public void readInfo(ClassReader reader) {
         nameIndex = getShortIndex(reader.readUint16());

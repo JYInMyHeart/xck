@@ -6,6 +6,7 @@ import lombok.Getter;
 import java.io.UnsupportedEncodingException;
 
 import static jawa.Utils.Sth.getByteIndex;
+import static jawa.Utils.Sth.getShortIndex;
 
 /**
  * @author xck
@@ -21,12 +22,16 @@ public class ConstantUtf8Info implements ConstantInfo {
     }
 
     public void readInfo(ClassReader reader) {
-        byte[] bytes = reader.readBytes(getByteIndex(reader.readUint32()));
+        byte[] bytes = reader.readBytes(getShortIndex(reader.readUint16()));
         try {
             str = new String(bytes, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
+
+    public String toString() {
+        return "'" + str + '\'';
     }
 }
 

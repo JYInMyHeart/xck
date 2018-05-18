@@ -3,9 +3,19 @@ package jawa.classfiles;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jawa.Utils.Sth.getShortIndex;
+
 public class ClassReader {
     private byte[] data;
     private int offset = 0;
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public byte[] getData() {
+        return data;
+    }
 
     public ClassReader(byte[] data) {
         this.data = data;
@@ -36,7 +46,7 @@ public class ClassReader {
         return data;
     }
     public List<byte[]> readUint16s(){
-        int n = Integer.valueOf(new String(readUint16()));
+        int n = getShortIndex(readUint16());
         List<byte[]> list = new ArrayList<byte[]>();
         for (int i = 0; i < n; i++) {
             list.add(readUint16());
@@ -46,7 +56,7 @@ public class ClassReader {
     public byte[] readBytes(int n){
         byte[] data = new byte[n];
         System.arraycopy(this.data,offset,data,0,data.length);
-        offset += n;
+        offset += data.length;
         return data;
     }
 

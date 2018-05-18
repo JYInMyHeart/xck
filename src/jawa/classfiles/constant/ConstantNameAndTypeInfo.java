@@ -27,6 +27,11 @@ public class ConstantNameAndTypeInfo implements ConstantInfo {
         descriptorIndex = getShortIndex(reader.readUint16());
     }
 
-
+    public String toString() {
+        return "ConstantNameAndTypeInfo{" +
+                "nameIndex=" + nameIndex +
+                ", descriptorIndex=" + descriptorIndex +
+                '}';
+    }
 }
 

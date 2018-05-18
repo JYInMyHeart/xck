@@ -11,9 +11,13 @@ import static jawa.Utils.Sth.getShortIndex;
  */
 
 public abstract class ConstantMemberrefInfo implements ConstantInfo {
-    private ConstantPool cp;
-    private short classIndex;
-    private short nameAndTypeIndex;
+    protected ConstantPool cp;
+    protected short classIndex;
+    protected short nameAndTypeIndex;
+
+    public ConstantMemberrefInfo(ConstantPool cp) {
+        this.cp = cp;
+    }
 
     @Override
     public void readInfo(ClassReader reader) {
@@ -29,4 +33,10 @@ public abstract class ConstantMemberrefInfo implements ConstantInfo {
         return cp.getNameAndType(nameAndTypeIndex);
     }
 
+    public String toString() {
+        return "ConstantMemberrefInfo{" +
+                "classIndex=" + classIndex +
+                ", nameAndTypeIndex=" + nameAndTypeIndex +
+                '}';
+    }
 }

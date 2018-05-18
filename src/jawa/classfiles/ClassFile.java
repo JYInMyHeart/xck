@@ -1,23 +1,27 @@
 package jawa.classfiles;
 
+import jawa.Utils.Sth;
 import jawa.classfiles.members.AttributeInfo;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.MemberInfo;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static jawa.Utils.Sth.bytesToHexString;
+import static jawa.Utils.Sth.bytesToIntHexString;
+import static jawa.Utils.Sth.getIntIndex;
 import static jawa.Utils.Sth.getShortIndex;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class ClassFile {
     private static final String MAGIC = "cafebabe";
     private String magic;
-    private String minorVersion;
-    private String majorVersion;
+    private int minorVersion;
+    private int majorVersion;
     private ConstantPool constantPool;
-    private short accessFlags;
+    private String accessFlags;
     private short thisClass;
     private short superClass;
     private List<byte[]> interfaces;
@@ -36,7 +40,7 @@ public class ClassFile {
         readAndCheckVersion(reader);
         ConstantPool c = new ConstantPool();
         constantPool = c.readConstantPool(reader);
-        accessFlags = getShortIndex(reader.readUint16());
+        accessFlags = bytesToIntHexString(reader.readUint16());
         thisClass = getShortIndex(reader.readUint16());
         superClass = getShortIndex(reader.readUint16());
         interfaces = reader.readUint16s();
@@ -50,16 +54,16 @@ public class ClassFile {
     private void readAndCheckVersion(ClassReader reader) throws Exception {
         byte[] minorVersion = reader.readUint16();
         byte[] majorVersion = reader.readUint16();
-        int minor = Integer.parseInt(Objects.requireNonNull(bytesToHexString(minorVersion)),10);
-        int major = Integer.parseInt(Objects.requireNonNull(bytesToHexString(majorVersion)),10);
-        if(major <= 52 && major > 45 && minor == 0) return;
-        if(major == 45) return;
+        this.minorVersion = getIntIndex(minorVersion);
+        this.majorVersion = getIntIndex(majorVersion);
+        if(this.majorVersion <= 53 && this.majorVersion > 45 && this.minorVersion == 0) return;
+        if(this.majorVersion == 45) return;
         throw new Exception("java.lang.UnsupportedClassVersionError!");
     }
 
     private void readAndCheckMagic(ClassReader reader) throws Exception {
         byte[] magic = reader.readUint32();
-        if(!MAGIC.equals(bytesToHexString(magic))){
+        if(!MAGIC.equals(bytesToIntHexString(magic))){
             throw new Exception("java.lang.ClassFormatError:magic!");
         }
     }
@@ -72,11 +76,11 @@ public class ClassFile {
         return constantPool.getClassName(superClass);
     }
 
-    public String getMinorVersion() {
+    public int getMinorVersion() {
         return minorVersion;
     }
 
-    public String getMajorVersion() {
+    public int getMajorVersion() {
         return majorVersion;
     }
 
@@ -84,7 +88,7 @@ public class ClassFile {
         return constantPool;
     }
 
-    public short getAccessFlags() {
+    public String getAccessFlags() {
         return accessFlags;
     }
 
@@ -96,4 +100,15 @@ public class ClassFile {
         return classMethods;
     }
 
+    public List<String> getInterfaces() {
+        List<String> list = interfaces.stream().map(e -> {
+            try {
+                return constantPool.getClassName(getShortIndex(e));
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                return "error";
+            }
+        }).collect(Collectors.toList());
+        return list;
+    }
 }

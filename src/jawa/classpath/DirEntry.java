@@ -9,6 +9,8 @@ public class DirEntry implements Entry {
     private String absDir;
 
     public DirEntry(String absDir) {
+        if(!absDir.endsWith("\\"))
+                absDir += "\\";
         this.absDir = absDir;
     }
 

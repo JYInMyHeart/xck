@@ -11,7 +11,7 @@ public class Classpath {
     public Classpath() {
     }
 
-    public Classpath parse(String jreOption,String cpOption) throws Exception {
+    public Classpath parse(String jreOption, String cpOption) throws Exception {
         Classpath cp = new Classpath();
         cp.parseBootAndExtClasspath(jreOption);
         cp.parseUserClasspath(cpOption);
@@ -25,28 +25,28 @@ public class Classpath {
     }
 
     private String getJreDir(String jreOption) throws Exception {
-        if(jreOption != null && new File(jreOption).exists())
+        if (jreOption != null && new File(jreOption).exists())
             return jreOption;
         String jh = System.getenv("JAVA_HOME");
-        if(jh != null)
+        if (jh != null)
             return jh.endsWith("/") ? jh + "jre" : jh + "/jre";
         throw new Exception("cant find jre folder!");
     }
 
-    private void parseUserClasspath(String cpOption){
-        if(cpOption == null || cpOption .endsWith(""))
+    private void parseUserClasspath(String cpOption) {
+        if (cpOption == null || cpOption.equals(""))
             cpOption = ".";
         this.userClasspath = Entry.newEntry(cpOption);
     }
 
-    public byte[] readClass(String className){
+    public byte[] readClass(String className) {
         className += ".class";
         byte[] bootData = bootClasspath.readClass(className);
-        if(Optional.ofNullable(bootData).isPresent()){
+        if (Optional.ofNullable(bootData).isPresent()) {
             return bootData;
         }
         byte[] extData = extClasspath.readClass(className);
-        if(Optional.ofNullable(extData).isPresent()){
+        if (Optional.ofNullable(extData).isPresent()) {
             return extData;
         }
         return userClasspath.readClass(className);

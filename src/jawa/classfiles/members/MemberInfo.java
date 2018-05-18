@@ -28,7 +28,7 @@ public class MemberInfo {
 
     public MemberInfo readMember(ClassReader reader, ConstantPool cp) throws Exception {
         this.cp = cp;
-        accessFlags = bytesToHexString(reader.readUint16());
+        accessFlags = bytesToIntHexString(reader.readUint16());
         nameIndex = getShortIndex(reader.readUint16());
         descriptorIndex = getShortIndex(reader.readUint16());
         attributeInfos = readAttributes(reader, cp);
@@ -45,5 +45,14 @@ public class MemberInfo {
 
     public String getDescriptor() throws Exception {
         return cp.getUtf8(descriptorIndex);
+    }
+
+    public String toString() {
+        return "MemberInfo{" +
+                "accessFlags='" + accessFlags + '\'' +
+                ", nameIndex=" + nameIndex +
+                ", descriptorIndex=" + descriptorIndex +
+                ", attributeInfos=" + attributeInfos +
+                '}';
     }
 }

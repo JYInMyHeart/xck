@@ -10,4 +10,6 @@ public class ConstantMethodHandleInfo implements ConstantInfo {
     public void readInfo(ClassReader reader) {
 
     }
+
+
 }

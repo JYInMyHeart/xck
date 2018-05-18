@@ -4,24 +4,24 @@ import java.util.Objects;
 
 public class Sth {
     public static int getIntIndex(byte[] attrNameIndex) {
-        return Integer.parseInt(Objects.requireNonNull(bytesToHexString(attrNameIndex)),10);
+        return Integer.parseInt(Objects.requireNonNull(bytesToIntHexString(attrNameIndex)),16);
     }
     public static short getShortIndex(byte[] attrNameIndex) {
-        return Short.parseShort(Objects.requireNonNull(bytesToHexString(attrNameIndex)),10);
+        return Short.parseShort(Objects.requireNonNull(bytesToIntHexString(attrNameIndex)),16);
     }
     public static byte getByteIndex(byte[] attrNameIndex) {
-        return Byte.parseByte(Objects.requireNonNull(bytesToHexString(attrNameIndex)),10);
+        return Byte.parseByte(Objects.requireNonNull(bytesToIntHexString(attrNameIndex)),16);
     }
     public static long getLongIndex(byte[] attrNameIndex) {
-        return Long.parseLong(Objects.requireNonNull(bytesToHexString(attrNameIndex)),10);
+        return bytesToLong(attrNameIndex);
     }
     public static float getFloatIndex(byte[] attrNameIndex) {
-        return Float.parseFloat(Objects.requireNonNull(bytesToHexString(attrNameIndex)));
+        return Float.intBitsToFloat(getIntIndex(attrNameIndex));
     }
     public static double getDoubleIndex(byte[] attrNameIndex) {
-        return Double.parseDouble(Objects.requireNonNull(bytesToHexString(attrNameIndex)));
+        return Double.longBitsToDouble(getLongIndex(attrNameIndex));
     }
-    public static String bytesToHexString(byte[] src){
+    public static String bytesToIntHexString(byte[] src){
         StringBuilder stringBuilder = new StringBuilder();
         if (src == null || src.length <= 0) {
             return null;
@@ -36,4 +36,13 @@ public class Sth {
         }
         return stringBuilder.toString();
     }
+    public static long bytesToLong(byte[] src){
+        long res = 0xffffffff;
+        for (int i = 0; i < src.length; i++) {
+            res &= src[i] << (src.length - 1 - i);
+        }
+        return res;
+    }
+
+
 }

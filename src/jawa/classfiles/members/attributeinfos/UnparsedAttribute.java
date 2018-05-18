@@ -18,6 +18,13 @@ public class UnparsedAttribute implements AttributeInfo {
     public void readInfo(ClassReader reader) {
         info = reader.readBytes(length);
     }
+
+    public String toString() {
+        return "UnparsedAttribute{" +
+                "name='" + name + '\'' +
+                ", length=" + length +
+                '}';
+    }
 }
 
 

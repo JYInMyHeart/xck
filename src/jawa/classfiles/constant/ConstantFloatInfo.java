@@ -19,4 +19,10 @@ public class ConstantFloatInfo implements ConstantInfo{
     public void readInfo(ClassReader reader){
         value = getFloatIndex(reader.readUint32());
     }
+
+    public String toString() {
+        return "ConstantFloatInfo{" +
+                "value=" + value +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
+import jawa.classfiles.members.MemberInfo;
 
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import static jawa.Utils.Sth.getShortIndex;
  * @author xck
  */
 
-public abstract class ConstantMemberrefInfo implements ConstantInfo {
+public abstract class ConstantMemberrefInfo extends MemberInfo implements ConstantInfo {
     protected ConstantPool cp;
     protected short classIndex;
     protected short nameAndTypeIndex;

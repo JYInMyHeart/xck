@@ -23,6 +23,10 @@ public class CodeAttribute implements AttributeInfo {
     private List<ExceptionTableEntry> exceptionTable;
     private List<AttributeInfo> attributeInfos;
 
+    public CodeAttribute(ConstantPool cp) {
+        this.cp = cp;
+    }
+
     @Override
     public void readInfo(ClassReader reader) {
         maxStack = getShortIndex(reader.readUint16());

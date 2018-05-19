@@ -36,21 +36,21 @@ public class Attributes {
 
     public static AttributeInfo newAttributeInfo(String attrName, int attrLen, ConstantPool cp) {
         switch (attrName) {
-            case "Code":
-                return new CodeAttribute();
-            case "ConstantValue":
+            case "'Code'":
+                return new CodeAttribute(cp);
+            case "'ConstantValue'":
                 return new ConstantValueAttribute();
-            case "Deprecated":
+            case "'Deprecated'":
                 return new DeprecatedAttribute();
-            case "Exceptions":
+            case "'Exceptions'":
                 return new ExceptionsAttribute();
-            case "LineNumberTable":
+            case "'LineNumberTable'":
                 return new LineNumberTableAttribute();
-            case "LocalVariableTable":
+            case "'LocalVariableTable'":
                 return new LocalVariableTableAttribute();
-            case "SourceFile":
+            case "'SourceFile'":
                 return new SourceFileAttribute();
-            case "Synthetic":
+            case "'Synthetic'":
                 return new SyntheticAttribute();
             default:
                 return new UnparsedAttribute(attrName, attrLen);

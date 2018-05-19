@@ -25,6 +25,10 @@ public class UnparsedAttribute implements AttributeInfo {
                 ", length=" + length +
                 '}';
     }
+
+    public byte[] getInfo() {
+        return null;
+    }
 }
 
 

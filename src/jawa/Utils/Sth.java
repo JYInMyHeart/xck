@@ -36,6 +36,8 @@ public class Sth {
         }
         return stringBuilder.toString();
     }
+
+    //todo fix this method (this is a wrong version
     public static long bytesToLong(byte[] src){
         long res = 0xffffffff;
         for (int i = 0; i < src.length; i++) {

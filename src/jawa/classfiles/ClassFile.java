@@ -44,9 +44,8 @@ public class ClassFile {
         thisClass = getShortIndex(reader.readUint16());
         superClass = getShortIndex(reader.readUint16());
         interfaces = reader.readUint16s();
-        MemberInfo memberInfo = new MemberInfo();
-        classFileds = memberInfo.readMembers(reader,constantPool);
-        classMethods = memberInfo.readMembers(reader,constantPool);
+        classFileds = MemberInfo.readMembers(reader,constantPool);
+        classMethods = MemberInfo.readMembers(reader,constantPool);
         attributeInfos = readAttributes(reader,constantPool);
         return this;
     }

@@ -19,7 +19,7 @@ public class CmdOperations {
                 System.out.println("version 0.0.1");break;
             case "exit":System.exit(0);
             default:{
-                String[] msg = args.split(" ");
+                String[] msg = args.split(";");
                 if(msg.length != 2) throw new RuntimeException("wrong cmd");
                 else {
                     cmd.setClassName(msg[1]);
@@ -44,6 +44,12 @@ public class CmdOperations {
         }
 
 
+
+
+
+
+
+
     }
 
     public ClassFile loadClass(String className,Classpath cp) throws Exception {
@@ -61,9 +67,10 @@ public class CmdOperations {
         System.out.println("this class: " + classFile.getClassName());
         System.out.println("super class: " + classFile.getSuperClassName());
         System.out.println("interfaces: " + classFile.getInterfaces());
-        classFile.getClassFileds().forEach(System.out::print);
-        System.out.println();
-        classFile.getClassMethods().forEach(System.out::print);
+        System.out.println("fields: ");
+        classFile.getClassFileds().forEach(System.out::println);
+        System.out.println("methods: ");
+        classFile.getClassMethods().forEach(System.out::println);
         System.out.println();
     }
 }

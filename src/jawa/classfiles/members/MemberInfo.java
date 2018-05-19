@@ -17,22 +17,24 @@ public class MemberInfo {
     private short descriptorIndex;
     private List<AttributeInfo> attributeInfos;
 
-    public List<MemberInfo> readMembers(ClassReader reader, ConstantPool cp) throws Exception {
+    public static List<MemberInfo> readMembers(ClassReader reader, ConstantPool cp) throws Exception {
         byte[] memberCount = reader.readUint16();
         List<MemberInfo> members = new ArrayList<>();
         for (int i = 0; i < getIntIndex(memberCount); i++) {
-            members.add(readMember(reader, cp));
+            MemberInfo m = readMember(reader, cp);
+            members.add(m);
         }
         return members;
     }
 
-    public MemberInfo readMember(ClassReader reader, ConstantPool cp) throws Exception {
-        this.cp = cp;
-        accessFlags = bytesToIntHexString(reader.readUint16());
-        nameIndex = getShortIndex(reader.readUint16());
-        descriptorIndex = getShortIndex(reader.readUint16());
-        attributeInfos = readAttributes(reader, cp);
-        return this;
+    public static MemberInfo readMember(ClassReader reader, ConstantPool cp) throws Exception {
+        MemberInfo memberInfo = new MemberInfo();
+        memberInfo.cp = cp;
+        memberInfo.accessFlags = bytesToIntHexString(reader.readUint16());
+        memberInfo.nameIndex = getShortIndex(reader.readUint16());
+        memberInfo.descriptorIndex = getShortIndex(reader.readUint16());
+        memberInfo.attributeInfos = readAttributes(reader, cp);
+        return memberInfo;
     }
 
     public String getAccessFlags() {
@@ -48,11 +50,16 @@ public class MemberInfo {
     }
 
     public String toString() {
-        return "MemberInfo{" +
-                "accessFlags='" + accessFlags + '\'' +
-                ", nameIndex=" + nameIndex +
-                ", descriptorIndex=" + descriptorIndex +
-                ", attributeInfos=" + attributeInfos +
-                '}';
+        try {
+            return "MemberInfo{" +
+                    "accessFlags='" + getAccessFlags() + '\'' +
+                    ", nameIndex=" + getName() +
+                    ", descriptorIndex=" + getDescriptor() +
+                    ", attributeInfos=" + attributeInfos +
+                    '}';
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "fatal error!";
+        }
     }
 }

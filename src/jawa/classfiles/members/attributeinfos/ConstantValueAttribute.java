@@ -19,4 +19,8 @@ public class ConstantValueAttribute implements AttributeInfo {
     public int getConstantValueIndex() {
         return constantValueIndex;
     }
+
+    public String toString() {
+        return "constantValueIndex=" + getConstantValueIndex() ;
+    }
 }

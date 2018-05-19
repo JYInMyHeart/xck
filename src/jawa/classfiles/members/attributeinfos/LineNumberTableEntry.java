@@ -26,4 +26,11 @@ public class LineNumberTableEntry {
     public void setLineNumber(short lineNumber) {
         this.lineNumber = lineNumber;
     }
+
+    public String toString() {
+        return "LineNumberTableEntry{" +
+                "startPc=" + startPc +
+                ", lineNumber=" + lineNumber +
+                '}';
+    }
 }

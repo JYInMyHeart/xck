@@ -30,4 +30,10 @@ public class LineNumberTableAttribute implements AttributeInfo {
     public List<LineNumberTableEntry> getLineNumberTable() {
         return lineNumberTable;
     }
+
+    public String toString() {
+        return "LineNumberTableAttribute{" +
+                "lineNumberTable=" + lineNumberTable +
+                '}';
+    }
 }

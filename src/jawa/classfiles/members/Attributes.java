@@ -20,6 +20,7 @@ public class Attributes {
         List<AttributeInfo> attributeInfos = new ArrayList<AttributeInfo>();
         int attributesCountVal = getIntIndex(attributesCount);
         for (int i = 0; i < attributesCountVal; i++) {
+            System.out.println("i " + i );
             attributeInfos.add(readAttribute(reader, cp));
         }
         return attributeInfos;

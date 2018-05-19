@@ -6,6 +6,7 @@ import jawa.classfiles.members.AttributeInfo;
 import jawa.classfiles.members.Attributes;
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static jawa.Utils.Sth.getIntIndex;
@@ -87,5 +88,15 @@ public class CodeAttribute implements AttributeInfo {
 
     public void setAttributeInfos(List<AttributeInfo> attributeInfos) {
         this.attributeInfos = attributeInfos;
+    }
+
+    public String toString() {
+        return "CodeAttribute{" +
+                "maxStack=" + maxStack +
+                ", maxLocals=" + maxLocals +
+                ", code=" + Arrays.toString(code) +
+                ", exceptionTable=" + exceptionTable +
+                ", attributeInfos=" + attributeInfos +
+                '}';
     }
 }

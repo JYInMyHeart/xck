@@ -3,7 +3,8 @@ package jawa.rtda;
 /**
  * @author xck
  */
-public class OperandStack {
+public class
+OperandStack {
     private int size;
     private Slot[] slots;
 
@@ -26,27 +27,55 @@ public class OperandStack {
 
 
     public void pushInt(int value){
-        slots[size++].setNum(value);
+        slots[size++] = new Slot(value,null);
     }
 
     public int popInt(){
-        return slots[size--].getNum();
+        return slots[--size].getNum();
+    }
+    public void pushFloat(float value){
+        slots[size++] = new Slot((int)value,null);
+    }
+
+    public float popFloat(){
+        return (float)slots[--size].getNum();
+    }
+
+    public void pushLong(long value){
+        slots[size++] = new Slot((int)value,null);
+    }
+
+    public long popLong(){
+        return slots[--size].getNum();
+    }
+
+    public void pushDouble(double value){
+        slots[size++] = new Slot((int)value,null);
+    }
+
+    public double popDouble(){
+        return slots[--size].getNum();
     }
 
     public void pushRef(XObject ref){
-        slots[size++].setRef(ref);
+        slots[size++] = new Slot(0,ref);
     }
 
     public XObject popRef(){
-        Slot currentSlot = slots[size];
-        slots[size--].setRef(null);
+        Slot currentSlot = slots[--size];
         return currentSlot.getRef();
     }
 
-    public static OperandStack newOperandStack(int maxStack){
+    public  OperandStack(int maxStack){
         assert maxStack > 0;
-        OperandStack operandStack = new OperandStack();
-        operandStack.slots = new Slot[maxStack];
-        return operandStack;
+        size = 0;
+        slots = new Slot[maxStack];
+    }
+
+    public void pushSlot(Slot slot){
+        slots[size++] = slot;
+    }
+    public Slot popSlot(){
+        return slots[--size];
     }
 }

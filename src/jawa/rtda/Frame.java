@@ -32,10 +32,8 @@ public class Frame {
         this.operandStack = operandStack;
     }
 
-    public Frame newFrame(int maxLocals, int maxStack){
-        Frame frame = new Frame();
-        frame.setLocalVars(LocalVars.newLocalVars(maxLocals));
-        frame.setOperandStack(OperandStack.newOperandStack(maxStack));
-        return frame;
+    public Frame(int maxLocals, int maxStack){
+        localvars = new LocalVars(maxLocals);
+        operandStack = new OperandStack(maxStack);
     }
 }

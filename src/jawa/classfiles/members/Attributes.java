@@ -20,7 +20,6 @@ public class Attributes {
         List<AttributeInfo> attributeInfos = new ArrayList<AttributeInfo>();
         int attributesCountVal = getIntIndex(attributesCount);
         for (int i = 0; i < attributesCountVal; i++) {
-            System.out.println("i " + i );
             attributeInfos.add(readAttribute(reader, cp));
         }
         return attributeInfos;
@@ -40,15 +39,15 @@ public class Attributes {
             case "'Code'":
                 return new CodeAttribute(cp);
             case "'ConstantValue'":
-                return new ConstantValueAttribute();
+                return new ConstantValueAttribute(cp);
             case "'Deprecated'":
                 return new DeprecatedAttribute();
             case "'Exceptions'":
-                return new ExceptionsAttribute();
+                return new ExceptionsAttribute(cp);
             case "'LineNumberTable'":
                 return new LineNumberTableAttribute();
             case "'LocalVariableTable'":
-                return new LocalVariableTableAttribute();
+                return new LocalVariableTableAttribute(cp);
             case "'SourceFile'":
                 return new SourceFileAttribute();
             case "'Synthetic'":

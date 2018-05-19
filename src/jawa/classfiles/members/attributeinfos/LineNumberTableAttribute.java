@@ -32,8 +32,6 @@ public class LineNumberTableAttribute implements AttributeInfo {
     }
 
     public String toString() {
-        return "LineNumberTableAttribute{" +
-                "lineNumberTable=" + lineNumberTable +
-                '}';
+        return "lineNumberTable=" + lineNumberTable ;
     }
 }

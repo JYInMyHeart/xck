@@ -60,4 +60,11 @@ public class ExceptionTableEntry {
     public void setCatchType(short catchType) {
         this.catchType = catchType;
     }
+
+    public String toString() {
+        return "startPc=" + startPc +
+                ", endPc=" + endPc +
+                ", handlerPc=" + handlerPc +
+                ", catchType=" + catchType ;
+    }
 }

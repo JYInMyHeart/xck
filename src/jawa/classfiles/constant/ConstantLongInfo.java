@@ -21,8 +21,6 @@ public class ConstantLongInfo implements ConstantInfo{
     }
 
     public String toString() {
-        return "ConstantLongInfo{" +
-                "value=" + value +
-                '}';
+        return "Long.value=" + value ;
     }
 }

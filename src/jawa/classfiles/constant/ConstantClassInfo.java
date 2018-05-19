@@ -23,12 +23,16 @@ public class ConstantClassInfo implements ConstantInfo {
 
     public String toString() {
         return "ConstantClassInfo{" +
-                "nameIndex=" + nameIndex +
+                "nameIndex=" + getName() +
                 '}';
     }
 
-    public String getName() throws Exception {
-        return cp.getUtf8(nameIndex);
+    public String getName()  {
+        try {
+            return cp.getUtf8(nameIndex);
+        } catch (Exception e) {
+            return "name cant find";
+        }
     }
 }
 

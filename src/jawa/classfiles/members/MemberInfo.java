@@ -11,11 +11,11 @@ import static jawa.Utils.Sth.*;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class MemberInfo {
-    private ConstantPool cp;
-    private String accessFlags;
-    private short nameIndex;
-    private short descriptorIndex;
-    private List<AttributeInfo> attributeInfos;
+    protected ConstantPool cp;
+    protected String accessFlags;
+    protected short nameIndex;
+    protected short descriptorIndex;
+    protected List<AttributeInfo> attributeInfos;
 
     public static List<MemberInfo> readMembers(ClassReader reader, ConstantPool cp) throws Exception {
         byte[] memberCount = reader.readUint16();
@@ -55,11 +55,27 @@ public class MemberInfo {
                     "accessFlags='" + getAccessFlags() + '\'' +
                     ", nameIndex=" + getName() +
                     ", descriptorIndex=" + getDescriptor() +
-                    ", attributeInfos=" + attributeInfos +
+                    getValueType() + attributeInfos +
                     '}';
         } catch (Exception e) {
             e.printStackTrace();
             return "fatal error!";
         }
+    }
+    private String getValueType(){
+        StringBuffer sb = new StringBuffer();
+        try {
+            switch (this.getDescriptor()){
+                case "'Z'":sb.append(" , Boolean.value=");break;
+                case "'B'":sb.append(" , Byte.value=");break;
+                case "'S'":sb.append(" , Short.value=");break;
+                case "'C'":sb.append(" , Char.value=");break;
+                case "'I'":sb.append(" , Int.value=");break;
+                default:sb.append(" , ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString() ;
     }
 }

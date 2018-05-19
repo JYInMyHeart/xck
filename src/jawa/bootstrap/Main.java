@@ -13,9 +13,8 @@ public class Main {
                 System.out.print("xckJxm>");
                 String msg = scanner.nextLine();
                 Cmd cmd = new Cmd();
-                CmdOperations cmdOperations = new CmdOperations();
-                cmdOperations.parseCmd(cmd,msg);
-                cmdOperations.startJvm(cmd);
+                CmdOperations.parseCmd(cmd,msg);
+                CmdOperations.startJvm(cmd);
             } catch (Exception e) {
                 System.out.println("this cmd is undefined! please reset ur input!" + e);
                 e.printStackTrace();

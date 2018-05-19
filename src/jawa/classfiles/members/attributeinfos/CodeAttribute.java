@@ -95,8 +95,8 @@ public class CodeAttribute implements AttributeInfo {
                 "maxStack=" + maxStack +
                 ", maxLocals=" + maxLocals +
                 ", code=" + Arrays.toString(code) +
-                ", exceptionTable=" + exceptionTable +
-                ", attributeInfos=" + attributeInfos +
+                ", exceptionTable=" + exceptionTable + "\r\n" +
+                "    attributeInfos=" + attributeInfos +
                 '}';
     }
 }

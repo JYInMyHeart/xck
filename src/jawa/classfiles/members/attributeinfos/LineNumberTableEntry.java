@@ -28,9 +28,7 @@ public class LineNumberTableEntry {
     }
 
     public String toString() {
-        return "LineNumberTableEntry{" +
-                "startPc=" + startPc +
-                ", lineNumber=" + lineNumber +
-                '}';
+        return "startPc=" + startPc +
+                ", lineNumber=" + lineNumber;
     }
 }

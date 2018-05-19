@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class CmdOperations {
 
 
-    public void parseCmd(Cmd cmd,String args){
+    public static void parseCmd(Cmd cmd,String args){
         switch (args){
             case "help":cmd.setHelpFlag(true);
                 System.out.println("help msg");break;
@@ -29,10 +29,10 @@ public class CmdOperations {
         }
     }
 
-    public void startJvm(Cmd cmd){
+    public static void startJvm(Cmd cmd){
         Classpath cp = null;
         try {
-            cp = new Classpath().parse(cmd.getxJreOption(),cmd.getCpOption());
+            cp = Classpath.parse(cmd.getxJreOption(),cmd.getCpOption());
             assert cp != null;
             byte[] classData = cp.readClass(cmd.getClassName().replace(".","/"));
 //            System.out.println(Arrays.toString(classData));
@@ -52,7 +52,7 @@ public class CmdOperations {
 
     }
 
-    public ClassFile loadClass(String className,Classpath cp) throws Exception {
+    public static ClassFile loadClass(String className,Classpath cp) throws Exception {
         byte[] classData = cp.readClass(className);
         assert classData != null;
         ClassFile cf = new ClassFile().parse(classData);
@@ -60,7 +60,7 @@ public class CmdOperations {
         return cf;
     }
 
-    public void printClassInfo(ClassFile classFile) throws Exception {
+    public static void printClassInfo(ClassFile classFile) throws Exception {
         System.out.println("version: " + classFile.getMajorVersion() + "  " + classFile.getMinorVersion());
         System.out.println("constants count: " + classFile.getConstantPool().getConstantInfoList().length);
         System.out.println("access flags: " + classFile.getAccessFlags());

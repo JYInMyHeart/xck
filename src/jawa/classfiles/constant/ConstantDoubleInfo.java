@@ -21,8 +21,6 @@ public class ConstantDoubleInfo implements ConstantInfo{
     }
 
     public String toString() {
-        return "ConstantDoubleInfo{" +
-                "value=" + value +
-                '}';
+        return "Double.value=" + value ;
     }
 }

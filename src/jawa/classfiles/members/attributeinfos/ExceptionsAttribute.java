@@ -2,6 +2,8 @@ package jawa.classfiles.members.attributeinfos;
 
 import jawa.Utils.Sth;
 import jawa.classfiles.ClassReader;
+import jawa.classfiles.constant.ConstantInfo;
+import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.AttributeInfo;
 import lombok.Getter;
 
@@ -13,8 +15,12 @@ import java.util.stream.Collectors;
  */
 
 public class ExceptionsAttribute implements AttributeInfo {
-
+    private ConstantPool cp;
     private List<Short> exceptionIndexTable;
+
+    public ExceptionsAttribute(ConstantPool cp) {
+        this.cp = cp;
+    }
 
     @Override
     public void readInfo(ClassReader reader) {
@@ -23,5 +29,19 @@ public class ExceptionsAttribute implements AttributeInfo {
 
     public List<Short> getExceptionIndexTable() {
         return exceptionIndexTable;
+    }
+
+    public List<String> getExceptionTable(){
+        return exceptionIndexTable.stream().map(e -> {
+            try {
+                return cp.getUtf8(e);
+            } catch (Exception e1) {
+                return "exception cant find!";
+            }
+        }).collect(Collectors.toList());
+    }
+
+    public String toString() {
+        return "\r\n            exceptionIndexTable=" + getExceptionTable() ;
     }
 }

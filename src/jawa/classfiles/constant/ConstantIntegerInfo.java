@@ -1,6 +1,7 @@
 package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
+import jawa.classfiles.members.MemberInfo;
 import lombok.Getter;
 
 import static jawa.Utils.Sth.getIntIndex;
@@ -21,8 +22,6 @@ public class ConstantIntegerInfo implements ConstantInfo{
     }
 
     public String toString() {
-        return "ConstantIntegerInfo{" +
-                "value=" + value +
-                '}';
+        return "" + value;
     }
 }

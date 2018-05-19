@@ -1,16 +1,23 @@
 package jawa.classfiles.members.attributeinfos;
 
 
+import jawa.classfiles.constant.ConstantPool;
+
 /**
  * @author xck
  */
 
 public class LocalVariableTableEntry {
+    private ConstantPool cp;
     private short startPc;
     private short length;
     private short nameIdnex;
     private short descriptorIndex;
     private short index;
+
+    public LocalVariableTableEntry(ConstantPool cp) {
+        this.cp = cp;
+    }
 
     public short getNameIdnex() {
         return nameIdnex;
@@ -36,6 +43,22 @@ public class LocalVariableTableEntry {
         this.index = index;
     }
 
+    public String getDescriptor(){
+        try {
+            return cp.getUtf8(descriptorIndex);
+        } catch (Exception e) {
+            return "descriptor cant find";
+        }
+    }
+
+    public String getName(){
+        try {
+            return cp.getUtf8(nameIdnex);
+        } catch (Exception e) {
+            return "name cant find";
+        }
+    }
+
     public short getStartPc() {
         return startPc;
     }
@@ -51,14 +74,14 @@ public class LocalVariableTableEntry {
     public void setLength(short length) {
         this.length = length;
     }
-    
+
 
     public String toString() {
         return "LocalVariableTableEntry{" +
                 "startPc=" + startPc +
                 ", length=" + length +
-                ", nameIdnex=" + nameIdnex +
-                ", descriptorIndex=" + descriptorIndex +
+                ", nameIdnex=" + getName() +
+                ", descriptorIndex=" + getDescriptor() +
                 ", index=" + index +
                 '}';
     }

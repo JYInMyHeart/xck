@@ -11,7 +11,7 @@ public class Classpath {
     public Classpath() {
     }
 
-    public Classpath parse(String jreOption, String cpOption) throws Exception {
+    public static Classpath parse(String jreOption, String cpOption) throws Exception {
         Classpath cp = new Classpath();
         cp.parseBootAndExtClasspath(jreOption);
         cp.parseUserClasspath(cpOption);

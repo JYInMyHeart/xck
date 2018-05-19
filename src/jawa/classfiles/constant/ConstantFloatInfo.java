@@ -21,8 +21,6 @@ public class ConstantFloatInfo implements ConstantInfo{
     }
 
     public String toString() {
-        return "ConstantFloatInfo{" +
-                "value=" + value +
-                '}';
+        return "Float.value=" + value ;
     }
 }

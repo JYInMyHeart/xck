@@ -7,6 +7,24 @@ public class Frame {
     private Frame lower;
     private LocalVars localvars;
     private OperandStack operandStack;
+    private XThread thread;
+    private int nextPc;
+
+    public XThread getThread() {
+        return thread;
+    }
+
+    public void setThread(XThread thread) {
+        this.thread = thread;
+    }
+
+    public int getNextPc() {
+        return nextPc;
+    }
+
+    public void setNextPc(int nextPc) {
+        this.nextPc = nextPc;
+    }
 
     public Frame getLower() {
         return lower;
@@ -35,5 +53,10 @@ public class Frame {
     public Frame(int maxLocals, int maxStack){
         localvars = new LocalVars(maxLocals);
         operandStack = new OperandStack(maxStack);
+    }
+
+    public Frame(XThread thread,int maxLocals, int maxStack) {
+        this(maxLocals,maxStack);
+        this.thread = thread;
     }
 }

@@ -4,7 +4,7 @@ import jawa.instructions.base.ByteCodeReader;
 import jawa.instructions.base.Instruction;
 import jawa.instructions.loads.*;
 import jawa.instructions.math.IINC;
-import jawa.instructions.stores.LSTORE;
+import jawa.instructions.stores.*;
 import jawa.rtda.Frame;
 
 /**
@@ -17,52 +17,61 @@ public class WIDE implements Instruction {
         int opcode = reader.readInt8();
         switch (opcode){
             case 0x15:  // iload
-                ILOAD inst = new ILOAD();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                ILOAD iload = new ILOAD();
+                iload.setIndex(reader.readInt16());
+                modifiedInstruction = iload;
+                break;
             case 0x16:  // lload
-                LLOAD inst = new LLOAD();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                LLOAD lload = new LLOAD();
+                lload.setIndex(reader.readInt16());
+                modifiedInstruction = lload;
+                break;
             case 0x17:  // fload
-                FLOAD inst = new FLOAD();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                FLOAD fload = new FLOAD();
+                fload.setIndex(reader.readInt16());
+                modifiedInstruction = fload;
+                break;
             case 0x18:  // dload
-                DLOAD inst = new DLOAD();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                DLOAD dload = new DLOAD();
+                dload.setIndex(reader.readInt16());
+                modifiedInstruction = dload;
+                break;
             case 0x19:  // aload
-                ALOAD inst = new ALOAD();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                ALOAD aload = new ALOAD();
+                aload.setIndex(reader.readInt16());
+                modifiedInstruction = aload;
+                break;
             case 0x36:  // istore
-                ISTORE inst = new ISTORE();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                ISTORE istore = new ISTORE();
+                istore.setIndex(reader.readInt16());
+                modifiedInstruction = istore;
+                break;
             case 0x37:  // lstore
-                LSTORE inst = new LSTORE();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                LSTORE lstore = new LSTORE();
+                lstore.setIndex(reader.readInt16());
+                modifiedInstruction = lstore;
+                break;
             case 0x38:  // fstore
-
-
-                FSTORE inst = new FSTORE();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                FSTORE fstore = new FSTORE();
+                fstore.setIndex(reader.readInt16());
+                modifiedInstruction = fstore;
+                break;
             case 0x39:  // dstore
-                DSTORE inst = new DSTORE();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                DSTORE dstore = new DSTORE();
+                dstore.setIndex(reader.readInt16());
+                modifiedInstruction = dstore;
+                break;
             case 0x3a:  // astore
-                ASTORE inst = new ASTORE();
-                inst.setIndex(reader.readInt16());
-                modifiedInstruction = inst;
+                ASTORE astore = new ASTORE();
+                astore.setIndex(reader.readInt16());
+                modifiedInstruction = astore;
+                break;
             case 0x84:  // iinc
-                IINC inst = new IINC();
-                inst.setIndex(reader.readInt16());
-                inst.setConstValue(reader.readInt16());
-                modifiedInstruction = inst;
+                IINC iinc = new IINC();
+                iinc.setIndex(reader.readInt16());
+                iinc.setConstValue(reader.readInt16());
+                modifiedInstruction = iinc;
+                break;
             case 0xa9:  //ret
                 throw new RuntimeException("Unsupporsted opcodeL 0xa9");
         }

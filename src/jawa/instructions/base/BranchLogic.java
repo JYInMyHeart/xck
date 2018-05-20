@@ -7,7 +7,7 @@ import jawa.rtda.Frame;
  */
 public class BranchLogic {
     public static void branch(Frame frame,int offset) {
-        int pc = frame.thread().pc();
+        int pc = frame.getThread().getPc();
         int nextPc = pc + offset;
         frame.setNextPc(nextPc);
     }

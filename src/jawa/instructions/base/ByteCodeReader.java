@@ -13,6 +13,10 @@ public class ByteCodeReader {
         this.pc = pc;
     }
 
+    public int getPc() {
+        return pc;
+    }
+
     public int readInt8(){
         return code[pc++];
     }

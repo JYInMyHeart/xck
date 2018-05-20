@@ -2,6 +2,7 @@ package jawa.classfiles.members;
 
 import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
+import jawa.classfiles.members.attributeinfos.CodeAttribute;
 
 
 import java.util.ArrayList;
@@ -77,5 +78,13 @@ public class MemberInfo {
             e.printStackTrace();
         }
         return sb.toString() ;
+    }
+
+    public CodeAttribute getCodeAttribute(){
+        for (int i = 0; i < attributeInfos.size(); i++) {
+            if(attributeInfos.get(i) instanceof CodeAttribute)
+                return (CodeAttribute) attributeInfos.get(i);
+        }
+        return null;
     }
 }

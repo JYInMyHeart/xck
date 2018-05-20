@@ -2,8 +2,7 @@ package jawa.instructions.extended;
 
 import jawa.instructions.base.ByteCodeReader;
 import jawa.instructions.base.Instruction;
-import jawa.instructions.loads.ILOAD;
-import jawa.instructions.loads.LLOAD;
+import jawa.instructions.loads.*;
 import jawa.instructions.math.IINC;
 import jawa.instructions.stores.LSTORE;
 import jawa.rtda.Frame;
@@ -46,6 +45,8 @@ public class WIDE implements Instruction {
                 inst.setIndex(reader.readInt16());
                 modifiedInstruction = inst;
             case 0x38:  // fstore
+
+
                 FSTORE inst = new FSTORE();
                 inst.setIndex(reader.readInt16());
                 modifiedInstruction = inst;

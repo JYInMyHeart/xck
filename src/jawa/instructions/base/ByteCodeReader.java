@@ -26,10 +26,15 @@ public class ByteCodeReader {
                 | (readInt8() << 8)
                 | readInt8();
     }
-    public int readInt32s(){
-        return 0;
+    public int[] readInt32s(int count){
+        int[] res = new int[count];
+        for (int i = 0; i < count; i++) {
+            res[i] = readInt32();
+        }
+        return res;
     }
     public void skipPadding(){
-        
+        while(pc % 4 != 0)
+            readInt8();
     }
 }

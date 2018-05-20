@@ -7,14 +7,14 @@ import jawa.rtda.OperandStack;
 /**
  * @author xck
  */
-public class ISHL extends NoOperandsInstruction {
+public class LSHL extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         OperandStack stack = frame.getOperandStack();
         int v2 = stack.popInt();
-        int v1 = stack.popInt();
-        int s = v2 & 0x1f;
-        int result = v1 << s;
-        stack.pushInt(result);
+        long v1 = stack.popLong();
+        int s = v2 & 0x3f;
+        long result = v1 << s;
+        stack.pushLong(result);
     }
 }

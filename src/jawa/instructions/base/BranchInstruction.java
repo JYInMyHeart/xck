@@ -6,7 +6,7 @@ import jawa.rtda.Frame;
  * @author xck
  */
 public class BranchInstruction implements Instruction {
-    private int offset;
+    protected int offset;
     @Override
     public void fetchOperands(ByteCodeReader reader) {
         offset = reader.readInt16();

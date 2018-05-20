@@ -1,20 +1,20 @@
-package jawa.instructions.math;
+package jawa.instructions.comparisions.ificmp;
 
-import jawa.instructions.base.NoOperandsInstruction;
+import jawa.instructions.base.BranchInstruction;
+import jawa.instructions.base.BranchLogic;
 import jawa.rtda.Frame;
 import jawa.rtda.OperandStack;
 
 /**
  * @author xck
  */
-public class ISHL extends NoOperandsInstruction {
+public class IF_ICMPGT extends BranchInstruction {
     @Override
     public void execute(Frame frame) {
         OperandStack stack = frame.getOperandStack();
         int v2 = stack.popInt();
         int v1 = stack.popInt();
-        int s = v2 & 0x1f;
-        int result = v1 << s;
-        stack.pushInt(result);
+        if(v1 > v2)
+            BranchLogic.branch(frame,offset);
     }
 }

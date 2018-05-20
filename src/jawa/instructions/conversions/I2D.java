@@ -1,4 +1,4 @@
-package jawa.instructions.math;
+package jawa.instructions.conversions;
 
 import jawa.instructions.base.NoOperandsInstruction;
 import jawa.rtda.Frame;
@@ -7,14 +7,11 @@ import jawa.rtda.OperandStack;
 /**
  * @author xck
  */
-public class ISHL extends NoOperandsInstruction {
+public class I2D extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
         OperandStack stack = frame.getOperandStack();
-        int v2 = stack.popInt();
-        int v1 = stack.popInt();
-        int s = v2 & 0x1f;
-        int result = v1 << s;
-        stack.pushInt(result);
+        double d = stack.popInt();
+        stack.pushDouble(d);
     }
 }

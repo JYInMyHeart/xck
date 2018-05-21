@@ -31,7 +31,10 @@ OperandStack {
     }
 
     public int popInt(){
-        return slots[--size].getNum();
+        if(size > 0)
+            return slots[--size].getNum();
+        else
+            return 0;
     }
     public void pushFloat(float value){
         slots[size++] = new Slot((int)value,null);

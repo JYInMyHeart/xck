@@ -6,9 +6,9 @@ import jawa.rtda.Frame;
 /**
  * @author xck
  */
-public class FLOAD extends Index8Instruction {
+public class LLOAD_3 extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getOperandStack().pushFloat(frame.getLocalVars().getFloat(index));
+        frame.getOperandStack().pushLong(frame.getLocalVars().getLong(3));
     }
 }

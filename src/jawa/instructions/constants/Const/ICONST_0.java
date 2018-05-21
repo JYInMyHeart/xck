@@ -11,4 +11,8 @@ public class ICONST_0 extends NoOperandsInstruction {
     public void execute(Frame frame) {
         frame.getOperandStack().pushInt(0);
     }
+
+    public String toString() {
+        return "ICONST_0";
+    }
 }

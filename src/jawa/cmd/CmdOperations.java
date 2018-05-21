@@ -1,26 +1,32 @@
 package jawa.cmd;
 
-import jawa.Utils.Sth;
 import jawa.classfiles.ClassFile;
+import jawa.classfiles.members.MemberInfo;
 import jawa.classpath.Classpath;
-
-import java.util.Arrays;
+import jawa.interpreter.Interpreter;
 
 public class CmdOperations {
 
 
-    public static void parseCmd(Cmd cmd,String args){
-        switch (args){
-            case "help":cmd.setHelpFlag(true);
-                System.out.println("help msg");break;
-            case "?":cmd.setHelpFlag(true);
-                System.out.println("help msg");break;
-            case "version":cmd.setVersionFlag(true);
-                System.out.println("version 0.0.1");break;
-            case "exit":System.exit(0);
-            default:{
+    public static void parseCmd(Cmd cmd, String args) {
+        switch (args) {
+            case "help":
+                cmd.setHelpFlag(true);
+                System.out.println("help msg");
+                break;
+            case "?":
+                cmd.setHelpFlag(true);
+                System.out.println("help msg");
+                break;
+            case "version":
+                cmd.setVersionFlag(true);
+                System.out.println("version 0.0.1");
+                break;
+            case "exit":
+                System.exit(0);
+            default: {
                 String[] msg = args.split(";");
-                if(msg.length != 2) throw new RuntimeException("wrong cmd");
+                if (msg.length != 2) throw new RuntimeException("wrong cmd");
                 else {
                     cmd.setClassName(msg[1]);
                     cmd.setCpOption(msg[0]);
@@ -29,30 +35,27 @@ public class CmdOperations {
         }
     }
 
-    public static void startJvm(Cmd cmd){
+    public static void startJvm(Cmd cmd) {
         Classpath cp = null;
         try {
-            cp = Classpath.parse(cmd.getxJreOption(),cmd.getCpOption());
+            cp = Classpath.parse(cmd.getxJreOption(), cmd.getCpOption());
             assert cp != null;
-            byte[] classData = cp.readClass(cmd.getClassName().replace(".","/"));
+            byte[] classData = cp.readClass(cmd.getClassName().replace(".", "/"));
 //            System.out.println(Arrays.toString(classData));
 //            System.out.println(cmd);
-            ClassFile cf = loadClass(cmd.getClassName().replace(".","/"),cp);
+            ClassFile cf = loadClass(cmd.getClassName().replace(".", "/"), cp);
             printClassInfo(cf);
+            MemberInfo mainMethod = getMainMethod(cf);
+            if (mainMethod != null)
+                Interpreter.interpret(mainMethod);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-
-
-
-
-
-
     }
 
-    public static ClassFile loadClass(String className,Classpath cp) throws Exception {
+    public static ClassFile loadClass(String className, Classpath cp) throws Exception {
         byte[] classData = cp.readClass(className);
         assert classData != null;
         ClassFile cf = new ClassFile().parse(classData);
@@ -72,5 +75,13 @@ public class CmdOperations {
         System.out.println("methods: ");
         classFile.getClassMethods().forEach(System.out::println);
         System.out.println();
+    }
+
+    public static MemberInfo getMainMethod(ClassFile cf) throws Exception {
+        for (MemberInfo m : cf.getClassMethods()) {
+            if ("'main'".equals(m.getName()) && "'([Ljava/lang/String;)V'".equals(m.getDescriptor()))
+                return m;
+        }
+        return null;
     }
 }

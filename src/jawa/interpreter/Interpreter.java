@@ -11,7 +11,7 @@ import jawa.rtda.XThread;
  * @author xck
  */
 public class Interpreter {
-    public void interpret(MemberInfo memberInfo){
+    public static void interpret(MemberInfo memberInfo){
         CodeAttribute codeAttribute = memberInfo.getCodeAttribute();
         int maxLocals = codeAttribute.getMaxLocals();
         int maxStack = codeAttribute.getMaxStack();
@@ -19,6 +19,7 @@ public class Interpreter {
         XThread thread = new XThread();
         Frame frame = thread.newFrame(maxLocals,maxStack);
         thread.pushFrame(frame);
+
         loop(thread,byteCode);
     }
 
@@ -26,14 +27,14 @@ public class Interpreter {
 
     }
 
-    public void loop(XThread thread,byte[] byteCode){
+    public static void loop(XThread thread,byte[] byteCode){
         Frame frame = thread.popFrame();
         ByteCodeReader reader = new ByteCodeReader();
         while(true){
             int pc = frame.getNextPc();
             thread.setPc(pc);
             reader.reset(byteCode,pc);
-            int opcode = reader.readInt8();
+            int opcode = reader.readInt8() & 0xFF;
             Instruction inst = Instruction.newInstruction(opcode);
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());

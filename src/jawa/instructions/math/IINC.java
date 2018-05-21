@@ -30,7 +30,7 @@ public class IINC implements Instruction {
 
     @Override
     public void fetchOperands(ByteCodeReader reader) {
-        index = reader.readInt8();
+        index = reader.readUInt8();
         constValue = reader.readInt8();
     }
 
@@ -42,6 +42,10 @@ public class IINC implements Instruction {
         localVars.setInt(index,value);
     }
 
-
-
+    public String toString() {
+        return "IINC{" +
+                "index=" + index +
+                ", constValue=" + constValue +
+                '}';
+    }
 }

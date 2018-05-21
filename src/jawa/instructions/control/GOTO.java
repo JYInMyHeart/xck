@@ -12,4 +12,10 @@ public class GOTO extends BranchInstruction {
     public void execute(Frame frame) {
         BranchLogic.branch(frame,offset);
     }
+
+    public String toString() {
+        return "GOTO{" +
+                "offset=" + offset +
+                '}';
+    }
 }

@@ -17,12 +17,23 @@ public class ByteCodeReader {
         return pc;
     }
 
+    public int readUInt8(){
+        return Byte.toUnsignedInt(code[pc++]);
+    }
     public int readInt8(){
         return code[pc++];
     }
+    public int readUInt16(){
+        return (int)Integer.toUnsignedLong(((readInt8() << 8) | readInt8()));
+    }
     public int readInt16(){
-        return (readInt8() << 8) | readInt8();
-
+        return ((readInt8() << 8) | readInt8());
+    }
+    public long readUInt32(){
+        return Integer.toUnsignedLong((readInt8() << 24)
+                | (readInt8() << 16)
+                | (readInt8() << 8)
+                | readInt8());
     }
     public int readInt32(){
         return (readInt8() << 24)

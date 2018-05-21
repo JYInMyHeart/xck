@@ -27,13 +27,15 @@ OperandStack {
 
 
     public void pushInt(int value){
-        slots[size++] = new Slot(value,null);
+        slots[size] = new Slot(value,null);
+        size++;
     }
 
     public int popInt(){
-        if(size > 0)
-            return slots[--size].getNum();
-        else
+        if(size > 0) {
+            size--;
+            return slots[size].getNum();
+        } else
             return 0;
     }
     public void pushFloat(float value){

@@ -10,7 +10,7 @@ public class Index16Instruction implements Instruction{
 
     @Override
     public void fetchOperands(ByteCodeReader reader) {
-        index = reader.readInt16();
+        index = reader.readUInt16();
     }
 
     @Override

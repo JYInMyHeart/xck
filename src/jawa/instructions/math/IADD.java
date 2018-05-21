@@ -16,4 +16,8 @@ public class IADD extends NoOperandsInstruction {
         int result = v1 + v2;
         stack.pushInt(result);
     }
+
+    public String toString() {
+        return "IADD{}";
+    }
 }

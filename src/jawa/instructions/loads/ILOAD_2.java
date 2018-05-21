@@ -11,4 +11,8 @@ public class ILOAD_2 extends NoOperandsInstruction {
     public void execute(Frame frame) {
         frame.getOperandStack().pushInt(frame.getLocalVars().getInt(2));
     }
+
+    public String toString() {
+        return "ILOAD_2{}";
+    }
 }

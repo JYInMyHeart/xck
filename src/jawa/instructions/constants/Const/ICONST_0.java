@@ -15,4 +15,5 @@ public class ICONST_0 extends NoOperandsInstruction {
     public String toString() {
         return "ICONST_0";
     }
+
 }

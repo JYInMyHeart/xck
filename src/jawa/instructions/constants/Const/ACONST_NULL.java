@@ -11,4 +11,8 @@ public class ACONST_NULL extends NoOperandsInstruction {
     public void execute(Frame frame) {
         frame.getOperandStack().pushRef(null);
     }
+
+    public String toString() {
+        return "ACONST_NULL{}";
+    }
 }

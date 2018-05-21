@@ -12,4 +12,10 @@ public class Bipush extends Index8Instruction {
     public void execute(Frame frame) {
         frame.getOperandStack().pushInt(index);
     }
+
+    public String toString() {
+        return "Bipush{" +
+                "index=" + index +
+                '}';
+    }
 }

@@ -17,4 +17,10 @@ public class IF_ICMPGT extends BranchInstruction {
         if(v1 > v2)
             BranchLogic.branch(frame,offset);
     }
+
+    public String toString() {
+        return "IF_ICMPGT{" +
+                "offset=" + offset +
+                '}';
+    }
 }

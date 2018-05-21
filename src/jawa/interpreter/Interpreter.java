@@ -34,11 +34,11 @@ public class Interpreter {
             int pc = frame.getNextPc();
             thread.setPc(pc);
             reader.reset(byteCode,pc);
-            int opcode = reader.readInt8() & 0xFF;
+            int opcode =  reader.readUInt8();
             Instruction inst = Instruction.newInstruction(opcode);
             inst.fetchOperands(reader);
             frame.setNextPc(reader.getPc());
-            System.out.println("" + pc + inst);
+            System.out.println("" + pc + "    " + inst);
             inst.execute(frame);
         }
     }

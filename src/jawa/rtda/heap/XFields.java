@@ -1,6 +1,7 @@
 package jawa.rtda.heap;
 
 import jawa.classfiles.members.MemberInfo;
+import jawa.classfiles.members.attributeinfos.ConstantValueAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import static jawa.rtda.heap.ACCESS_FLAG.*;
 
 public class XFields extends XClassMember {
     int slotId;
+    int constValueIndex;
 
     public static List<XFields> newFields(XClass xClass, List<MemberInfo> classFields) throws Exception {
         List<XFields> xFieldsList = new ArrayList<>();
@@ -16,10 +18,19 @@ public class XFields extends XClassMember {
             XFields x = new XFields();
             x.xClass = xClass;
             x.copy(classFields.get(i));
+            x.copyAttributes(classFields.get(i));
             xFieldsList.add(x);
         }
         return xFieldsList;
     }
+
+    public void copyAttributes(MemberInfo memberInfo){
+        ConstantValueAttribute valueAttribute = memberInfo.getConstantValueAttribute().get();
+        if(valueAttribute != null)
+            constValueIndex = valueAttribute.getConstantValueAttr();
+    }
+
+
 
     public boolean isPublic() {
         return 0 != (accessFlags & ACC_PUBLIC.getValue());

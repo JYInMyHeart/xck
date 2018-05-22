@@ -51,6 +51,11 @@ public class ConstantPool {
             return null;
         }
     }
+
+    public XClass getxClass() {
+        return xClass;
+    }
+
     public Optional<Constant> getConstant(int index){
         return Optional.ofNullable(constants[index]);
     }

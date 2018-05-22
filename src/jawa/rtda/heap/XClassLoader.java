@@ -108,7 +108,7 @@ public class XClassLoader {
         xClass.instanceSlotCount = slotId;
     }
 
-    public void calcStaticFieldSlotIds(XClass xClass){
+    public void calcStaticFieldSlotIds(XClass xClass) {
         int slotId = 0;
         for (int i = 0; i < xClass.fields.size(); i++) {
             if (xClass.fields.get(i).isStatic()) {
@@ -120,15 +120,49 @@ public class XClassLoader {
         }
         xClass.staticSlotCount = slotId;
     }
-    public void allocAndInitStaticVars(XClass xClass){
-/*
-* class.staticVars = newSlots(class.staticSlotCount)
-for _, field := range class.fields {
-if field.IsStatic() && field.IsFinal() {
-initStaticFinalVar(class, field)
-}
-}*/
+
+    public void allocAndInitStaticVars(XClass xClass) {
         xClass.staticVars = new Slot[xClass.staticSlotCount];
+        for (int i = 0; i < xClass.staticSlotCount; i++) {
+            XFields field = xClass.fields.get(i);
+            if (field.isStatic() && field.isFinal())
+                initStaticFinalVar(xClass, field);
+        }
+    }
+
+    public void initStaticFinalVar(XClass xClass, XFields fields) {
+        Slot[] vars = xClass.staticVars;
+        ConstantPool cp = xClass.constantPool;
+        int slotId = fields.slotId;
+        int cpIndex = fields.constValueIndex;
+        if (cpIndex > 0) {
+            switch (fields.descroptor) {
+                case "Z":
+                case "B":
+                case "C":
+                case "I": {
+                    int value = (int) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
+                    vars[slotId] = new Slot(value, null);
+                }
+                case "J": {
+                    long value = (long) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
+                    vars[slotId] = new Slot((int) value, null);
+                }
+                case "F": {
+                    float value = (float) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
+                    vars[slotId] = new Slot((int) value, null);
+                }
+                case "D":{
+                    double value = (float) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
+                    vars[slotId] = new Slot((int) value, null);
+                }
+                case "'Ljava/lang/String;'":{
+
+                }
+
+
+            }
+        }
     }
 
 

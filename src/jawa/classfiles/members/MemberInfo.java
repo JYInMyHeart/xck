@@ -3,10 +3,13 @@ package jawa.classfiles.members;
 import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.attributeinfos.CodeAttribute;
+import jawa.classfiles.members.attributeinfos.ConstantValueAttribute;
+import jawa.rtda.heap.ConstantValue;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static jawa.Utils.Sth.*;
 import static jawa.classfiles.members.Attributes.readAttributes;
@@ -40,6 +43,14 @@ public class MemberInfo {
         memberInfo.descriptorIndex = getShortIndex(reader.readUint16());
         memberInfo.attributeInfos = readAttributes(reader, cp);
         return memberInfo;
+    }
+
+    public Optional<ConstantValueAttribute> getConstantValueAttribute(){
+                for (int i = 0; i < attributeInfos.size(); i++) {
+                    if(attributeInfos.get(i) instanceof ConstantValueAttribute)
+                        return Optional.ofNullable(((ConstantValueAttribute) attributeInfos.get(i)));
+        }
+        return Optional.empty();
     }
 
     public int getAccessFlags() {

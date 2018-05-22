@@ -30,6 +30,10 @@ public class ConstantValueAttribute implements AttributeInfo {
         }
     }
 
+    public int getConstantValueAttr() {
+        return constantValueIndex;
+    }
+
     public String toString() {
         return getConstantValue() ;
     }

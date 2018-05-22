@@ -42,6 +42,17 @@ public class XClass {
         return clazz;
     }
 
+    public boolean isAccessibleTo(XClass other){
+        return isPublic() || getPackageName() == other.getPackageName();
+    }
+
+    public String getPackageName(){
+        int i = name.lastIndexOf("/");
+        if(i >= 0)
+            return name.substring(0,i);
+        return "";
+    }
+
     public boolean isPublic(){
         return 0 != (accessFlags & ACC_PUBLIC.getValue());
     }

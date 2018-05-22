@@ -13,10 +13,14 @@ import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class MemberInfo {
     protected ConstantPool cp;
-    protected String accessFlags;
+    protected int accessFlags;
     protected short nameIndex;
     protected short descriptorIndex;
     protected List<AttributeInfo> attributeInfos;
+
+    public List<AttributeInfo> getAttributeInfos() {
+        return attributeInfos;
+    }
 
     public static List<MemberInfo> readMembers(ClassReader reader, ConstantPool cp) throws Exception {
         byte[] memberCount = reader.readUint16();
@@ -31,14 +35,14 @@ public class MemberInfo {
     public static MemberInfo readMember(ClassReader reader, ConstantPool cp) throws Exception {
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.cp = cp;
-        memberInfo.accessFlags = bytesToIntHexString(reader.readUint16());
+        memberInfo.accessFlags = getIntIndex(reader.readUint16());
         memberInfo.nameIndex = getShortIndex(reader.readUint16());
         memberInfo.descriptorIndex = getShortIndex(reader.readUint16());
         memberInfo.attributeInfos = readAttributes(reader, cp);
         return memberInfo;
     }
 
-    public String getAccessFlags() {
+    public int getAccessFlags() {
         return accessFlags;
     }
 

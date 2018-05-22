@@ -21,7 +21,7 @@ public class ClassFile {
     private int minorVersion;
     private int majorVersion;
     private ConstantPool constantPool;
-    private String accessFlags;
+    private int accessFlags;
     private short thisClass;
     private short superClass;
     private List<byte[]> interfaces;
@@ -40,7 +40,7 @@ public class ClassFile {
         readAndCheckVersion(reader);
         ConstantPool c = new ConstantPool();
         constantPool = c.readConstantPool(reader);
-        accessFlags = bytesToIntHexString(reader.readUint16());
+        accessFlags = getIntIndex(reader.readUint16());
         thisClass = getShortIndex(reader.readUint16());
         superClass = getShortIndex(reader.readUint16());
         interfaces = reader.readUint16s();
@@ -87,7 +87,7 @@ public class ClassFile {
         return constantPool;
     }
 
-    public String getAccessFlags() {
+    public int getAccessFlags() {
         return accessFlags;
     }
 

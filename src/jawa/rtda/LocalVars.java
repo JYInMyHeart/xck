@@ -1,5 +1,9 @@
 package jawa.rtda;
 
+import jawa.rtda.heap.XObject;
+
+import java.util.Arrays;
+
 /**
  * @author xck
  */
@@ -48,12 +52,18 @@ public class LocalVars {
     }
 
 
-    public void setRef(int index,XObject ref){
+    public void setRef(int index, XObject ref){
         Slot slot = new Slot(0,ref);
         slots[index] = slot;
     }
 
     public XObject getRef(int index){
         return slots[index].getRef();
+    }
+
+    public String toString() {
+        return "LocalVars{" +
+                "slots=" + Arrays.toString(slots) +
+                '}';
     }
 }

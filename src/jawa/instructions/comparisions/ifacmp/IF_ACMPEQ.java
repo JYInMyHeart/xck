@@ -4,7 +4,7 @@ import jawa.instructions.base.BranchInstruction;
 import jawa.instructions.base.BranchLogic;
 import jawa.rtda.Frame;
 import jawa.rtda.OperandStack;
-import jawa.rtda.XObject;
+import jawa.rtda.heap.XObject;
 
 /**
  * @author xck

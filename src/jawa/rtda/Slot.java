@@ -1,5 +1,7 @@
 package jawa.rtda;
 
+import jawa.rtda.heap.XObject;
+
 /**
  * @author xck
  */
@@ -26,5 +28,12 @@ public class Slot {
 
     public void setRef(XObject ref) {
         this.ref = ref;
+    }
+
+    public String toString() {
+        return "Slot{" +
+                "num=" + num +
+                ", ref=" + ref +
+                '}';
     }
 }

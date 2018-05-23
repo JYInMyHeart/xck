@@ -15,10 +15,11 @@ public class ExceptionTableEntry {
     private short endPc;
     private short handlerPc;
     private short catchType;
-    public List<ExceptionTableEntry> readExceptionTable(ClassReader reader){
+
+    public List<ExceptionTableEntry> readExceptionTable(ClassReader reader) {
         short exceptionTableLength = getShortIndex(reader.readUint16());
         List<ExceptionTableEntry> exceptionTable = new ArrayList<ExceptionTableEntry>();
-        for (int i = 0;i < exceptionTableLength;i++) {
+        for (int i = 0; i < exceptionTableLength; i++) {
             ExceptionTableEntry e = new ExceptionTableEntry();
             e.startPc = getShortIndex(reader.readUint16());
             e.endPc = getShortIndex(reader.readUint16());
@@ -65,6 +66,6 @@ public class ExceptionTableEntry {
         return "startPc=" + startPc +
                 ", endPc=" + endPc +
                 ", handlerPc=" + handlerPc +
-                ", catchType=" + catchType ;
+                ", catchType=" + catchType;
     }
 }

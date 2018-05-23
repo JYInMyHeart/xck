@@ -35,6 +35,6 @@ public class ConstantValueAttribute implements AttributeInfo {
     }
 
     public String toString() {
-        return getConstantValue() ;
+        return getConstantValue();
     }
 }

@@ -1,7 +1,5 @@
 package jawa.cmd;
 
-import lombok.Data;
-
 import java.util.Arrays;
 
 public class Cmd {

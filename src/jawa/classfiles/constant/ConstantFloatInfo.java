@@ -1,7 +1,6 @@
 package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
-import lombok.Getter;
 
 import static jawa.Utils.Sth.getFloatIndex;
 
@@ -9,18 +8,18 @@ import static jawa.Utils.Sth.getFloatIndex;
  * @author xck
  */
 
-public class ConstantFloatInfo implements ConstantInfo{
+public class ConstantFloatInfo implements ConstantInfo {
     private float value;
 
     public float getValue() {
         return value;
     }
 
-    public void readInfo(ClassReader reader){
+    public void readInfo(ClassReader reader) {
         value = getFloatIndex(reader.readUint32());
     }
 
     public String toString() {
-        return "Float.value=" + value ;
+        return "Float.value=" + value;
     }
 }

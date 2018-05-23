@@ -13,6 +13,7 @@ public class TABLE_SWITCH implements Instruction {
     private int low;
     private int high;
     private int[] jumpOffsets;
+
     @Override
     public void fetchOperands(ByteCodeReader reader) {
         reader.skipPadding();
@@ -27,10 +28,10 @@ public class TABLE_SWITCH implements Instruction {
     public void execute(Frame frame) {
         int index = frame.getOperandStack().popInt();
         int offset;
-        if(index >= low && index <= high)
+        if (index >= low && index <= high)
             offset = jumpOffsets[index - low];
         else
             offset = defaultOffset;
-        BranchLogic.branch(frame,offset);
+        BranchLogic.branch(frame, offset);
     }
 }

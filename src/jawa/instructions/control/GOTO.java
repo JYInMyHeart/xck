@@ -10,7 +10,7 @@ import jawa.rtda.Frame;
 public class GOTO extends BranchInstruction {
     @Override
     public void execute(Frame frame) {
-        BranchLogic.branch(frame,offset);
+        BranchLogic.branch(frame, offset);
     }
 
     public String toString() {

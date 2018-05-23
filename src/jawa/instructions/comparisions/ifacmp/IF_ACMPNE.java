@@ -15,7 +15,7 @@ public class IF_ACMPNE extends BranchInstruction {
         OperandStack stack = frame.getOperandStack();
         XObject ref2 = stack.popRef();
         XObject ref1 = stack.popRef();
-        if(ref1 != ref2)
-            BranchLogic.branch(frame,offset);
+        if (ref1 != ref2)
+            BranchLogic.branch(frame, offset);
     }
 }

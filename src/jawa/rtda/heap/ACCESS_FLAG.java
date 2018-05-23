@@ -1,6 +1,6 @@
 package jawa.rtda.heap;
 
-public enum  ACCESS_FLAG{
+public enum ACCESS_FLAG {
     ACC_PUBLIC(0x0001),
     ACC_PRIVATE(0x0002),
     ACC_PROTECTED(0x0004),

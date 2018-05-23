@@ -43,7 +43,7 @@ public class LocalVariableTableEntry {
         this.index = index;
     }
 
-    public String getDescriptor(){
+    public String getDescriptor() {
         try {
             return cp.getUtf8(descriptorIndex);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class LocalVariableTableEntry {
         }
     }
 
-    public String getName(){
+    public String getName() {
         try {
             return cp.getUtf8(nameIdnex);
         } catch (Exception e) {

@@ -39,7 +39,7 @@ public class IINC implements Instruction {
         LocalVars localVars = frame.getLocalVars();
         int value = localVars.getInt(index);
         value += constValue;
-        localVars.setInt(index,value);
+        localVars.setInt(index, value);
     }
 
     public String toString() {

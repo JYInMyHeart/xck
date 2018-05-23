@@ -2,10 +2,8 @@ package jawa.classfiles.members.attributeinfos;
 
 import jawa.Utils.Sth;
 import jawa.classfiles.ClassReader;
-import jawa.classfiles.constant.ConstantInfo;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.AttributeInfo;
-import lombok.Getter;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +29,7 @@ public class ExceptionsAttribute implements AttributeInfo {
         return exceptionIndexTable;
     }
 
-    public List<String> getExceptionTable(){
+    public List<String> getExceptionTable() {
         return exceptionIndexTable.stream().map(e -> {
             try {
                 return cp.getUtf8(e);
@@ -42,6 +40,6 @@ public class ExceptionsAttribute implements AttributeInfo {
     }
 
     public String toString() {
-        return "\r\n            exceptionIndexTable=" + getExceptionTable() ;
+        return "\r\n            exceptionIndexTable=" + getExceptionTable();
     }
 }

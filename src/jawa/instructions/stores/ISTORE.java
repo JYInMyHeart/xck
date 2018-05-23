@@ -9,6 +9,6 @@ import jawa.rtda.Frame;
 public class ISTORE extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setInt(index,frame.getOperandStack().popInt());
+        frame.getLocalVars().setInt(index, frame.getOperandStack().popInt());
     }
 }

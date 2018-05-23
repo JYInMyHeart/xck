@@ -4,14 +4,13 @@ import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.attributeinfos.CodeAttribute;
 import jawa.classfiles.members.attributeinfos.ConstantValueAttribute;
-import jawa.rtda.heap.ConstantValue;
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static jawa.Utils.Sth.*;
+import static jawa.Utils.Sth.getIntIndex;
+import static jawa.Utils.Sth.getShortIndex;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class MemberInfo {
@@ -45,10 +44,10 @@ public class MemberInfo {
         return memberInfo;
     }
 
-    public Optional<ConstantValueAttribute> getConstantValueAttribute(){
-                for (int i = 0; i < attributeInfos.size(); i++) {
-                    if(attributeInfos.get(i) instanceof ConstantValueAttribute)
-                        return Optional.ofNullable(((ConstantValueAttribute) attributeInfos.get(i)));
+    public Optional<ConstantValueAttribute> getConstantValueAttribute() {
+        for (int i = 0; i < attributeInfos.size(); i++) {
+            if (attributeInfos.get(i) instanceof ConstantValueAttribute)
+                return Optional.ofNullable(((ConstantValueAttribute) attributeInfos.get(i)));
         }
         return Optional.empty();
     }
@@ -78,26 +77,38 @@ public class MemberInfo {
             return "fatal error!";
         }
     }
-    private String getValueType(){
+
+    private String getValueType() {
         StringBuffer sb = new StringBuffer();
         try {
-            switch (this.getDescriptor()){
-                case "'Z'":sb.append(" , Boolean.value=");break;
-                case "'B'":sb.append(" , Byte.value=");break;
-                case "'S'":sb.append(" , Short.value=");break;
-                case "'C'":sb.append(" , Char.value=");break;
-                case "'I'":sb.append(" , Int.value=");break;
-                default:sb.append(" , ");
+            switch (this.getDescriptor()) {
+                case "'Z'":
+                    sb.append(" , Boolean.value=");
+                    break;
+                case "'B'":
+                    sb.append(" , Byte.value=");
+                    break;
+                case "'S'":
+                    sb.append(" , Short.value=");
+                    break;
+                case "'C'":
+                    sb.append(" , Char.value=");
+                    break;
+                case "'I'":
+                    sb.append(" , Int.value=");
+                    break;
+                default:
+                    sb.append(" , ");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sb.toString() ;
+        return sb.toString();
     }
 
-    public CodeAttribute getCodeAttribute(){
+    public CodeAttribute getCodeAttribute() {
         for (int i = 0; i < attributeInfos.size(); i++) {
-            if(attributeInfos.get(i) instanceof CodeAttribute)
+            if (attributeInfos.get(i) instanceof CodeAttribute)
                 return (CodeAttribute) attributeInfos.get(i);
         }
         return null;

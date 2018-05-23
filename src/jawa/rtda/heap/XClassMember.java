@@ -3,8 +3,6 @@ package jawa.rtda.heap;
 import jawa.classfiles.members.MemberInfo;
 
 import static jawa.rtda.heap.ACCESS_FLAG.*;
-import static jawa.rtda.heap.ACCESS_FLAG.ACC_ANNOTATION;
-import static jawa.rtda.heap.ACCESS_FLAG.ACC_ENUM;
 
 public class XClassMember {
     protected int accessFlags;
@@ -18,46 +16,71 @@ public class XClassMember {
         descroptor = memberInfo.getDescriptor();
     }
 
-    public boolean isAccessibleTo(XClass c){
-        if(isPublic())
+    public boolean isAccessibleTo(XClass c) {
+        if (isPublic())
             return true;
         XClass xClazz = xClass;
-        if(isProtected())
-            return c.name.equals(xClazz.name) || c.isSubClassOf(xClazz) || xClazz.getPackageName().equals(c.getPackageName());
-        if(!isPrivate()){
+        if (isProtected())
+            return c.getName().equals(xClazz.getName()) || c.isSubClassOf(xClazz) || xClazz.getPackageName().equals(c.getPackageName());
+        if (!isPrivate()) {
             return xClazz.getPackageName().equals(c.getPackageName());
         }
-        return c.name.equals(xClazz.name)
+        return c.getName().equals(xClazz.getName());
     }
 
-    public boolean isPublic(){
+    public XClass getxClass() {
+        return xClass;
+    }
+
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescroptor() {
+        return descroptor;
+    }
+
+    public boolean isPublic() {
         return 0 != (accessFlags & ACC_PUBLIC.getValue());
     }
-    public boolean isProtected(){
+
+    public boolean isProtected() {
         return 0 != (accessFlags & ACC_PROTECTED.getValue());
     }
-    public boolean isAbstract(){
+
+    public boolean isAbstract() {
         return 0 != (accessFlags & ACC_ABSTRACT.getValue());
     }
-    public boolean isFinal(){
+
+    public boolean isFinal() {
         return 0 != (accessFlags & ACC_FINAL.getValue());
     }
-    public boolean isSuper(){
+
+    public boolean isSuper() {
         return 0 != (accessFlags & ACC_SUPER.getValue());
     }
-    public boolean isInterface(){
+
+    public boolean isInterface() {
         return 0 != (accessFlags & ACC_INTERFACE.getValue());
     }
-    public boolean isSynthetic(){
+
+    public boolean isSynthetic() {
         return 0 != (accessFlags & ACC_SYNCHRONIZED.getValue());
     }
-    public boolean isAnnotation(){
+
+    public boolean isAnnotation() {
         return 0 != (accessFlags & ACC_ANNOTATION.getValue());
     }
-    public boolean isEnum(){
+
+    public boolean isEnum() {
         return 0 != (accessFlags & ACC_ENUM.getValue());
     }
-    public boolean isPrivate(){
+
+    public boolean isPrivate() {
         return 0 != (accessFlags & ACC_PRIVATE.getValue());
     }
 }

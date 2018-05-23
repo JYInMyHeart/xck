@@ -9,8 +9,8 @@ import java.util.List;
 import static jawa.rtda.heap.ACCESS_FLAG.*;
 
 public class XFields extends XClassMember {
-    int slotId;
-    int constValueIndex;
+    private int slotId;
+    private int constValueIndex;
 
     public static List<XFields> newFields(XClass xClass, List<MemberInfo> classFields) throws Exception {
         List<XFields> xFieldsList = new ArrayList<>();
@@ -24,13 +24,28 @@ public class XFields extends XClassMember {
         return xFieldsList;
     }
 
-    public void copyAttributes(MemberInfo memberInfo){
-        ConstantValueAttribute valueAttribute = memberInfo.getConstantValueAttribute().get();
-        if(valueAttribute != null)
+    public void copyAttributes(MemberInfo memberInfo) {
+        if(memberInfo.getConstantValueAttribute().isPresent()){
+            ConstantValueAttribute valueAttribute = memberInfo.getConstantValueAttribute().get();
             constValueIndex = valueAttribute.getConstantValueAttr();
+        }
     }
 
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
+    }
 
+    public void setConstValueIndex(int constValueIndex) {
+        this.constValueIndex = constValueIndex;
+    }
+
+    public int getSlotId() {
+        return slotId;
+    }
+
+    public int getConstValueIndex() {
+        return constValueIndex;
+    }
 
     public boolean isPublic() {
         return 0 != (accessFlags & ACC_PUBLIC.getValue());
@@ -67,7 +82,8 @@ public class XFields extends XClassMember {
     public boolean isEnum() {
         return 0 != (accessFlags & ACC_ENUM.getValue());
     }
-    public boolean isLongOrDouble(){
+
+    public boolean isLongOrDouble() {
         return "J".equals(descroptor) || "D".equals(descroptor);
     }
 

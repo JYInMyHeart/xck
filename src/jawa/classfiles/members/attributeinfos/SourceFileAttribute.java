@@ -3,7 +3,6 @@ package jawa.classfiles.members.attributeinfos;
 import jawa.classfiles.ClassReader;
 import jawa.classfiles.members.AttributeInfo;
 
-import static jawa.Utils.Sth.getIntIndex;
 import static jawa.Utils.Sth.getShortIndex;
 
 /**
@@ -11,6 +10,7 @@ import static jawa.Utils.Sth.getShortIndex;
  */
 public class SourceFileAttribute implements AttributeInfo {
     private short sourceFileIndex;
+
     @Override
     public void readInfo(ClassReader reader) {
         sourceFileIndex = getShortIndex(reader.readUint16());
@@ -18,6 +18,6 @@ public class SourceFileAttribute implements AttributeInfo {
 
 
     public String toString() {
-        return "sourceFileIndex=" + sourceFileIndex ;
+        return "sourceFileIndex=" + sourceFileIndex;
     }
 }

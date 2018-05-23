@@ -1,18 +1,13 @@
 package jawa.classfiles;
 
-import jawa.Utils.Sth;
-import jawa.classfiles.members.AttributeInfo;
 import jawa.classfiles.constant.ConstantPool;
+import jawa.classfiles.members.AttributeInfo;
 import jawa.classfiles.members.MemberInfo;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static jawa.Utils.Sth.bytesToIntHexString;
-import static jawa.Utils.Sth.getIntIndex;
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.Utils.Sth.*;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class ClassFile {
@@ -35,6 +30,7 @@ public class ClassFile {
         cf.read(cr);
         return cf;
     }
+
     public ClassFile read(ClassReader reader) throws Exception {
         readAndCheckMagic(reader);
         readAndCheckVersion(reader);
@@ -44,9 +40,9 @@ public class ClassFile {
         thisClass = getShortIndex(reader.readUint16());
         superClass = getShortIndex(reader.readUint16());
         interfaces = reader.readUint16s();
-        classFileds = MemberInfo.readMembers(reader,constantPool);
-        classMethods = MemberInfo.readMembers(reader,constantPool);
-        attributeInfos = readAttributes(reader,constantPool);
+        classFileds = MemberInfo.readMembers(reader, constantPool);
+        classMethods = MemberInfo.readMembers(reader, constantPool);
+        attributeInfos = readAttributes(reader, constantPool);
         return this;
     }
 
@@ -55,14 +51,14 @@ public class ClassFile {
         byte[] majorVersion = reader.readUint16();
         this.minorVersion = getIntIndex(minorVersion);
         this.majorVersion = getIntIndex(majorVersion);
-        if(this.majorVersion <= 53 && this.majorVersion > 45 && this.minorVersion == 0) return;
-        if(this.majorVersion == 45) return;
+        if (this.majorVersion <= 53 && this.majorVersion > 45 && this.minorVersion == 0) return;
+        if (this.majorVersion == 45) return;
         throw new Exception("java.lang.UnsupportedClassVersionError!");
     }
 
     private void readAndCheckMagic(ClassReader reader) throws Exception {
         byte[] magic = reader.readUint32();
-        if(!MAGIC.equals(bytesToIntHexString(magic))){
+        if (!MAGIC.equals(bytesToIntHexString(magic))) {
             throw new Exception("java.lang.ClassFormatError:magic!");
         }
     }

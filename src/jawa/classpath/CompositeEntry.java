@@ -3,7 +3,6 @@ package jawa.classpath;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CompositeEntry implements Entry {
@@ -27,7 +26,7 @@ public class CompositeEntry implements Entry {
                 .map(e -> e.readClass(className))
                 .collect(Collectors.toList());
         List<byte[]> res = result.stream().filter(e -> e != null && e.length > 0).collect(Collectors.toList());
-        if(res.size() > 0) return res.get(0);
+        if (res.size() > 0) return res.get(0);
         else return null;
     }
 

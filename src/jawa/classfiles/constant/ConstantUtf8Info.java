@@ -1,17 +1,14 @@
 package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
-import lombok.Getter;
 
 import java.io.UnsupportedEncodingException;
 
-import static jawa.Utils.Sth.getByteIndex;
 import static jawa.Utils.Sth.getShortIndex;
 
 /**
  * @author xck
  */
-
 
 
 public class ConstantUtf8Info implements ConstantInfo {

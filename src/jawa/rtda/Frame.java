@@ -1,5 +1,7 @@
 package jawa.rtda;
 
+import jawa.rtda.heap.XMethod;
+
 /**
  * @author xck
  */
@@ -9,6 +11,11 @@ public class Frame {
     private OperandStack operandStack;
     private XThread thread;
     private int nextPc;
+    private XMethod method;
+
+    public XMethod getMethod() {
+        return method;
+    }
 
     public XThread getThread() {
         return thread;
@@ -50,14 +57,19 @@ public class Frame {
         this.operandStack = operandStack;
     }
 
-    public Frame(int maxLocals, int maxStack){
+    public Frame(int maxLocals, int maxStack) {
         localvars = new LocalVars(maxLocals + 1);
         operandStack = new OperandStack(maxStack + 1);
     }
 
-    public Frame(XThread thread,int maxLocals, int maxStack) {
-        this(maxLocals,maxStack);
+    public Frame(XThread thread, int maxLocals, int maxStack) {
+        this(maxLocals, maxStack);
         this.thread = thread;
+    }
+
+    public Frame(XMethod method) {
+        this(method.getMaxLocals(), method.getMaxLocals());
+        this.method = method;
     }
 
 

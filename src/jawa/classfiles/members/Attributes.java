@@ -8,7 +8,6 @@ import jawa.classfiles.members.attributeinfos.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import static jawa.Utils.Sth.getIntIndex;
 
 /**

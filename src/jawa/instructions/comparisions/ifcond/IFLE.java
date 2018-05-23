@@ -10,7 +10,7 @@ import jawa.rtda.Frame;
 public class IFLE extends BranchInstruction {
     @Override
     public void execute(Frame frame) {
-        if(frame.getOperandStack().popInt() <= 0)
-            BranchLogic.branch(frame,offset);
+        if (frame.getOperandStack().popInt() <= 0)
+            BranchLogic.branch(frame, offset);
     }
 }

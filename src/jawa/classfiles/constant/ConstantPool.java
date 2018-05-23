@@ -4,7 +4,8 @@ package jawa.classfiles.constant;
 import jawa.Utils.MyInt;
 import jawa.classfiles.ClassReader;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static jawa.Utils.Sth.getIntIndex;
 import static jawa.Utils.Sth.getShortIndex;
@@ -30,7 +31,7 @@ public class ConstantPool {
         MyInt index = new MyInt(1);
         for (; index.getValue() < cpCount; index.increase()) {
 //            System.out.print("i=" + index.getValue() + ",");
-            cp[index.getValue()] = readConstantInfo(reader,new ConstantPool(cp),index);
+            cp[index.getValue()] = readConstantInfo(reader, new ConstantPool(cp), index);
         }
         return new ConstantPool(cp);
 
@@ -48,7 +49,7 @@ public class ConstantPool {
         ConstantNameAndTypeInfo ntInfo = (ConstantNameAndTypeInfo) getConstantInfo(index);
         String name = getUtf8(ntInfo.getNameIndex());
         String type = getUtf8(ntInfo.getDescriptorIndex());
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>();
         map.put(name, type);
         return map;
     }
@@ -64,16 +65,16 @@ public class ConstantPool {
     }
 
 
-    public ConstantInfo readConstantInfo(ClassReader reader, ConstantPool cp,MyInt index) throws Exception {
+    public ConstantInfo readConstantInfo(ClassReader reader, ConstantPool cp, MyInt index) throws Exception {
 //        int last = reader.getOffset();
         byte[] tag = reader.readUint8();
-        ConstantInfo c = newConstantInfo(tag, cp,index);
+        ConstantInfo c = newConstantInfo(tag, cp, index);
         c.readInfo(reader);
 //        System.out.println(Arrays.toString(tag) + "--->" + (reader.getOffset() - last));
         return c;
     }
 
-    public ConstantInfo newConstantInfo(byte[] tag, ConstantPool cp,MyInt index) throws Exception {
+    public ConstantInfo newConstantInfo(byte[] tag, ConstantPool cp, MyInt index) throws Exception {
         int tagStr = getIntIndex(tag);
         switch (tagStr) {
             case CONSTANT_Integer:

@@ -40,6 +40,9 @@ public class Classpath {
     }
 
     public byte[] readClass(String className) {
+        if (className.startsWith("'")) {
+            className = className.replace("'", "");
+        }
         className += ".class";
         byte[] bootData = bootClasspath.readClass(className);
         if (Optional.ofNullable(bootData).isPresent()) {

@@ -1,6 +1,5 @@
 package jawa.instructions.stores;
 
-import jawa.instructions.base.Index8Instruction;
 import jawa.instructions.base.NoOperandsInstruction;
 import jawa.rtda.Frame;
 
@@ -10,6 +9,6 @@ import jawa.rtda.Frame;
 public class DSTORE_1 extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setDouble(1,frame.getOperandStack().popDouble());
+        frame.getLocalVars().setDouble(1, frame.getOperandStack().popDouble());
     }
 }

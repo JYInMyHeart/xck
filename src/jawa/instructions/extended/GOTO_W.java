@@ -26,6 +26,6 @@ public class GOTO_W implements Instruction {
 
     @Override
     public void execute(Frame frame) {
-        BranchLogic.branch(frame,offset);
+        BranchLogic.branch(frame, offset);
     }
 }

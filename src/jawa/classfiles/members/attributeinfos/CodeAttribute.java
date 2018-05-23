@@ -4,7 +4,6 @@ import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.AttributeInfo;
 import jawa.classfiles.members.Attributes;
-import lombok.Data;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +35,7 @@ public class CodeAttribute implements AttributeInfo {
         code = reader.readBytes(codeLength);
         exceptionTable = new ExceptionTableEntry().readExceptionTable(reader);
         try {
-            attributeInfos = Attributes.readAttributes(reader,cp);
+            attributeInfos = Attributes.readAttributes(reader, cp);
         } catch (Exception e) {
             e.printStackTrace();
         }

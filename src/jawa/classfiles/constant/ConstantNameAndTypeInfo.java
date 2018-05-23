@@ -1,7 +1,6 @@
 package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
-import lombok.Getter;
 
 import static jawa.Utils.Sth.getShortIndex;
 

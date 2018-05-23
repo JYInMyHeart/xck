@@ -1,6 +1,5 @@
 package jawa.instructions.loads;
 
-import jawa.instructions.base.Index8Instruction;
 import jawa.instructions.base.NoOperandsInstruction;
 import jawa.rtda.Frame;
 

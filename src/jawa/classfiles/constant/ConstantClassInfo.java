@@ -27,7 +27,7 @@ public class ConstantClassInfo implements ConstantInfo {
                 '}';
     }
 
-    public String getName()  {
+    public String getName() {
         try {
             return cp.getUtf8(nameIndex);
         } catch (Exception e) {

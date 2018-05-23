@@ -1,6 +1,5 @@
 package jawa.instructions.stores;
 
-import jawa.instructions.base.Index8Instruction;
 import jawa.instructions.base.NoOperandsInstruction;
 import jawa.rtda.Frame;
 
@@ -10,6 +9,6 @@ import jawa.rtda.Frame;
 public class LSTORE_3 extends NoOperandsInstruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setLong(3,frame.getOperandStack().popLong());
+        frame.getLocalVars().setLong(3, frame.getOperandStack().popLong());
     }
 }

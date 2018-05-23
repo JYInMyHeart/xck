@@ -15,10 +15,11 @@ public class MyInt {
         this(0);
     }
 
-    public void increase(int n){
+    public void increase(int n) {
         value += n;
     }
-    public void increase(){
+
+    public void increase() {
         increase(1);
     }
 }

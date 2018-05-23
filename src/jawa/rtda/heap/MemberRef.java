@@ -10,8 +10,8 @@ public class MemberRef extends SymRef {
 
     public void copyMemerRefInfo(ConstantMemberrefInfo refInfo) throws Exception {
         className = refInfo.getClassName();
-        Map<String,String> map = refInfo.getNameAndType();
-        for (Map.Entry<String,String> e:map.entrySet()) {
+        Map<String, String> map = refInfo.getNameAndType();
+        for (Map.Entry<String, String> e : map.entrySet()) {
             name = e.getKey();
             descriptor = e.getValue();
         }

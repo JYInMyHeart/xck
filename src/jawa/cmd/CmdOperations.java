@@ -4,6 +4,9 @@ import jawa.classfiles.ClassFile;
 import jawa.classfiles.members.MemberInfo;
 import jawa.classpath.Classpath;
 import jawa.interpreter.Interpreter;
+import jawa.rtda.heap.XClass;
+import jawa.rtda.heap.XClassLoader;
+import jawa.rtda.heap.XMethod;
 
 public class CmdOperations {
 
@@ -40,12 +43,11 @@ public class CmdOperations {
         try {
             cp = Classpath.parse(cmd.getxJreOption(), cmd.getCpOption());
             assert cp != null;
-            byte[] classData = cp.readClass(cmd.getClassName().replace(".", "/"));
-//            System.out.println(Arrays.toString(classData));
-//            System.out.println(cmd);
+            XClassLoader xClassLoader = XClassLoader.newClassLoader(cp);
             ClassFile cf = loadClass(cmd.getClassName().replace(".", "/"), cp);
+            XClass xClass = xClassLoader.loadClass(cmd.getClassName().replace(".", "/"));
             printClassInfo(cf);
-            MemberInfo mainMethod = getMainMethod(cf);
+            XMethod mainMethod = xClass.getMainMethod(xClass);
             if (mainMethod != null)
                 Interpreter.interpret(mainMethod);
         } catch (Exception e) {

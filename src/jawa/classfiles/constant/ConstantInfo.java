@@ -7,6 +7,7 @@ import jawa.classfiles.ClassReader;
  */
 public interface ConstantInfo {
     void readInfo(ClassReader reader);
+
     int CONSTANT_Class = 7;
     int CONSTANT_Fieldref = 9;
     int CONSTANT_Methodref = 10;

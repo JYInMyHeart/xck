@@ -5,7 +5,7 @@ import jawa.rtda.Frame;
 /**
  * @author xck
  */
-public class Index8Instruction implements Instruction{
+public class Index8Instruction implements Instruction {
     protected int index;
 
     public int getIndex() {

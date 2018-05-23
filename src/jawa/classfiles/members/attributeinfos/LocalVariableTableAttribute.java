@@ -6,9 +6,7 @@ import jawa.classfiles.members.AttributeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static jawa.Utils.Sth.getIntIndex;
 import static jawa.Utils.Sth.getShortIndex;
 
 /**
@@ -40,6 +38,6 @@ public class LocalVariableTableAttribute implements AttributeInfo {
 
 
     public String toString() {
-        return "\r\n        localVariableTable=" + localVariableTable ;
+        return "\r\n        localVariableTable=" + localVariableTable;
     }
 }

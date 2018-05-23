@@ -51,10 +51,10 @@ public class XClassLoader {
 
     public Optional<XClass> defineClass(byte[] data) throws Exception {
         XClass xClass = parseClass(data).get();
-        xClass.loader = this;
+        xClass.setLoader(this);
         resolveSuperClass(xClass);
         resolveInterfaces(xClass);
-        classMap.put(xClass.name, xClass);
+        classMap.put(xClass.getName(), xClass);
         return Optional.ofNullable(xClass);
     }
 
@@ -64,15 +64,15 @@ public class XClassLoader {
     }
 
     public void resolveSuperClass(XClass xClass) {
-        if (!Objects.equals(xClass.name, "'java/lang/Object'"))
-            xClass.superClass = xClass.loader.loadClass(xClass.superClassName);
+        if (!Objects.equals(xClass.getName(), "'java/lang/Object'"))
+            xClass.setSuperClass(xClass.getLoader().loadClass(xClass.getSuperClassName()));
     }
 
     public void resolveInterfaces(XClass xClass) {
-        int interfaceCount = xClass.interfaceNames.size();
+        int interfaceCount = xClass.getInterfaceNames().size();
         if (interfaceCount > 0) {
             for (int i = 0; i < interfaceCount; i++) {
-                xClass.interfaces[i] = xClass.loader.loadClass(xClass.interfaceNames.get(i));
+                xClass.getInterfaces()[i] = xClass.getLoader().loadClass(xClass.getInterfaceNames().get(i));
             }
         }
     }
@@ -94,47 +94,47 @@ public class XClassLoader {
 
     public void calcInstanceFieldSlotIds(XClass xClass) {
         int slotId = 0;
-        if (xClass.superClass != null) {
-            slotId = xClass.superClass.instanceSlotCount;
+        if (xClass.getSuperClass() != null) {
+            slotId = xClass.getSuperClass().getInstanceSlotCount();
         }
-        for (int i = 0; i < xClass.fields.size(); i++) {
-            if (!xClass.fields.get(i).isStatic()) {
-                xClass.fields.get(i).slotId = slotId;
+        for (int i = 0; i < xClass.getFields().size(); i++) {
+            if (!xClass.getFields().get(i).isStatic()) {
+                xClass.getFields().get(i).setSlotId(slotId);
                 slotId++;
-                if (xClass.fields.get(i).isLongOrDouble())
+                if (xClass.getFields().get(i).isLongOrDouble())
                     slotId++;
             }
         }
-        xClass.instanceSlotCount = slotId;
+        xClass.setInstanceSlotCount(slotId);
     }
 
     public void calcStaticFieldSlotIds(XClass xClass) {
         int slotId = 0;
-        for (int i = 0; i < xClass.fields.size(); i++) {
-            if (xClass.fields.get(i).isStatic()) {
-                xClass.fields.get(i).slotId = slotId;
+        for (int i = 0; i < xClass.getFields().size(); i++) {
+            if (xClass.getFields().get(i).isStatic()) {
+                xClass.getFields().get(i).setSlotId(slotId);
                 slotId++;
-                if (xClass.fields.get(i).isLongOrDouble())
+                if (xClass.getFields().get(i).isLongOrDouble())
                     slotId++;
             }
         }
-        xClass.staticSlotCount = slotId;
+        xClass.setStaticSlotCount(slotId);
     }
 
     public void allocAndInitStaticVars(XClass xClass) {
-        xClass.staticVars = new Slot[xClass.staticSlotCount];
-        for (int i = 0; i < xClass.staticSlotCount; i++) {
-            XFields field = xClass.fields.get(i);
+        xClass.setStaticVars(new Slot[xClass.getStaticSlotCount()]);
+        for (int i = 0; i < xClass.getStaticSlotCount(); i++) {
+            XFields field = xClass.getFields().get(i);
             if (field.isStatic() && field.isFinal())
                 initStaticFinalVar(xClass, field);
         }
     }
 
     public void initStaticFinalVar(XClass xClass, XFields fields) {
-        Slot[] vars = xClass.staticVars;
-        ConstantPool cp = xClass.constantPool;
-        int slotId = fields.slotId;
-        int cpIndex = fields.constValueIndex;
+        Slot[] vars = xClass.getStaticVars();
+        ConstantPool cp = xClass.getConstantPool();
+        int slotId = fields.getSlotId();
+        int cpIndex = fields.getConstValueIndex();
         if (cpIndex > 0) {
             switch (fields.descroptor) {
                 case "Z":
@@ -152,11 +152,11 @@ public class XClassLoader {
                     float value = (float) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
                     vars[slotId] = new Slot((int) value, null);
                 }
-                case "D":{
+                case "D": {
                     double value = (float) ((ConstantValue) cp.getConstant(cpIndex).get()).value;
                     vars[slotId] = new Slot((int) value, null);
                 }
-                case "'Ljava/lang/String;'":{
+                case "'Ljava/lang/String;'": {
 
                 }
 

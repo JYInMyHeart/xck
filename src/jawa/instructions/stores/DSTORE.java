@@ -9,6 +9,6 @@ import jawa.rtda.Frame;
 public class DSTORE extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setDouble(index,frame.getOperandStack().popDouble());
+        frame.getLocalVars().setDouble(index, frame.getOperandStack().popDouble());
     }
 }

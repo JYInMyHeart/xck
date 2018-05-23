@@ -12,10 +12,11 @@ import jawa.rtda.Frame;
  */
 public class WIDE implements Instruction {
     private Instruction modifiedInstruction;
+
     @Override
     public void fetchOperands(ByteCodeReader reader) {
         int opcode = reader.readInt8();
-        switch (opcode){
+        switch (opcode) {
             case 0x15:  // iload
                 ILOAD iload = new ILOAD();
                 iload.setIndex(reader.readInt16());

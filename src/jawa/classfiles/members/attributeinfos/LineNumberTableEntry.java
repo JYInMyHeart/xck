@@ -1,8 +1,6 @@
 package jawa.classfiles.members.attributeinfos;
 
 
-import lombok.Data;
-
 /**
  * @author xck
  */

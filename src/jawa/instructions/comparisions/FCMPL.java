@@ -5,9 +5,9 @@ import jawa.rtda.Frame;
 /**
  * @author xck
  */
-public class FCMPL extends FCMP{
+public class FCMPL extends FCMP {
     @Override
     public void execute(Frame frame) {
-        fcmp(frame,false);
+        fcmp(frame, false);
     }
 }

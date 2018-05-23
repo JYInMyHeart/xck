@@ -1,5 +1,7 @@
 package jawa.rtda;
 
+import jawa.rtda.heap.XMethod;
+
 import java.util.Stack;
 
 /**
@@ -19,22 +21,27 @@ public class XThread {
     }
 
     public XThread() {
-        stack = new Stack();
+        stack = new Stack<>();
     }
 
-    public void pushFrame(Frame frame){
+    public void pushFrame(Frame frame) {
         stack.push(frame);
     }
 
-    public Frame popFrame(){
+    public Frame popFrame() {
         return stack.pop();
     }
 
-    public Frame currentFrame(){
+    public Frame currentFrame() {
         return stack.peek();
     }
 
-    public Frame newFrame(int maxLocals,int maxStack){
-        return new Frame(this,maxLocals,maxStack);
+    public Frame newFrame(int maxLocals, int maxStack) {
+        return new Frame(this, maxLocals, maxStack);
     }
+
+    public Frame newFrame(XMethod xMethod) {
+        return new Frame(xMethod.getMaxLocals(), xMethod.getMaxStack());
+    }
+
 }

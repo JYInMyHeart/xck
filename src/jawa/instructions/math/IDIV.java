@@ -13,7 +13,7 @@ public class IDIV extends NoOperandsInstruction {
         OperandStack stack = frame.getOperandStack();
         int v2 = stack.popInt();
         int v1 = stack.popInt();
-        if(v2 == 0)
+        if (v2 == 0)
             throw new RuntimeException("java.lang.ArithmeticException: / by zero");
         int result = v1 / v2;
         stack.pushInt(result);

@@ -12,6 +12,6 @@ public class L2I extends NoOperandsInstruction {
     public void execute(Frame frame) {
         OperandStack stack = frame.getOperandStack();
         double d = stack.popLong();
-        stack.pushInt((int)d);
+        stack.pushInt((int) d);
     }
 }

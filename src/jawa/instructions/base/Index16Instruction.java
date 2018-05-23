@@ -5,8 +5,8 @@ import jawa.rtda.Frame;
 /**
  * @author xck
  */
-public class Index16Instruction implements Instruction{
-    private int index;
+public class Index16Instruction implements Instruction {
+    protected int index;
 
     @Override
     public void fetchOperands(ByteCodeReader reader) {

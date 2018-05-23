@@ -10,7 +10,7 @@ import jawa.rtda.Frame;
 public class IFNONNULL extends BranchInstruction {
     @Override
     public void execute(Frame frame) {
-        if(frame.getOperandStack().popRef() != null)
-            BranchLogic.branch(frame,offset);
+        if (frame.getOperandStack().popRef() != null)
+            BranchLogic.branch(frame, offset);
     }
 }

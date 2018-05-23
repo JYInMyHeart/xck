@@ -9,6 +9,6 @@ import jawa.rtda.Frame;
 public class ASTORE extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setRef(index,frame.getOperandStack().popRef());
+        frame.getLocalVars().setRef(index, frame.getOperandStack().popRef());
     }
 }

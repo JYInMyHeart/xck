@@ -14,7 +14,7 @@ public class IF_ICMPGE extends BranchInstruction {
         OperandStack stack = frame.getOperandStack();
         int v2 = stack.popInt();
         int v1 = stack.popInt();
-        if(v1 >= v2)
-            BranchLogic.branch(frame,offset);
+        if (v1 >= v2)
+            BranchLogic.branch(frame, offset);
     }
 }

@@ -13,7 +13,7 @@ public class LDIV extends NoOperandsInstruction {
         OperandStack stack = frame.getOperandStack();
         long v2 = stack.popLong();
         long v1 = stack.popLong();
-        if(v2 == 0)
+        if (v2 == 0)
             throw new RuntimeException("java.lang.ArithmeticException: / by zero");
         long result = v1 / v2;
         stack.pushLong(result);

@@ -12,6 +12,7 @@ public class LOOKUP_SWITCH implements Instruction {
     private int defaultOffset;
     private int npairs;
     private int[] matchOffsets;
+
     @Override
     public void fetchOperands(ByteCodeReader reader) {
         reader.skipPadding();
@@ -24,12 +25,12 @@ public class LOOKUP_SWITCH implements Instruction {
     public void execute(Frame frame) {
         int key = frame.getOperandStack().popInt();
         for (int i = 0; i < npairs * 2; i += 2) {
-            if(matchOffsets[i] == key){
+            if (matchOffsets[i] == key) {
                 int offset = matchOffsets[i + 1];
-                BranchLogic.branch(frame,offset);
+                BranchLogic.branch(frame, offset);
                 return;
             }
         }
-        BranchLogic.branch(frame,defaultOffset);
+        BranchLogic.branch(frame, defaultOffset);
     }
 }

@@ -9,6 +9,6 @@ import jawa.rtda.Frame;
 public class FSTORE extends Index8Instruction {
     @Override
     public void execute(Frame frame) {
-        frame.getLocalVars().setFloat(index,frame.getOperandStack().popFloat());
+        frame.getLocalVars().setFloat(index, frame.getOperandStack().popFloat());
     }
 }

@@ -9,6 +9,7 @@ public abstract class Hello {
     public static final long LONG = -6849794470754667710L;
     public static final float PI = 3.14f;
     public static final double E = 2.71828;
+
     public static void main(String[] args) throws RuntimeException {
         System.out.println("Hello, World!");
     }

@@ -41,7 +41,7 @@ public class XThread {
     }
 
     public Frame newFrame(XMethod xMethod) {
-        return new Frame(xMethod.getMaxLocals(), xMethod.getMaxStack());
+        return new Frame(xMethod);
     }
 
 }

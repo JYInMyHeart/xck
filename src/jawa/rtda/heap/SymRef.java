@@ -1,6 +1,9 @@
 package jawa.rtda.heap;
 
-public class SymRef implements Constant {
+import jawa.classfiles.ClassReader;
+import jawa.classfiles.constant.ConstantInfo;
+
+public class SymRef implements ConstantInfo {
     ConstantPool cp;
     String className;
     XClass xClass;
@@ -20,4 +23,8 @@ public class SymRef implements Constant {
     }
 
 
+    @Override
+    public void readInfo(ClassReader reader) {
+
+    }
 }

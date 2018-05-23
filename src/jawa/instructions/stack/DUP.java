@@ -16,4 +16,8 @@ public class DUP extends NoOperandsInstruction {
         stack.pushSlot(slot);
         stack.pushSlot(slot);
     }
+
+    public String toString() {
+        return "DUP{}";
+    }
 }

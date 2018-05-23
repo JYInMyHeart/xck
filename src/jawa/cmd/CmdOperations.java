@@ -44,9 +44,9 @@ public class CmdOperations {
             cp = Classpath.parse(cmd.getxJreOption(), cmd.getCpOption());
             assert cp != null;
             XClassLoader xClassLoader = XClassLoader.newClassLoader(cp);
-            ClassFile cf = loadClass(cmd.getClassName().replace(".", "/"), cp);
+//            ClassFile cf = loadClass(cmd.getClassName().replace(".", "/"), cp);
             XClass xClass = xClassLoader.loadClass(cmd.getClassName().replace(".", "/"));
-            printClassInfo(cf);
+//            printClassInfo(cf);
             XMethod mainMethod = xClass.getMainMethod(xClass);
             if (mainMethod != null)
                 Interpreter.interpret(mainMethod);

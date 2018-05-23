@@ -11,26 +11,26 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
     public void execute(Frame frame) {
         ConstantPool cp = frame.getMethod().getxClass().getConstantPool();
         MethodRef ref = (MethodRef) cp.getConstant(index).get();
-        if (ref.getMethod().getName().equals("'println'")) {
+        if ("'println'".equals(ref.getName())) {
             OperandStack stack = frame.getOperandStack();
-            switch (ref.getMethod().getDescroptor()) {
-                case "(Z)V":
-                case "(C)V":
-                case "(B)V":
-                case "(S)V":
-                case "(I)V": {
+            switch (ref.getDescriptor()) {
+                case "'(Z)V'":
+                case "'(C)V'":
+                case "'(B)V'":
+                case "'(S)V'":
+                case "'(I)V'": {
                     System.out.println(String.format("%d", stack.popInt()));
                 }
                 break;
-                case "(J)V": {
+                case "'(J)V'": {
                     System.out.println(String.format("%d", stack.popLong()));
                     break;
                 }
-                case "(F)V": {
+                case "'(F)V'": {
                     System.out.println(String.format("%f", stack.popFloat()));
                     break;
                 }
-                case "(D)V": {
+                case "'(D)V'": {
                     System.out.println(String.format("%f", stack.popDouble()));
                     break;
                 }
@@ -43,5 +43,11 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
         }
 
 
+    }
+
+    public String toString() {
+        return "INVOKE_VIRTUAL{" +
+                "index=" + index +
+                '}';
     }
 }

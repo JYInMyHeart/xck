@@ -30,14 +30,18 @@ public class XFieldRef extends MemberRef {
     }
 
     public XFields lookupField(XClass xClass, String name, String descriptor) {
-        for (int i = 0; i < xClass.getFields().size(); i++) {
-            if (xClass.getFields().get(i).name == name && xClass.getFields().get(i).descroptor == descriptor)
-                return xClass.getFields().get(i);
+        if(xClass.getFields() != null){
+            for (int i = 0; i < xClass.getFields().size(); i++) {
+                if (xClass.getFields().get(i).name.equals(name) && xClass.getFields().get(i).descroptor.equals(descriptor))
+                    return xClass.getFields().get(i);
+            }
         }
-        for (int i = 0; i < xClass.getInterfaces().length; i++) {
-            XFields fields = lookupField(xClass.getInterfaces()[i], name, descriptor);
-            if (fields != null)
-                return fields;
+        if(xClass.getInterfaces() != null){
+            for (int i = 0; i < xClass.getInterfaces().length; i++) {
+                XFields fields = lookupField(xClass.getInterfaces()[i], name, descriptor);
+                if (fields != null)
+                    return fields;
+            }
         }
         if (xClass.getSuperClass() != null)
             return lookupField(xClass.getSuperClass(), name, descriptor);

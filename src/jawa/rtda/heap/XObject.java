@@ -14,6 +14,9 @@ public class XObject {
         fields = new Slot[xClass.getInstanceSlotCount()];
     }
 
+    public XObject() {
+    }
+
     public boolean isInstanceof(XClass xClass) {
         return xClass.isAssignableFrom(this.xClass);
     }

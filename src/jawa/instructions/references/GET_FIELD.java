@@ -50,4 +50,10 @@ public class GET_FIELD extends Index16Instruction {
             break;
         }
     }
+
+    public String toString() {
+        return "GET_FIELD{" +
+                "index=" + index +
+                '}';
+    }
 }

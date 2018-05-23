@@ -125,6 +125,7 @@ public class XClassLoader {
         xClass.setStaticVars(new Slot[xClass.getStaticSlotCount()]);
         for (int i = 0; i < xClass.getStaticSlotCount(); i++) {
             XFields field = xClass.getFields().get(i);
+            xClass.getStaticVars()[i] = new Slot(0,xClass.getFields().get(i));
             if (field.isStatic() && field.isFinal())
                 initStaticFinalVar(xClass, field);
         }

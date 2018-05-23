@@ -7,6 +7,12 @@ import jawa.rtda.Slot;
 import jawa.rtda.heap.*;
 
 public class PUT_STATIC extends Index16Instruction {
+    public String toString() {
+        return "PUT_STATIC{" +
+                "index=" + index +
+                '}';
+    }
+
     @Override
     public void execute(Frame frame) {
         XMethod currentMethod = frame.getMethod();
@@ -51,5 +57,7 @@ public class PUT_STATIC extends Index16Instruction {
             }
             break;
         }
+
+
     }
 }

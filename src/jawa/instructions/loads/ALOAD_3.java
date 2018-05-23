@@ -11,4 +11,8 @@ public class ALOAD_3 extends NoOperandsInstruction {
     public void execute(Frame frame) {
         frame.getOperandStack().pushRef(frame.getLocalVars().getRef(3));
     }
+
+    public String toString() {
+        return "ALOAD_3{}";
+    }
 }

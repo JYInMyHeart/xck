@@ -13,4 +13,10 @@ public class IFEQ extends BranchInstruction {
         if (frame.getOperandStack().popInt() == 0)
             BranchLogic.branch(frame, offset);
     }
+
+    public String toString() {
+        return "IFEQ{" +
+                "offset=" + offset +
+                '}';
+    }
 }

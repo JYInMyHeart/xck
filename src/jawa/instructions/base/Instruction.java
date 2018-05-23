@@ -1,5 +1,9 @@
 package jawa.instructions.base;
 
+import jawa.classfiles.constant.ConstantDoubleInfo;
+import jawa.classfiles.constant.ConstantFloatInfo;
+import jawa.classfiles.constant.ConstantIntegerInfo;
+import jawa.classfiles.constant.ConstantStringInfo;
 import jawa.instructions.comparisions.*;
 import jawa.instructions.comparisions.ifacmp.IF_ACMPEQ;
 import jawa.instructions.comparisions.ifacmp.IF_ACMPNE;
@@ -559,18 +563,16 @@ public interface Instruction {
     default void _ldc(Frame frame, int index) {
         OperandStack stack = frame.getOperandStack();
         ConstantPool cp = frame.getMethod().getxClass().getConstantPool();
-        Object c = cp.getConstant(index);
-        if (c.getClass().equals(int.class))
-            stack.pushInt((int) c);
-        if (c.getClass().equals(float.class))
-            stack.pushFloat((float) c);
-        if (c.getClass().equals(String.class)) {
+        Object c = cp.getConstant(index).get();
+        if (c instanceof ConstantIntegerInfo)
+            stack.pushInt(((ConstantIntegerInfo) c).getValue());
+        else if (c instanceof ConstantFloatInfo)
+            stack.pushFloat(((ConstantFloatInfo) c).getValue());
+        else if (c instanceof ConstantStringInfo) {
 
-        }
-        if (c.getClass().equals(int.class)) {
+        } else if (c instanceof ConstantDoubleInfo) {
 
-        }
-        throw new RuntimeException("todo ldc");
+        } else throw new RuntimeException("todo ldc");
 
     }
 }

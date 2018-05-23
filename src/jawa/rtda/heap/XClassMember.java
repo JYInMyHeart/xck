@@ -4,7 +4,7 @@ import jawa.classfiles.members.MemberInfo;
 
 import static jawa.rtda.heap.ACCESS_FLAG.*;
 
-public class XClassMember {
+public class XClassMember extends XObject{
     protected int accessFlags;
     protected String name;
     protected String descroptor;

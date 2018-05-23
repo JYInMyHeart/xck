@@ -8,4 +8,10 @@ public class LDC extends Index8Instruction {
     public void execute(Frame frame) {
         _ldc(frame, index);
     }
+
+    public String toString() {
+        return "LDC{" +
+                "index=" + index +
+                '}';
+    }
 }

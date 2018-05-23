@@ -11,4 +11,8 @@ public class ASTORE_3 extends NoOperandsInstruction {
     public void execute(Frame frame) {
         frame.getLocalVars().setRef(3, frame.getOperandStack().popRef());
     }
+
+    public String toString() {
+        return "ASTORE_3{}";
+    }
 }

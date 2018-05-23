@@ -5,8 +5,8 @@ import jawa.classfiles.constant.ConstantMemberrefInfo;
 import java.util.Map;
 
 public class MemberRef extends SymRef {
-    String name;
-    String descriptor;
+    protected String name;
+    protected String descriptor;
 
     public void copyMemerRefInfo(ConstantMemberrefInfo refInfo) throws Exception {
         className = refInfo.getClassName();
@@ -15,5 +15,13 @@ public class MemberRef extends SymRef {
             name = e.getKey();
             descriptor = e.getValue();
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescriptor() {
+        return descriptor;
     }
 }

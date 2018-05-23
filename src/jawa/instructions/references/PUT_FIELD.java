@@ -73,4 +73,10 @@ public class PUT_FIELD extends Index16Instruction {
             break;
         }
     }
+
+    public String toString() {
+        return "PUT_FIELD{" +
+                "index=" + index +
+                '}';
+    }
 }

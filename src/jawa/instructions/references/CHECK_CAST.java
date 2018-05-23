@@ -20,8 +20,14 @@ public class CHECK_CAST extends Index16Instruction {
         ConstantPool cp = frame.getMethod().getxClass().getConstantPool();
         XClassRef xClassRef = (XClassRef) cp.getConstant(index).get();
         XClass xClass = xClassRef.resolvedClass();
-        if (ref.isInstanceof(xClass)) {
+        if (!ref.isInstanceof(xClass)) {
             throw new RuntimeException("java.lang.ClassCastException");
         }
+    }
+
+    public String toString() {
+        return "CHECK_CAST{" +
+                "index=" + index +
+                '}';
     }
 }

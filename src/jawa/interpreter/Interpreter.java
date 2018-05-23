@@ -11,14 +11,11 @@ import jawa.rtda.heap.XMethod;
  */
 public class Interpreter {
     public static void interpret(XMethod memberInfo) {
-        int maxLocals = memberInfo.getMaxLocals();
-        int maxStack = memberInfo.getMaxStack();
-        byte[] byteCode = memberInfo.getCode();
         XThread thread = new XThread();
-        Frame frame = thread.newFrame(maxLocals, maxStack);
+        Frame frame = thread.newFrame(memberInfo);
         thread.pushFrame(frame);
 
-        loop(thread, byteCode);
+        loop(thread, memberInfo.getCode());
     }
 
     public static void catchErr(Frame frame) {
@@ -31,6 +28,7 @@ public class Interpreter {
         try {
             while (true) {
                 int pc = frame.getNextPc();
+                if(pc >= byteCode.length - 1) break;
                 thread.setPc(pc);
                 reader.reset(byteCode, pc);
                 int opcode = reader.readUInt8();
@@ -42,7 +40,7 @@ public class Interpreter {
             }
         } catch (Exception e) {
             catchErr(frame);
-            System.out.println(e);
+            System.exit(0);
         }
     }
 }

@@ -43,10 +43,17 @@ public class GET_STATIC extends Index16Instruction {
                 stack.pushDouble(slots[slotId].getNum());
             }
             break;
+            case'[':
             case 'L': {
                 stack.pushRef(slots[slotId].getRef());
             }
             break;
         }
+    }
+
+    public String toString() {
+        return "GET_STATIC{" +
+                "index=" + index +
+                '}';
     }
 }

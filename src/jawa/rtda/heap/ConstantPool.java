@@ -11,29 +11,29 @@ import static jawa.rtda.heap.XFieldRef.newFiledRef;
 
 public class ConstantPool {
     private XClass xClass;
-    private Constant[] constants;
+    private ConstantInfo[] constants;
 
     public static ConstantPool newConstatntPool(XClass xClass, jawa.classfiles.constant.ConstantPool cfcp) {
         int cpCount = cfcp.getConstantInfoList().length;
         ConstantPool cp = new ConstantPool();
-        Constant[] constants = new Constant[cpCount];
+        ConstantInfo[] constants = new ConstantInfo[cpCount];
         try {
-            for (int i = 0; i < cpCount; i++) {
+            for (int i = 1; i < cpCount; i++) {
                 ConstantInfo cfInfo = cfcp.getConstantInfoList()[i];
                 if (cfInfo instanceof ConstantIntegerInfo)
-                    constants[i] = new ConstantValue(((ConstantIntegerInfo) cfInfo).getValue());
+                    constants[i] = cfInfo;
                 if (cfInfo instanceof ConstantFloatInfo)
-                    constants[i] = new ConstantValue(((ConstantFloatInfo) cfInfo).getValue());
+                    constants[i] = cfInfo;
                 if (cfInfo instanceof ConstantLongInfo) {
-                    constants[i] = new ConstantValue(((ConstantLongInfo) cfInfo).getValue());
+                    constants[i] = cfInfo;
                     i++;
                 }
                 if (cfInfo instanceof ConstantDoubleInfo) {
-                    constants[i] = new ConstantValue(((ConstantDoubleInfo) cfInfo).getValue());
+                    constants[i] = cfInfo;
                     i++;
                 }
                 if (cfInfo instanceof ConstantStringInfo) {
-                    constants[i] = new ConstantValue(((ConstantStringInfo) cfInfo).getString());
+                    constants[i] = cfInfo;
                 }
                 if (cfInfo instanceof ConstantClassInfo)
                     constants[i] = newClassRef(cp, (ConstantClassInfo) cfInfo);
@@ -46,6 +46,7 @@ public class ConstantPool {
 
             }
             cp.constants = constants;
+            cp.xClass = xClass;
             return cp;
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class ConstantPool {
         return xClass;
     }
 
-    public Optional<Constant> getConstant(int index) {
+    public Optional<ConstantInfo> getConstant(int index) {
         return Optional.ofNullable(constants[index]);
     }
 }

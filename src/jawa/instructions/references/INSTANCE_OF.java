@@ -26,4 +26,10 @@ public class INSTANCE_OF extends Index16Instruction {
             stack.pushInt(0);
         }
     }
+
+    public String toString() {
+        return "INSTANCE_OF{" +
+                "index=" + index +
+                '}';
+    }
 }

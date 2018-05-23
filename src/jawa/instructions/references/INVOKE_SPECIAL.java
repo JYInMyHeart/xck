@@ -8,4 +8,10 @@ public class INVOKE_SPECIAL extends Index16Instruction {
     public void execute(Frame frame) {
         frame.getOperandStack().popRef();
     }
+
+    public String toString() {
+        return "INVOKE_SPECIAL{" +
+                "index=" + index +
+                '}';
+    }
 }

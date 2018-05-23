@@ -57,4 +57,11 @@ public class Classpath {
 
     }
 
+    public String toString() {
+        return "Classpath{" +
+                "bootClasspath=" + bootClasspath + "\n" +
+                ", extClasspath=" + extClasspath + "\n" +
+                ", userClasspath=" + userClasspath +
+                '}';
+    }
 }

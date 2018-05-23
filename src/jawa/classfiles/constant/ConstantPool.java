@@ -38,6 +38,7 @@ public class ConstantPool {
     }
 
     public ConstantInfo getConstantInfo(int index) throws Exception {
+        if(index == 0) return new ConstantStringInfo();
         ConstantInfo cf = constantInfoList[index];
         if (cf != null) {
             return cf;
@@ -55,6 +56,7 @@ public class ConstantPool {
     }
 
     public String getClassName(int index) throws Exception {
+        if(index == 0) return "";
         ConstantClassInfo classInfo = (ConstantClassInfo) getConstantInfo(index);
         return classInfo.getName();
     }

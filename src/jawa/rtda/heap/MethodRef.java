@@ -12,6 +12,8 @@ public class MethodRef extends MemberRef {
         return methodRef;
     }
 
+
+
     public XMethod getMethod() {
         return method;
     }

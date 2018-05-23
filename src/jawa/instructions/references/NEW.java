@@ -18,4 +18,10 @@ public class NEW extends Index16Instruction {
         XObject ref = xClass.newObject();
         frame.getOperandStack().pushRef(ref);
     }
+
+    public String toString() {
+        return "NEW{" +
+                "index=" + index +
+                '}';
+    }
 }

@@ -87,4 +87,9 @@ OperandStack {
     public Slot popSlot() {
         return slots[--size];
     }
+
+    public XObject getRefFromTop(int n){
+        return slots[size - 1 - n].getRef();
+    }
+
 }

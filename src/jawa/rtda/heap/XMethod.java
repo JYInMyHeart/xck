@@ -6,10 +6,13 @@ import jawa.classfiles.members.attributeinfos.CodeAttribute;
 import java.util.ArrayList;
 import java.util.List;
 
+import static jawa.rtda.heap.XMethodDescriptor.MethodDescriptorParser.parserMethodDescriptor;
+
 public class XMethod extends XClassMember {
     private int maxStack;
     private int maxLocals;
     private byte[] code;
+    private int argSlotCount;
 
     public static List<XMethod> newMethods(XClass xClass, List<MemberInfo> memberInfos) throws Exception {
         List<XMethod> xMethodList = new ArrayList<>();
@@ -18,6 +21,7 @@ public class XMethod extends XClassMember {
             m.xClass = xClass;
             m.copy(memberInfos.get(i));
             m.copyAttributes(memberInfos.get(i));
+            m.calcArgSlotCount();
             xMethodList.add(m);
         }
         return xMethodList;
@@ -32,6 +36,17 @@ public class XMethod extends XClassMember {
         }
     }
 
+    public void calcArgSlotCount(){
+        XMethodDescriptor methodDescriptor = parserMethodDescriptor(descroptor);
+        for (String param:methodDescriptor.getParameterTypes()){
+            argSlotCount++;
+            if(param.equals("'J'") || param.equals("'D'"))
+                argSlotCount++;
+        }
+        if(!isStatic())
+            argSlotCount++;
+    }
+
     public int getMaxStack() {
         return maxStack;
     }
@@ -42,5 +57,13 @@ public class XMethod extends XClassMember {
 
     public byte[] getCode() {
         return code;
+    }
+
+    public int getArgSlotCount() {
+        return argSlotCount;
+    }
+
+    public void setArgSlotCount(int argSlotCount) {
+        this.argSlotCount = argSlotCount;
     }
 }

@@ -72,6 +72,11 @@ public class XClass {
     public boolean isSubClassOf(XClass z) {
         return this.superClassName.equals(z.name);
     }
+    public boolean isSuperClassOf(XClass z) {
+        return z.superClassName.equals(this.name);
+    }
+
+
 
     public boolean isImplements(XClass z) {
         for (int i = 0; i < this.superClass.getInterfaces().length; i++) {

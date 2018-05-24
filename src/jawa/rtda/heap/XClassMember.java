@@ -83,4 +83,7 @@ public class XClassMember extends XObject{
     public boolean isPrivate() {
         return 0 != (accessFlags & ACC_PRIVATE.getValue());
     }
+    public boolean isStatic() {
+        return 0 != (accessFlags & ACC_STATIC.getValue());
+    }
 }

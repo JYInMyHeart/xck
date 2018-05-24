@@ -66,4 +66,12 @@ public class LocalVars {
                 "slots=" + Arrays.toString(slots) +
                 '}';
     }
+
+    public Slot[] getSlots() {
+        return slots;
+    }
+
+    public void setSlots(Slot[] slots) {
+        this.slots = slots;
+    }
 }

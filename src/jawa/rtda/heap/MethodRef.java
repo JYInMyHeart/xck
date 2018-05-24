@@ -50,7 +50,12 @@ public class MethodRef extends MemberRef {
     }
 
     public Optional<XMethod> lookupInterfaceMethod(XClass xClass,String name,String descriptor){
-
+        for(int i = 0;i < xClass.getMethods().size();i++){
+            if(xClass.getMethods().get(i).name.equals(name) && xClass.getMethods().get(i).descroptor.equals(descriptor)){
+                return Optional.ofNullable(xClass.getMethods().get(i));
+            }
+        }
+        return lookupMethodInInterfaces(xClass.getInterfaces(),name,descriptor);
     }
 
     public void resolvedMethodRef(){

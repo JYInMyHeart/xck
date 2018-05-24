@@ -1,6 +1,7 @@
 package jawa.rtda;
 
 import jawa.rtda.heap.XMethod;
+import jawa.rtda.heap.XObject;
 
 /**
  * @author xck
@@ -71,6 +72,7 @@ public class Frame {
         this(method.getMaxLocals(), method.getMaxLocals());
         this.method = method;
     }
+
 
 
 }

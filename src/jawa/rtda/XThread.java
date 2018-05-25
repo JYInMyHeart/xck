@@ -41,7 +41,7 @@ public class XThread {
     }
 
     public Frame newFrame(XMethod xMethod) {
-        return new Frame(xMethod);
+        return new Frame(this,xMethod);
     }
 
     public boolean isStackEmpty(){

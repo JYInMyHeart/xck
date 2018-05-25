@@ -150,10 +150,10 @@ public class XMethodDescriptor {
                 return "";
             }else{
                 int objStart = offset - 1;
-                int objEnd = raw.substring(objStart).indexOf(";") + offset;
+
+                int objEnd = raw.indexOf(";",offset) + 1;
                 offset = objEnd;
-                String descriptor = raw.substring(objStart).substring(0,objEnd);
-                return descriptor;
+                return raw.substring(objStart,objEnd);
             }
         }
 

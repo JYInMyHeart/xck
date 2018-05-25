@@ -412,9 +412,9 @@ public interface Instruction {
             case 0xb7:
                 return new INVOKE_SPECIAL();
             case 0xb8:
-                return new Nop();
+                return new INVOKE_STATIC();
             case 0xb9:
-                return new Nop();
+                return new INVOKE_INTERFACE();
             case 0xba:
                 return new Nop();
             case 0xbb:

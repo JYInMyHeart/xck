@@ -68,6 +68,11 @@ public class Frame {
         this.thread = thread;
     }
 
+    public Frame(XThread thread, XMethod method) {
+        this(method);
+        this.thread = thread;
+    }
+
     public Frame(XMethod method) {
         this(method.getMaxLocals(), method.getMaxLocals());
         this.method = method;

@@ -79,9 +79,9 @@ public class MethodRef extends MemberRef {
     public Optional<XMethod> lookupMethodInClass(XClass xClass,String name,String descriptor){
         while(xClass.getSuperClass() != null){
             XClass xClazz = xClass.getSuperClass();
-            for (int i = 0; i < xClazz.getMethods().size(); i++) {
-                if(name.endsWith(xClazz.getMethods().get(i).name) && descriptor.endsWith(xClazz.getMethods().get(i).descroptor)){
-                    return Optional.ofNullable(xClazz.getMethods().get(i));
+            for (int i = 0; i < xClass.getMethods().size(); i++) {
+                if(name.endsWith(xClass.getMethods().get(i).name) && descriptor.endsWith(xClass.getMethods().get(i).descroptor)){
+                    return Optional.ofNullable(xClass.getMethods().get(i));
                 }
             }
             xClass = xClazz;

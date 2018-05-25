@@ -40,7 +40,7 @@ public class XClassLoader {
             e.printStackTrace();
         }
         link(xclass);
-        System.out.println(String.format("Loaded %s from %s", name, cp));
+        System.out.println(String.format("Loaded %s from s", name));
         return xclass;
     }
 

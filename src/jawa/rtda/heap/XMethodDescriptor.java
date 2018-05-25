@@ -1,5 +1,6 @@
 package jawa.rtda.heap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,6 +9,10 @@ import java.util.List;
 public class XMethodDescriptor {
     private List<String> parameterTypes;
     private String returnType;
+
+    public XMethodDescriptor() {
+        this.parameterTypes = new ArrayList<>();
+    }
 
     public List<String> getParameterTypes() {
         return parameterTypes;
@@ -27,6 +32,7 @@ public class XMethodDescriptor {
         XMethodDescriptor parsed;
 
         public MethodDescriptorParser() {
+            offset = 0;
         }
 
         public static XMethodDescriptor parserMethodDescriptor(String desc) {
@@ -35,7 +41,7 @@ public class XMethodDescriptor {
         }
 
         public XMethodDescriptor parse(String desc) {
-            raw = desc;
+            raw = desc.replace("'","");
             parsed = new XMethodDescriptor();
             startParams();
             parseParamTypes();
@@ -46,7 +52,7 @@ public class XMethodDescriptor {
         }
 
         public void startParams() {
-            if (readUint8() != 'c') {
+            if (readUint8() != '(') {
                 causePanic();
             }
         }
@@ -66,7 +72,9 @@ public class XMethodDescriptor {
         }
 
         public int readUint8() {
-            return raw.charAt(offset++);
+            int res = raw.charAt(offset);
+            offset = offset + 1;
+            return res;
         }
 
         public void unreadUint8() {
@@ -74,12 +82,26 @@ public class XMethodDescriptor {
         }
 
         public void parseParamTypes() {
-            for (char s : parseFieldType().toCharArray()) {
-                if (s != ' ')
-                    parsed.addParameterType(Character.toString(s));
-                else
-                    break;
+//            String temp = parseFieldType();
+//            if (temp.length() == 1){
+//                parsed.addParameterType(temp);
+//                parseParamTypes();
+//            }
+//            else if(temp.length() > 1){
+//                for (char s : temp.toCharArray()) {
+//                    if (!Character.toString(s).equals(""))
+//                        parsed.addParameterType(Character.toString(s));
+//                    else
+//                        break;
+//                }
+//                parseParamTypes();
+//            }
+            String t;
+            while(!(t = parseFieldType()).equals("")){
+                parsed.addParameterType(t);
+                parseParamTypes();
             }
+
         }
 
         public void parseReturnType() {
@@ -128,9 +150,9 @@ public class XMethodDescriptor {
                 return "";
             }else{
                 int objStart = offset - 1;
-                int objEnd = offset + raw.indexOf(";") + 1;
+                int objEnd = raw.substring(objStart).indexOf(";") + offset;
                 offset = objEnd;
-                String descriptor = raw.substring(objStart,objEnd);
+                String descriptor = raw.substring(objStart).substring(0,objEnd);
                 return descriptor;
             }
         }

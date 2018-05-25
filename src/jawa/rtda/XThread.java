@@ -44,4 +44,8 @@ public class XThread {
         return new Frame(xMethod);
     }
 
+    public boolean isStackEmpty(){
+        return stack.isEmpty();
+    }
+
 }

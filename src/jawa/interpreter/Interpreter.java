@@ -35,12 +35,27 @@ public class Interpreter {
                 Instruction inst = Instruction.newInstruction(opcode);
                 inst.fetchOperands(reader);
                 frame.setNextPc(reader.getPc());
+//                if(logInst)
+                    logInstruction(frame,inst);
                 System.out.println("" + pc + "    " + inst);
                 inst.execute(frame);
+//                if(thread.isStackEmpty()){
+//
+//                    break;
+//                }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             catchErr(frame);
             System.exit(0);
         }
+    }
+
+    public static void logInstruction(Frame frame,Instruction inst){
+        XMethod method = frame.getMethod();
+        String className = method.getxClass().getName();
+        String methodName = method.getName();
+        int pc = frame.getNextPc();
+        System.out.println(String.format("%s.%s() #%2d %s %s",className,methodName,pc,inst,inst));
     }
 }

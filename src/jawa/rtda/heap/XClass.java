@@ -32,6 +32,7 @@ public class XClass {
             clazz.name = cf.getClassName();
             clazz.superClassName = cf.getSuperClassName();
             clazz.interfaceNames = cf.getInterfaces();
+            clazz.interfaces = new XClass[cf.getInterfaces().size()];
             clazz.constantPool = newConstatntPool(clazz, cf.getConstantPool());
             clazz.fields = newFields(clazz, cf.getClassFileds());
             clazz.methods = newMethods(clazz, cf.getClassMethods());
@@ -147,6 +148,8 @@ public class XClass {
     public XClass[] getInterfaces() {
         return interfaces;
     }
+
+
 
     public int getStaticSlotCount() {
         return staticSlotCount;

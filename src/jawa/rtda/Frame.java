@@ -78,6 +78,15 @@ public class Frame {
         this.method = method;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Frame{" +
+                "lower=" + lower +
+                ", localvars=" + localvars +
+                ", operandStack=" + operandStack +
+                ", thread=" + thread +
+                ", nextPc=" + nextPc +
+                ", method=" + method +
+                '}';
+    }
 }

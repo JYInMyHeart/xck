@@ -163,5 +163,13 @@ public class XMethodDescriptor {
             int arrEnd = offset;
             return raw.substring(arrStart,arrEnd);
         }
+
+        @Override
+        public String toString() {
+            return "MethodDescriptorParser{" +
+                    "raw='" + raw + '\'' +
+                    ", parsed=" + parsed +
+                    '}';
+        }
     }
 }

@@ -13,7 +13,7 @@ public class ARETURN extends NoOperandsInstruction {
     public void execute(Frame frame) {
         XThread thread = frame.getThread();
         Frame currentFrame = thread.popFrame();
-        Frame invokerFrame = thread.popFrame();
+        Frame invokerFrame = thread.topFrame();
         XObject retVal = currentFrame.getOperandStack().popRef();
         invokerFrame.getOperandStack().pushRef(retVal);
     }

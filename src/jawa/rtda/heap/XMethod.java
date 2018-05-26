@@ -42,8 +42,8 @@ public class XMethod extends XClassMember {
             return;
         for (String param:methodDescriptor.getParameterTypes()){
             argSlotCount++;
-            if(param.equals("J") || param.equals("D"))
-                argSlotCount++;
+//            if(param.equals("J") || param.equals("D"))
+//                argSlotCount++;
         }
         if(!isStatic())
             argSlotCount++;

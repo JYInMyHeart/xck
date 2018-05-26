@@ -12,7 +12,7 @@ public class FRETURN extends NoOperandsInstruction {
     public void execute(Frame frame) {
         XThread thread = frame.getThread();
         Frame currentFrame = thread.popFrame();
-        Frame invokerFrame = thread.popFrame();
+        Frame invokerFrame = thread.topFrame();
         float retVal = currentFrame.getOperandStack().popFloat();
         invokerFrame.getOperandStack().pushFloat(retVal);
     }

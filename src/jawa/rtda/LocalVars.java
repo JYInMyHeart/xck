@@ -57,6 +57,10 @@ public class LocalVars {
         slots[index] = slot;
     }
 
+    public void setSlot(int index,Slot slot){
+        slots[index] = slot;
+    }
+
     public XObject getRef(int index) {
         return slots[index].getRef();
     }

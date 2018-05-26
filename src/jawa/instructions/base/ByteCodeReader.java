@@ -26,7 +26,7 @@ public class ByteCodeReader {
     }
 
     public int readUInt16() {
-        return (int) Integer.toUnsignedLong(((readInt8() << 8) | readInt8()));
+        return (int) Integer.toUnsignedLong(((readUInt8() << 8) | readUInt8()));
     }
 
     public int readInt16() {
@@ -34,10 +34,10 @@ public class ByteCodeReader {
     }
 
     public long readUInt32() {
-        return Integer.toUnsignedLong((readInt8() << 24)
-                | (readInt8() << 16)
-                | (readInt8() << 8)
-                | readInt8());
+        return Integer.toUnsignedLong((readUInt8() << 24)
+                | (readUInt8() << 16)
+                | (readUInt8() << 8)
+                | readUInt8());
     }
 
     public int readInt32() {

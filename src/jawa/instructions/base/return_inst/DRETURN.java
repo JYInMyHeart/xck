@@ -12,7 +12,7 @@ public class DRETURN extends NoOperandsInstruction {
     public void execute(Frame frame) {
         XThread thread = frame.getThread();
         Frame currentFrame = thread.popFrame();
-        Frame invokerFrame = thread.popFrame();
+        Frame invokerFrame = thread.topFrame();
         double retVal = currentFrame.getOperandStack().popDouble();
         invokerFrame.getOperandStack().pushDouble(retVal);
     }

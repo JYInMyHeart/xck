@@ -9,7 +9,7 @@ import java.util.Stack;
  */
 public class XThread {
     private int pc;
-    private Stack<Frame> stack;
+    private JvmStack stack;
     private static final int STACK_MAX_SIZE = 0124;
 
     public int getPc() {
@@ -21,7 +21,7 @@ public class XThread {
     }
 
     public XThread() {
-        stack = new Stack<>();
+        stack = new JvmStack(1024);
     }
 
     public void pushFrame(Frame frame) {
@@ -33,7 +33,11 @@ public class XThread {
     }
 
     public Frame currentFrame() {
-        return stack.peek();
+        return stack.getTop();
+    }
+
+    public Frame topFrame() {
+        return stack.getTop();
     }
 
     public Frame newFrame(int maxLocals, int maxStack) {

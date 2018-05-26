@@ -23,30 +23,31 @@ public class Interpreter {
     }
 
     public static void loop(XThread thread, byte[] byteCode) {
-        Frame frame = thread.popFrame();
+
         ByteCodeReader reader = new ByteCodeReader();
         try {
             while (true) {
+                Frame frame = thread.currentFrame();
                 int pc = frame.getNextPc();
-                if(pc >= byteCode.length - 1) break;
+//                if(pc >= byteCode.length - 1) break;
                 thread.setPc(pc);
-                reader.reset(byteCode, pc);
+                byte[] codes = frame.getMethod().getCode();
+                reader.reset(codes, pc);
                 int opcode = reader.readUInt8();
                 Instruction inst = Instruction.newInstruction(opcode);
                 inst.fetchOperands(reader);
                 frame.setNextPc(reader.getPc());
 //                if(logInst)
-                    logInstruction(frame,inst);
-                System.out.println("" + pc + "    " + inst);
+//                    logInstruction(frame,inst);
+//                System.out.println("" + pc + "    " + inst);
                 inst.execute(frame);
-//                if(thread.isStackEmpty()){
-//
-//                    break;
-//                }
+                if(thread.isStackEmpty()){
+                    System.out.println(frame);
+                    break;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            catchErr(frame);
             System.exit(0);
         }
     }

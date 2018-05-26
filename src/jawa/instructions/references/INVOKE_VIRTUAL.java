@@ -31,7 +31,7 @@ public class INVOKE_VIRTUAL extends Index16Instruction {
                 && ref.getxClass().isSubClassOf(currentClass))
             throw new RuntimeException("java.lang.IllegalAccessError");
         XMethod methodToBeInvoked = methodRef.lookupMethodInClass(
-                ref.getxClass(),methodRef.getName(),methodRef.getDescriptor()).get();
+                methodRef.getxClass(),methodRef.getName(),methodRef.getDescriptor()).orElse(null);
         if(methodToBeInvoked == null || methodToBeInvoked.isAbstract())
             throw new RuntimeException("java.lang.AbstractMethodError");
         invokeMethod(frame,methodToBeInvoked);

@@ -4,6 +4,7 @@ import jawa.classfiles.constant.ConstantDoubleInfo;
 import jawa.classfiles.constant.ConstantFloatInfo;
 import jawa.classfiles.constant.ConstantIntegerInfo;
 import jawa.classfiles.constant.ConstantStringInfo;
+import jawa.instructions.base.return_inst.*;
 import jawa.instructions.comparisions.*;
 import jawa.instructions.comparisions.ifacmp.IF_ACMPEQ;
 import jawa.instructions.comparisions.ifacmp.IF_ACMPNE;
@@ -388,17 +389,17 @@ public interface Instruction {
             case 0xab:
                 return new LOOKUP_SWITCH();
             case 0xac:
-                return new Nop();
+                return new IRETURN();
             case 0xad:
-                return new Nop();
+                return new LRETURN();
             case 0xae:
-                return new Nop();
+                return new FRETURN();
             case 0xaf:
-                return new Nop();
+                return new DRETURN();
             case 0xb0:
-                return new Nop();
+                return new ARETURN();
             case 0xb1:
-                return new Nop();
+                return new RETURN();
             case 0xb2:
                 return new GET_STATIC();
             case 0xb3:

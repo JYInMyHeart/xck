@@ -12,8 +12,13 @@ public class IRETURN extends NoOperandsInstruction {
     public void execute(Frame frame) {
         XThread thread = frame.getThread();
         Frame currentFrame = thread.popFrame();
-        Frame invokerFrame = thread.popFrame();
+        Frame invokerFrame = thread.topFrame();
         int retVal = currentFrame.getOperandStack().popInt();
         invokerFrame.getOperandStack().pushInt(retVal);
+    }
+
+    @Override
+    public String toString() {
+        return "IRETURN{}";
     }
 }

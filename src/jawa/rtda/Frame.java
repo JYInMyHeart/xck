@@ -60,7 +60,7 @@ public class Frame {
 
     public Frame(int maxLocals, int maxStack) {
         localvars = new LocalVars(maxLocals + 1);
-        operandStack = new OperandStack(maxStack + 1);
+        operandStack = new OperandStack(maxStack + 10);
     }
 
     public Frame(XThread thread, int maxLocals, int maxStack) {

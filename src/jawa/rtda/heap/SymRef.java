@@ -27,4 +27,8 @@ public class SymRef implements ConstantInfo {
     public void readInfo(ClassReader reader) {
 
     }
+
+    public XClass getxClass() {
+        return xClass;
+    }
 }

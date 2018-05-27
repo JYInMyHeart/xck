@@ -4,7 +4,7 @@ public class Test5 {
     public static void main(String[] args) {
         Test5 t = new Test5();
         int a = 1000000;
-        int b = fibonacci(20);
+        int b = fibonacci(30);
         System.out.println(t.f(a, b));
 
 

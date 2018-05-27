@@ -3,10 +3,7 @@ package jawa.instructions.references;
 import jawa.instructions.base.ByteCodeReader;
 import jawa.instructions.base.Instruction;
 import jawa.rtda.Frame;
-import jawa.rtda.heap.ConstantPool;
-import jawa.rtda.heap.MethodRef;
-import jawa.rtda.heap.XMethod;
-import jawa.rtda.heap.XObject;
+import jawa.rtda.heap.*;
 
 import static jawa.instructions.base.InvokeLogic.invokeMethod;
 
@@ -22,8 +19,8 @@ public class INVOKE_INTERFACE implements Instruction {
     @Override
     public void execute(Frame frame) {
         ConstantPool cp = frame.getMethod().getxClass().getConstantPool();
-        MethodRef methodRef = (MethodRef) cp.getConstant(index).get();
-        XMethod resolvedMethod = methodRef.resolvedMethod();
+        InterfaceMethodRef methodRef = (InterfaceMethodRef) cp.getConstant(index).get();
+        XMethod resolvedMethod = methodRef.resolvedInterfaceMethod();
         if(resolvedMethod.isStatic())
             throw new RuntimeException("java.lang.IncompatibleClassChangeError");
         XObject ref = frame.getOperandStack().getRefFromTop(resolvedMethod.getArgSlotCount() - 1);

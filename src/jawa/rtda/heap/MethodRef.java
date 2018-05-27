@@ -5,7 +5,7 @@ import jawa.classfiles.constant.ConstantMethodrefInfo;
 import java.util.Optional;
 
 public class MethodRef extends MemberRef {
-    private XMethod method;
+    protected XMethod method;
 
     public static MethodRef newMethodRef(ConstantPool cp, ConstantMethodrefInfo refInfo) throws Exception {
         MethodRef methodRef = new MethodRef();

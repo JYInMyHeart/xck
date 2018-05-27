@@ -81,9 +81,9 @@ public class XClass {
 
 
     public boolean isImplements(XClass z) {
-        for (int i = 0; i < this.superClass.getInterfaces().length; i++) {
-            if (this.superClass.getInterfaces()[i].name.equals(z.name)
-                    || this.superClass.getInterfaces()[i].isSubInterfaceOf(z))
+        for (int i = 0; i < this.getInterfaces().length; i++) {
+            if (this.getInterfaces()[i].name.equals(z.name)
+                    || this.getInterfaces()[i].isSubInterfaceOf(z))
                 return true;
         }
         return false;

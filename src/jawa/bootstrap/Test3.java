@@ -5,7 +5,7 @@ public class Test3 {
     public static void main(String[] args) {
         new Test3().a = 4;
     }
-    public static void f(String s){
-        System.out.println(s);
-    }
+//    public static void f(String s){
+//        System.out.println(s);
+//    }
 }

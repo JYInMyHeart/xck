@@ -6,6 +6,8 @@ import jawa.rtda.OperandStack;
 import jawa.rtda.Slot;
 import jawa.rtda.heap.*;
 
+import static jawa.instructions.base.InitLogic.initClass;
+
 public class PUT_STATIC extends Index16Instruction {
     public String toString() {
         return "PUT_STATIC{" +
@@ -21,6 +23,11 @@ public class PUT_STATIC extends Index16Instruction {
         XFieldRef fieldRef = (XFieldRef) cp.getConstant(index).get();
         XFields fields = fieldRef.resolvedField();
         XClass xClass = fields.getxClass();
+        if(!xClass.isInitStarted()){
+            frame.revertNextPc();
+            initClass(frame.getThread(),xClass);
+            return;
+        }
         if (!fields.isStatic())
             throw new RuntimeException("java.lang.IncompatibleClassChangeError");
         if (fields.isFinal()) {

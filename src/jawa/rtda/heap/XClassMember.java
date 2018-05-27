@@ -79,6 +79,10 @@ public class XClassMember extends XObject{
     public boolean isEnum() {
         return 0 != (accessFlags & ACC_ENUM.getValue());
     }
+    public boolean isNative() {
+        return 0 != (accessFlags & ACC_NATIVE.getValue());
+    }
+
 
     public boolean isPrivate() {
         return 0 != (accessFlags & ACC_PRIVATE.getValue());

@@ -24,6 +24,7 @@ public class XClass {
     private int instanceSlotCount;
     private int staticSlotCount;
     private Slot[] staticVars;
+    private boolean initStarted;
 
     public static XClass newXClass(ClassFile cf) {
         XClass clazz = new XClass();
@@ -109,6 +110,14 @@ public class XClass {
         return null;
     }
 
+    public void startInit(){
+        initStarted = true;
+    }
+
+    public XMethod getClinitMethod(){
+        return getStaticMethod("'<clinit>'","'()V'");
+    }
+
     public ConstantPool getConstantPool() {
         return constantPool;
     }
@@ -150,6 +159,13 @@ public class XClass {
     }
 
 
+    public boolean isInitStarted() {
+        return initStarted;
+    }
+
+    public void setInitStarted(boolean initStarted) {
+        this.initStarted = initStarted;
+    }
 
     public int getStaticSlotCount() {
         return staticSlotCount;

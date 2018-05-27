@@ -3,7 +3,7 @@ package jawa.classfiles;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 public class ClassReader {
     private byte[] data;

@@ -78,6 +78,10 @@ public class Frame {
         this.method = method;
     }
 
+    public void revertNextPc(){
+        nextPc = thread.getPc();
+    }
+
     @Override
     public String toString() {
         return "Frame{" +

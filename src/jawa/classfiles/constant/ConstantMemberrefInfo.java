@@ -5,7 +5,7 @@ import jawa.classfiles.members.MemberInfo;
 
 import java.util.Map;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

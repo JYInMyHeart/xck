@@ -1,4 +1,4 @@
-package jawa.Utils;
+package jawa.utils;
 
 import java.util.Objects;
 

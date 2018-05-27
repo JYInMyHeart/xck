@@ -9,6 +9,8 @@ import jawa.rtda.heap.XClass;
 import jawa.rtda.heap.XFieldRef;
 import jawa.rtda.heap.XFields;
 
+import static jawa.instructions.base.InitLogic.initClass;
+
 public class GET_STATIC extends Index16Instruction {
     @Override
     public void execute(Frame frame) {
@@ -16,6 +18,11 @@ public class GET_STATIC extends Index16Instruction {
         XFieldRef fieldRef = (XFieldRef) cp.getConstant(index).get();
         XFields fields = fieldRef.resolvedField();
         XClass xClass = fields.getxClass();
+        if(!xClass.isInitStarted()){
+            frame.revertNextPc();
+            initClass(frame.getThread(),xClass);
+            return;
+        }
         if (!fields.isStatic())
             throw new RuntimeException("java.lang.IncompatibleClassChangeError");
         String descriptor = fields.getDescroptor();

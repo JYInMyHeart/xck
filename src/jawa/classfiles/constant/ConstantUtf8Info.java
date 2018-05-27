@@ -4,7 +4,7 @@ import jawa.classfiles.ClassReader;
 
 import java.io.UnsupportedEncodingException;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

@@ -5,7 +5,7 @@ public class Test5 {
         int a = fibonacci(30);
         int b = 4;
         int c = a + b;
-        Long d = Long.valueOf(c);
+//        Long d = Long.valueOf(c);
 
     }
     private static int fibonacci(int n) {

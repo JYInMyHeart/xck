@@ -21,5 +21,14 @@ public class InvokeLogic {
         }
         thread.pushFrame(newFrame);
         invokerFrame.setThread(thread);
+
+        if(xMethod.isNative()){
+            if(xMethod.getName().equals("'registerNatives'")){
+                thread.popFrame();
+            }else{
+                System.out.println(String.format("native method;%s.%s%s\n",
+                        xMethod.getxClass().getName(),xMethod.getName(),xMethod.getDescroptor()));
+            }
+        }
     }
 }

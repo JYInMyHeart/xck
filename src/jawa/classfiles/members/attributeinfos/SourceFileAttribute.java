@@ -3,7 +3,7 @@ package jawa.classfiles.members.attributeinfos;
 import jawa.classfiles.ClassReader;
 import jawa.classfiles.members.AttributeInfo;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

@@ -1,4 +1,4 @@
-package jawa.Utils;
+package jawa.utils;
 
 public class MyInt {
     private int value;

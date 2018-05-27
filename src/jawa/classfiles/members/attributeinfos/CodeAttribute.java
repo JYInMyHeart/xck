@@ -8,8 +8,8 @@ import jawa.classfiles.members.Attributes;
 import java.util.Arrays;
 import java.util.List;
 
-import static jawa.Utils.Sth.getIntIndex;
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getIntIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

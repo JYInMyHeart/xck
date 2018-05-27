@@ -1,6 +1,6 @@
 package jawa.classfiles.members.attributeinfos;
 
-import jawa.Utils.Sth;
+import jawa.utils.Sth;
 import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.AttributeInfo;

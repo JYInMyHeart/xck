@@ -4,7 +4,7 @@ import jawa.classfiles.ClassReader;
 import jawa.classfiles.constant.ConstantPool;
 import jawa.classfiles.members.AttributeInfo;
 
-import static jawa.Utils.Sth.getIntIndex;
+import static jawa.utils.Sth.getIntIndex;
 
 /**
  * @author xck

@@ -6,7 +6,7 @@ import jawa.classfiles.members.AttributeInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

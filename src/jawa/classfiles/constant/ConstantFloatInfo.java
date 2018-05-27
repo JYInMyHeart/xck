@@ -2,7 +2,7 @@ package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
 
-import static jawa.Utils.Sth.getFloatIndex;
+import static jawa.utils.Sth.getFloatIndex;
 
 /**
  * @author xck

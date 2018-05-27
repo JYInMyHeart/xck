@@ -7,7 +7,7 @@ import jawa.classfiles.members.MemberInfo;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static jawa.Utils.Sth.*;
+import static jawa.utils.Sth.*;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class ClassFile {

@@ -2,7 +2,7 @@ package jawa.classfiles.constant;
 
 import jawa.classfiles.ClassReader;
 
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getShortIndex;
 
 /**
  * @author xck

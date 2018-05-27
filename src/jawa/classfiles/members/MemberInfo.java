@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static jawa.Utils.Sth.getIntIndex;
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getIntIndex;
+import static jawa.utils.Sth.getShortIndex;
 import static jawa.classfiles.members.Attributes.readAttributes;
 
 public class MemberInfo {

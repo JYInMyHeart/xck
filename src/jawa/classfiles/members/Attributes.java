@@ -8,7 +8,7 @@ import jawa.classfiles.members.attributeinfos.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jawa.Utils.Sth.getIntIndex;
+import static jawa.utils.Sth.getIntIndex;
 
 /**
  * @author xck

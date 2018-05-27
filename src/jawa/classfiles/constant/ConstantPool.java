@@ -1,14 +1,14 @@
 package jawa.classfiles.constant;
 
 
-import jawa.Utils.MyInt;
+import jawa.utils.MyInt;
 import jawa.classfiles.ClassReader;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static jawa.Utils.Sth.getIntIndex;
-import static jawa.Utils.Sth.getShortIndex;
+import static jawa.utils.Sth.getIntIndex;
+import static jawa.utils.Sth.getShortIndex;
 import static jawa.classfiles.constant.ConstantInfo.*;
 
 

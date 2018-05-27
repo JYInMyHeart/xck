@@ -2,14 +2,19 @@ package jawa.bootstrap;
 
 public class Test5 {
     public static void main(String[] args) {
-        int a = fibonacci(30);
-        int b = 4;
-        int c = a + b;
-//        Long d = Long.valueOf(c);
+        Test5 t = new Test5();
+        int a = 1000000;
+        int b = fibonacci(20);
+        System.out.println(t.f(a, b));
+
 
     }
     private static int fibonacci(int n) {
         if (n <= 1) { return n; }
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
+    public  int f(int n,int z){
+        return n - z;
+    }
+
 }

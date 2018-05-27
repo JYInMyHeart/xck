@@ -42,7 +42,6 @@ public class Interpreter {
 //                System.out.println("" + pc + "    " + inst);
                 inst.execute(frame);
                 if(thread.isStackEmpty()){
-                    System.out.println(frame);
                     break;
                 }
             }

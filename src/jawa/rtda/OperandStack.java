@@ -89,7 +89,7 @@ OperandStack {
     }
 
     public XObject getRefFromTop(int n){
-        return slots[size - 1 - n].getRef();
+        return slots[size - n - 1].getRef();
     }
 
 }

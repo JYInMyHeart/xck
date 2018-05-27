@@ -6,6 +6,8 @@ import jawa.rtda.OperandStack;
 import jawa.rtda.Slot;
 import jawa.rtda.heap.*;
 
+import java.util.Objects;
+
 import static jawa.instructions.base.InitLogic.initClass;
 
 public class PUT_STATIC extends Index16Instruction {
@@ -31,7 +33,7 @@ public class PUT_STATIC extends Index16Instruction {
         if (!fields.isStatic())
             throw new RuntimeException("java.lang.IncompatibleClassChangeError");
         if (fields.isFinal()) {
-            if (currentClass != xClass || currentMethod.getName() != "'<clinit>'")
+            if (!currentClass.getName().equals(xClass.getName()) || !Objects.equals(currentMethod.getName(), "'<clinit>'"))
                 throw new RuntimeException("java.lang.IllegalAccessError");
         }
         String descriptor = fields.getDescroptor();

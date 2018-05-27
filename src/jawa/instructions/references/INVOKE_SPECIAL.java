@@ -4,6 +4,8 @@ import jawa.instructions.base.Index16Instruction;
 import jawa.rtda.Frame;
 import jawa.rtda.heap.*;
 
+import java.util.Objects;
+
 import static jawa.instructions.base.InvokeLogic.invokeMethod;
 
 public class INVOKE_SPECIAL extends Index16Instruction {
@@ -19,20 +21,20 @@ public class INVOKE_SPECIAL extends Index16Instruction {
             throw new RuntimeException("java.lang.NoSuchMethodError");
         if(resolvedMethod.isStatic())
             throw new RuntimeException("java.lang.IncompatibleChangeError");
-        XObject ref = frame.getOperandStack().getRefFromTop(resolvedMethod.getArgSlotCount());
+        XObject ref = frame.getOperandStack().getRefFromTop(resolvedMethod.getArgSlotCount() - 1);
         if(ref == null)
             throw new RuntimeException("java.lang.NullPointerException");
         if(resolvedMethod.isProtected()
                 && resolvedMethod.getxClass().isSuperClassOf(currentClass)
-                && resolvedMethod.getxClass().getPackageName() != currentClass.getPackageName()
-                && ref.getxClass() != currentClass
+                && !Objects.equals(resolvedMethod.getxClass().getPackageName(), currentClass.getPackageName())
+                && ref.getxClass().getName().equals( currentClass.getName())
                 && !ref.getxClass().isSubClassOf(currentClass)){
             throw new RuntimeException("java.lang.IllegalAccessError");
         }
         XMethod methodToBeInvoked = resolvedMethod;
         if(currentClass.isSuper()
                 && resolvedClass.isSuperClassOf(currentClass)
-                && resolvedClass.getName() != "<init>"){
+                && !Objects.equals(resolvedMethod.getName(), "'<init>'")){
             methodToBeInvoked = methodRef.lookupMethodInClass(currentClass.getSuperClass()
                     ,methodRef.getName()
                     ,methodRef.getDescriptor()).get();

@@ -36,16 +36,16 @@ public class XMethod extends XClassMember {
         }
     }
 
-    public void calcArgSlotCount(){
+    public void calcArgSlotCount() {
         XMethodDescriptor methodDescriptor = parserMethodDescriptor(descroptor);
-        if(methodDescriptor.getParameterTypes() == null || methodDescriptor.getParameterTypes().size() == 0)
-            return;
-        for (String param:methodDescriptor.getParameterTypes()){
-            argSlotCount++;
+        if (methodDescriptor.getParameterTypes() != null) {
+            for (String param : methodDescriptor.getParameterTypes()) {
+                argSlotCount++;
 //            if(param.equals("J") || param.equals("D"))
 //                argSlotCount++;
+            }
         }
-        if(!isStatic())
+        if (!isStatic())
             argSlotCount++;
     }
 

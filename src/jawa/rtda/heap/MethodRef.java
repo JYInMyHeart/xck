@@ -86,6 +86,13 @@ public class MethodRef extends MemberRef {
             }
             xClass = xClazz;
         }
+        if(xClass.getName().equals("'java/lang/Object'")){
+            for (int i = 0; i < xClass.getMethods().size(); i++) {
+                if(name.endsWith(xClass.getMethods().get(i).name) && descriptor.endsWith(xClass.getMethods().get(i).descroptor)){
+                    return Optional.ofNullable(xClass.getMethods().get(i));
+                }
+            }
+        }
         return Optional.empty();
     }
 

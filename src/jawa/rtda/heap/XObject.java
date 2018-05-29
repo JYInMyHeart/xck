@@ -2,19 +2,25 @@ package jawa.rtda.heap;
 
 import jawa.rtda.Slot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author xck
  */
-public class XObject {
+public class XObject<T> {
     private XClass xClass;
-    private Slot[] fields;
+    private Slot[] data;
+    private List<T> array;
 
     public XObject(XClass xClass) {
         this.xClass = xClass;
-        fields = new Slot[xClass.getInstanceSlotCount()];
+        data = new Slot[xClass.getInstanceSlotCount()];
     }
 
+
     public XObject() {
+        this.array = new ArrayList<>();
     }
 
     public boolean isInstanceof(XClass xClass) {
@@ -29,12 +35,20 @@ public class XObject {
         this.xClass = xClass;
     }
 
-    public Slot[] getFields() {
-        return fields;
+    public Slot[] getData() {
+        return data;
     }
 
-    public void setFields(Slot[] fields) {
-        this.fields = fields;
+    public void setData(Slot[] data) {
+        this.data = data;
+    }
+
+    public List<T> getArray() {
+        return array;
+    }
+
+    public void setArray(List<T> array) {
+        this.array = array;
     }
 
     //todo

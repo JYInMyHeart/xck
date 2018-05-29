@@ -16,7 +16,7 @@ public class Chapter3Test {
             ClassFile cf = CmdOperations.loadClass("Test", cp);
             Assert.assertEquals("'jawa/bootstrap/Test'", cf.getClassName());
             Assert.assertEquals("'java/lang/Object'", cf.getSuperClassName());
-            Assert.assertEquals("0601", cf.getAccessFlags());
+            Assert.assertEquals(1537, cf.getAccessFlags());
             System.out.println("pass cp3_1!");
         } catch (Exception e) {
             e.printStackTrace();
@@ -31,8 +31,8 @@ public class Chapter3Test {
             ClassFile cf1 = CmdOperations.loadClass("Hello", cp1);
             Assert.assertEquals("'jawa/bootstrap/Hello'", cf1.getClassName());
             Assert.assertEquals("'java/lang/Object'", cf1.getSuperClassName());
-            Assert.assertEquals("0421", cf1.getAccessFlags());
-            Assert.assertEquals("0019", cf1.getClassFileds().get(0).getAccessFlags());
+            Assert.assertEquals(1057, cf1.getAccessFlags());
+            Assert.assertEquals(25, cf1.getClassFileds().get(0).getAccessFlags());
             Assert.assertEquals("'Z'", cf1.getClassFileds().get(0).getDescriptor());
             Assert.assertEquals("'FLAG'", cf1.getClassFileds().get(0).getName());
             System.out.println("pass cp3_2!");

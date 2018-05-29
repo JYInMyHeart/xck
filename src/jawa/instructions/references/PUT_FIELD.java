@@ -18,7 +18,7 @@ public class PUT_FIELD extends Index16Instruction {
         if (fields.isStatic())
             throw new RuntimeException("java.lang.IncompatibleClassChangeError");
         if (fields.isFinal()) {
-            if (currentClass != xClass || currentMethod.getName() != "'<init>'")
+            if (!currentClass.getName().equals(xClass.getName()) || currentMethod.getName().equals( "'<init>'"))
                 throw new RuntimeException("java.lang.IllegalAccessError");
         }
         String descriptor = fields.getDescroptor();
@@ -34,7 +34,7 @@ public class PUT_FIELD extends Index16Instruction {
                 XObject ref = stack.popRef();
                 if (ref == null)
                     throw new RuntimeException("java.lang.NullPointerException");
-                ref.getFields()[slotId] = new Slot(value, null);
+                ref.getData()[slotId] = new Slot(value, null);
             }
             break;
             case 'F': {
@@ -42,7 +42,7 @@ public class PUT_FIELD extends Index16Instruction {
                 XObject ref = stack.popRef();
                 if (ref == null)
                     throw new RuntimeException("java.lang.NullPointerException");
-                ref.getFields()[slotId] = new Slot((int) value, null);
+                ref.getData()[slotId] = new Slot((int) value, null);
             }
             break;
             case 'J': {
@@ -50,7 +50,7 @@ public class PUT_FIELD extends Index16Instruction {
                 XObject ref = stack.popRef();
                 if (ref == null)
                     throw new RuntimeException("java.lang.NullPointerException");
-                ref.getFields()[slotId] = new Slot((int) value, null);
+                ref.getData()[slotId] = new Slot((int) value, null);
             }
             break;
             case 'D': {
@@ -58,7 +58,7 @@ public class PUT_FIELD extends Index16Instruction {
                 XObject ref = stack.popRef();
                 if (ref == null)
                     throw new RuntimeException("java.lang.NullPointerException");
-                ref.getFields()[slotId] = new Slot((int) value, null);
+                ref.getData()[slotId] = new Slot((int) value, null);
                 ;
             }
             break;
@@ -68,7 +68,7 @@ public class PUT_FIELD extends Index16Instruction {
                 XObject ref = stack.popRef();
                 if (ref == null)
                     throw new RuntimeException("java.lang.NullPointerException");
-                ref.getFields()[slotId] = new Slot(0, value);
+                ref.getData()[slotId] = new Slot(0, value);
             }
             break;
         }

@@ -3,6 +3,7 @@ package jawa.rtda.heap;
 import jawa.classfiles.ClassFile;
 import jawa.classpath.Classpath;
 import jawa.rtda.Slot;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class XClassLoader {
         this.classMap = classMap;
     }
 
-    public static XClassLoader newClassLoader(Classpath cp) {
+    public static XClassLoader newClassLoader(@NotNull Classpath cp) {
         return new XClassLoader(cp, new HashMap<>());
     }
 
@@ -28,10 +29,27 @@ public class XClassLoader {
         if (classMap.containsKey(name)) {
             return classMap.get(name);
         }
+        if(name.charAt(1) == '[' || name.charAt(0) == '[')
+            return loadArrayClass(name);
         return loadNonArrayClass(name);
     }
 
-    public XClass loadNonArrayClass(String name) {
+    public XClass loadArrayClass(@NotNull String name) {
+        XClass xClass = new XClass();
+        xClass.setAccessFlags(ACCESS_FLAG.ACC_PUBLIC.getValue());
+        xClass.setName(name);
+        xClass.setLoader(this);
+        xClass.setInitStarted(true);
+        xClass.setSuperClass(loadClass("java/lang/Object"));
+        XClass[] interfaces = new XClass[2];
+        interfaces[0] = loadClass("java/lang/Cloneable");
+        interfaces[1] = loadClass("java/io/Serializable");
+        xClass.setInterfaces(interfaces);
+        classMap.put(name,xClass);
+        return xClass;
+    }
+
+    public XClass loadNonArrayClass(@NotNull String name) {
         byte[] data = readClass(name).get();
         XClass xclass = null;
         try {

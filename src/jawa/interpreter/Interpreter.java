@@ -29,7 +29,6 @@ public class Interpreter {
             while (true) {
                 Frame frame = thread.currentFrame();
                 int pc = frame.getNextPc();
-//                if(pc >= byteCode.length - 1) break;
                 thread.setPc(pc);
                 byte[] codes = frame.getMethod().getCode();
                 reader.reset(codes, pc);
@@ -47,7 +46,6 @@ public class Interpreter {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.exit(0);
         }
     }
 

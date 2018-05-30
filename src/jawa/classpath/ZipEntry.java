@@ -35,8 +35,8 @@ public class ZipEntry implements Entry {
     }
 
     public static byte[] readAllBytes(InputStream inputStream) throws IOException {
-        final int DEFAULT_BUFFER_SIZE = 2048;
-        final int MAX_BUFFER_SIZE = 8192;
+        final int DEFAULT_BUFFER_SIZE = 8192;
+        final int MAX_BUFFER_SIZE = 2 << 15;
         byte[] buf = new byte[DEFAULT_BUFFER_SIZE];
         int capacity = buf.length;
         int nread = 0;

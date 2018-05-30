@@ -1,35 +1,34 @@
 package jawa.rtda.heap;
 
-public class ArrayObject {
-    private XObject xObject;
+public class ArrayObject<T> extends XObject<T>{
 
-    public ArrayObject(XObject xObject) {
-        this.xObject = xObject;
+    public ArrayObject() {
+
     }
 
     public  Byte[] getBytes(){
-        return (Byte[]) xObject.getArray().toArray();
+        return (Byte[])getArray().toArray();
     }
     public  Short[] getShorts(){
-        return (Short[]) xObject.getArray().toArray();
+        return (Short[])getArray().toArray();
     }
     public  Integer[] getInts(){
-        return (Integer[]) xObject.getArray().toArray();
+        return (Integer[])getArray().toArray();
     }
     public  Long[] getLongs(){
-        return (Long[]) xObject.getArray().toArray();
+        return (Long[]) getArray().toArray();
     }
     public  Float[] getFloat(){
-        return (Float[]) xObject.getArray().toArray();
+        return (Float[]) getArray().toArray();
     }
     public  Double[] getDouble(){
-        return (Double[]) xObject.getArray().toArray();
+        return (Double[]) getArray().toArray();
     }
     public  XObject[] getRefs() {
-        return (XObject[]) xObject.getArray().toArray();
+        return (XObject[]) getArray().toArray();
     }
 
     public int arrayLength(){
-        return xObject.getArray().size();
+        return getArray().size();
     }
 }

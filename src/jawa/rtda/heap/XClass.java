@@ -9,6 +9,7 @@ import static jawa.rtda.heap.ACCESS_FLAG.*;
 import static jawa.rtda.heap.ConstantPool.newConstatntPool;
 import static jawa.rtda.heap.XFields.newFields;
 import static jawa.rtda.heap.XMethod.newMethods;
+import static jawa.utils.ClassNameHelper.getArrayClassName;
 
 public class XClass {
     private int accessFlags;
@@ -108,6 +109,11 @@ public class XClass {
                 return m;
         }
         return null;
+    }
+
+    public XClass getArrayClass(){
+        String arrayClassName = getArrayClassName(name);
+        return loader.loadClass(arrayClassName);
     }
 
     public void startInit(){

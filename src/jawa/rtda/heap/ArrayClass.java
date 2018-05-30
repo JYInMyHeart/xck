@@ -1,6 +1,5 @@
 package jawa.rtda.heap;
 
-import java.util.List;
 
 public class ArrayClass{
     private XClass xClass;

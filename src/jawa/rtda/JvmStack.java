@@ -1,9 +1,9 @@
 package jawa.rtda;
 
 public class JvmStack {
-    int maxSize;
-    int size;
-    Frame top;
+    private int maxSize;
+    private int size;
+    private Frame top;
 
     public JvmStack(int maxSize) {
         this.maxSize = maxSize;

@@ -50,7 +50,7 @@ public class ConstantPool {
         ConstantNameAndTypeInfo ntInfo = (ConstantNameAndTypeInfo) getConstantInfo(index);
         String name = getUtf8(ntInfo.getNameIndex());
         String type = getUtf8(ntInfo.getDescriptorIndex());
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put(name, type);
         return map;
     }

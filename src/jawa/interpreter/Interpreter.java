@@ -2,6 +2,7 @@ package jawa.interpreter;
 
 import jawa.instructions.base.ByteCodeReader;
 import jawa.instructions.base.Instruction;
+import jawa.instructions.base.InstructionFactory;
 import jawa.rtda.Frame;
 import jawa.rtda.XThread;
 import jawa.rtda.heap.XMethod;
@@ -33,7 +34,7 @@ public class Interpreter {
                 byte[] codes = frame.getMethod().getCode();
                 reader.reset(codes, pc);
                 int opcode = reader.readUInt8();
-                Instruction inst = Instruction.newInstruction(opcode);
+                Instruction inst = InstructionFactory.newInstruction(opcode);
                 inst.fetchOperands(reader);
                 frame.setNextPc(reader.getPc());
 //                if(logInst)

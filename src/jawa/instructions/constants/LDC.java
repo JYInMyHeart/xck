@@ -3,7 +3,7 @@ package jawa.instructions.constants;
 import jawa.instructions.base.Index8Instruction;
 import jawa.rtda.Frame;
 
-public class LDC extends Index8Instruction {
+public class LDC extends Index8Instruction implements _LDC {
     @Override
     public void execute(Frame frame) {
         _ldc(frame, index);

@@ -1,4 +1,4 @@
-package jawa.instructions.math;
+package jawa.instructions.math.rem;
 
 import jawa.instructions.base.NoOperandsInstruction;
 import jawa.rtda.Frame;

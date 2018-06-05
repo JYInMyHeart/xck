@@ -11,8 +11,7 @@ import static jawa.rtda.heap.XFields.newFields;
 import static jawa.rtda.heap.XMethod.newMethods;
 import static jawa.utils.ClassNameHelper.getArrayClassName;
 
-public class XClass {
-    private int accessFlags;
+public class XClass extends AbstractAccessFlag{
     private String name;
     private String superClassName;
     private List<String> interfaceNames;
@@ -233,39 +232,5 @@ public class XClass {
         this.staticVars = staticVars;
     }
 
-    public boolean isPublic() {
-        return 0 != (accessFlags & ACC_PUBLIC.getValue());
-    }
 
-    public boolean isProtected() {
-        return 0 != (accessFlags & ACC_PROTECTED.getValue());
-    }
-
-    public boolean isAbstract() {
-        return 0 != (accessFlags & ACC_ABSTRACT.getValue());
-    }
-
-    public boolean isFinal() {
-        return 0 != (accessFlags & ACC_FINAL.getValue());
-    }
-
-    public boolean isSuper() {
-        return 0 != (accessFlags & ACC_SUPER.getValue());
-    }
-
-    public boolean isInterface() {
-        return 0 != (accessFlags & ACC_INTERFACE.getValue());
-    }
-
-    public boolean isSynthetic() {
-        return 0 != (accessFlags & ACC_SYNCHRONIZED.getValue());
-    }
-
-    public boolean isAnnotation() {
-        return 0 != (accessFlags & ACC_ANNOTATION.getValue());
-    }
-
-    public boolean isEnum() {
-        return 0 != (accessFlags & ACC_ENUM.getValue());
-    }
 }

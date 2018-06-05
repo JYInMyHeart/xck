@@ -47,41 +47,7 @@ public class XFields extends XClassMember {
         return constValueIndex;
     }
 
-    public boolean isPublic() {
-        return 0 != (accessFlags & ACC_PUBLIC.getValue());
-    }
 
-    public boolean isPrivate() {
-        return 0 != (accessFlags & ACC_PRIVATE.getValue());
-    }
-
-    public boolean isProtected() {
-        return 0 != (accessFlags & ACC_PROTECTED.getValue());
-    }
-
-    public boolean isStatic() {
-        return 0 != (accessFlags & ACC_STATIC.getValue());
-    }
-
-    public boolean isFinal() {
-        return 0 != (accessFlags & ACC_FINAL.getValue());
-    }
-
-    public boolean isSynthetic() {
-        return 0 != (accessFlags & ACC_SYNTHETIC.getValue());
-    }
-
-    public boolean isVolatile() {
-        return 0 != (accessFlags & ACC_VOLATILE.getValue());
-    }
-
-    public boolean isTransient() {
-        return 0 != (accessFlags & ACC_TRANSIENT.getValue());
-    }
-
-    public boolean isEnum() {
-        return 0 != (accessFlags & ACC_ENUM.getValue());
-    }
 
     public boolean isLongOrDouble() {
         return "J".equals(descroptor) || "D".equals(descroptor);

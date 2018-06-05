@@ -82,20 +82,6 @@ public class XMethodDescriptor {
         }
 
         public void parseParamTypes() {
-//            String temp = parseFieldType();
-//            if (temp.length() == 1){
-//                parsed.addParameterType(temp);
-//                parseParamTypes();
-//            }
-//            else if(temp.length() > 1){
-//                for (char s : temp.toCharArray()) {
-//                    if (!Character.toString(s).equals(""))
-//                        parsed.addParameterType(Character.toString(s));
-//                    else
-//                        break;
-//                }
-//                parseParamTypes();
-//            }
             String t;
             while(!(t = parseFieldType()).equals("")){
                 parsed.addParameterType(t);

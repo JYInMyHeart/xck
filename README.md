@@ -1,7 +1,7 @@
 # xck
 a simple jvm wrote by java just for realized how jvm works.
 
-It only has one useful command.
+It has only one useful command.
 
 U can insert "classpath;className" to invoke this classFile
 

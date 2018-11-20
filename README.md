@@ -3,7 +3,7 @@ a simple jvm wrote by java just for realized how jvm works.
 
 It has only one useful command.
 
-U can insert "classpath;className" to invoke this classFile
+U can input "classpath;className" to invoke this classFile
 
 if the parameter "className" are some jdk's library's classFile.It can also be loaded and u can see some informations.
 

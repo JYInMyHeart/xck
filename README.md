@@ -16,5 +16,5 @@ Note:
     2.This toy only supports a few features.U can use it do some simple computings.But don't use array.
     I haven't finished it.
     
-    3.If u find some bugs about it.It's very appreciate if u can fix that.Also u can give an issue.But 
+    3.If u find some bugs about it.It's very appreciate if u can fix those.Also u can give an issue.But 
     maybe i won't go to fix it.
